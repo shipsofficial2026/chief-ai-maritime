@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chief AI V4.1 TRANSLATOR</title>
+<title>Chief AI V5.0 GOD MODE</title>
 <style>
 body{margin:0;background:#0a1929;color:#fff;font:18px Arial}
-h3{text-align:center;padding:10px;background:#1a2332;color:#4fc3f7;margin:0}
+h3{text-align:center;padding:10px;background:#1a2332;color:#4fc3f7;margin:0;font-size:20px}
 #chat{height:60vh;overflow:auto;padding:12px}
 .msg{margin:8px 0;line-height:1.6}
 .u{text-align:right;color:#4fc3f7}
@@ -15,19 +15,23 @@ input{width:70%;padding:15px;font-size:18px;background:#0d1b2a;color:#fff;border
 button{width:25%;padding:15px;background:#4fc3f7;border:0;border-radius:20px;font-size:18px;font-weight:bold}
 a.video,a.link{background:red;color:#fff;padding:6px 10px;border-radius:5px;text-decoration:none;font-size:16px;margin:2px;display:inline-block}
 .trans{color:#00ff00;font-weight:bold}
+.quiz{color:#ffaa00;font-weight:bold}
 </style>
 </head>
 <body>
-<h3>⚓ Chief AI V4.1 - WITH TRANSLATOR</h3>
-<div id=chat><div class=msg a><b>AI:</b> Boss! Translator ON! Type: "translate mag-ingat ka" o "translate take care"</div></div>
+<h3>⚓ Chief AI V5.0 GOD MODE - ALL IN ONE</h3>
+<div id=chat><div class=msg a><b>AI:</b> Boss V5.0 GOD MODE loaded! Barko + Training + Translator + Recipes + Medical + Games! Type help para sa list!</div></div>
 <div style="padding:10px;display:flex;gap:8px">
-<input id=q placeholder="translate ___ boss..." onkeypress="if(event.key==13)ask()">
+<input id=q placeholder="help, quiz, translate ___, fire..." onkeypress="if(event.key==13)ask()">
 <button onclick=ask()>➤</button>
 </div>
 
 <script>
 const dict={
-// TAGALOG → ENGLISH
+// HELP LIST
+'help':'AI: BOSS COMMAND LIST: <br>1.TRANSLATOR: translate salamat <br>2.TRAINING: quiz, ppsc, lifeboat, fire drill, marpol, colregs <br>3.MARITIME: fire, cpr, bowline, epirb <br>4.WEATHER: weather, bagyo <br>5.PORT: manila port, cebu <br>6.RECIPE: adobo, sinigang <br>7.MEDICAL: lagnat, sugat <br>8.MONEY: ipon, sahod <br>9.GAMES: joke, bingo, workout',
+
+// TRANSLATOR TAGALOG → ENGLISH
 'mag-ingat ka':'Take care boss!',
 'salamat':'Thank you!',
 'kumusta ka':'How are you?',
@@ -38,6 +42,8 @@ const dict={
 'tigil':'Stop!',
 'bilis':'Hurry up!',
 'ingat sa duty':'Be careful on duty',
+'palit tayo':'Change shift with me',
+'break muna':'Break muna boss',
 // ENGLISH → TAGALOG
 'take care':'Mag-ingat ka boss!',
 'thank you':'Salamat!',
@@ -49,14 +55,67 @@ const dict={
 'stop':'Tigil!',
 'hurry':'Bilis!',
 'be careful':'Mag-ingat ka!',
-// MARITIME + LAHAT NG LUMA
-'fire':'AI: FIRE! PASS method! <a class=video href="https://youtube.com/results?search_query=fire+extinguisher" target=_blank>▶️ VIDEO</a>',
-'adobo':'AI: ADOBO 🍗 Gisa bawang+karne+Toyo+Suka+30mins=Tapos!',
-'bowline':'AI: BOWLINE KNOT! <a class=video href="https://youtube.com/results?search_query=bowline+knot" target=_blank>▶️ VIDEO</a>',
-'weather':'AI: Check Windy.com boss! <a class=link href="https://windy.com" target=_blank>🌪️ WEATHER</a>',
-'joke':'AI: Bakit di nalulunod Chief Engineer? Laging afloat utak! HAHA',
-'workout':'AI: Pushups 20x + Squats 30x + Plank 1min!',
-'ipon':'AI: 70% padala, 20% ipon, 10% gastos boss!'
+'change shift':'Palit tayo boss',
+
+// TRAINING CENTER - PPSC/MTC/AMA REVIEWER
+'ppsc':'AI: PPSC EXAM TIPS boss! 1.Basahin MARPOL 2.Memorize COLREGS 3.Practice Fire signals 4.Sleep 8hrs bago exam! Goodluck!',
+'quiz':'AI: <span class=quiz>QUIZ #1 boss!</span> Q: Ilang flares sa lifeboat? A)4 B)6 C)12 <br>Reply A, B, o C lang!',
+'6':'AI: <span class=quiz>TAMA BOSS! 6 flares + 2 rockets</span> = SOLAS Ch3 requirement! Next quiz? Type QUIZ ulit!',
+'12':'AI: Mali boss! 12 = sobra. Tamang sagot = B) 6 flares. Review SOLAS Ch3 para pumasa!',
+'a':'AI: Mali boss! 4 flares kulang. Tamang sagot = B) 6 flares. Aral pa!',
+'b':'AI: <span class=quiz>TAMA BOSS! 6 flares</span> = SOLAS standard! Astig ka!',
+'c':'AI: Mali boss! 12 flares sobra na. Tamang sagot = B) 6 flares lang!',
+'lifeboat':'AI: LIFEBOAT DRILL boss! 1.Suit 30sec 2.Mustard 3.Lower 4.Release 5.Row! <a class=video href="https://youtube.com/results?search_query=lifeboat+drill+training" target=_blank>▶️ VIDEO</a>',
+'fire drill':'AI: FIRE DRILL boss! 1.Alarm 2.BA set 3.Muster 4.Boundary cooling 5.Extinguish! <a class=video href="https://youtube.com/results?search_query=fire+drill+ship" target=_blank>▶️ VIDEO</a>',
+'marpol':'AI: MARPOL ANNEX I boss! Oil discharge: >12nm from land, <15ppm, ship moving >4knots. Pag mahuli = penalty!',
+'colregs rule 5':'AI: RULE 5 COLREGS boss! "Every vessel shall maintain proper lookout". Tulog ka = kaso!',
+'colregs rule 15':'AI: RULE 15 boss! Crossing situation: Vessel on starboard side = GIVE WAY! Ikaw mag-alter course!',
+'epirb':'AI: EPIRB boss! 406MHz frequency. Activate pag abandon ship! Battery 48hrs! Test monthly lang!',
+'sart':'AI: SART boss! 9GHz radar transponder. 8nm range. Switch ON pag abandon ship para makita rescue!',
+'gmdss':'AI: GMDSS AREAS boss! A1=VHF 20nm, A2=MF 150nm, A3=Satellite, A4=Polar! Check ka kung nasaan barko!',
+'stcw':'AI: STCW 2010 Manila boss! Required: BT, SDSD, AFF, PSCRB, Medical First Aid! 5 certs bago sumampa!',
+'bt':'AI: BT = Basic Training boss! 5 modules: PSSR, FPFF, EFA, PSCRB, PST! 5 days training center!',
+'aff':'AI: AFF = Advanced Fire Fighting boss! 4 days. Lead fire team, command BA team, fire tactics!',
+
+// MARITIME + VIDEO
+'fire':'AI: FIRE CLASS B! PASS method boss! Pull-Aim-Squeeze-Sweep <a class=video href="https://youtube.com/results?search_query=fire+extinguisher+PASS" target=_blank>▶️ VIDEO</a>',
+'cpr':'AI: CPR 30:2, 100-120/min, 5-6cm depth! <a class=video href="https://youtube.com/results?search_query=CPR+2025" target=_blank>▶️ VIDEO</a>',
+'bowline':'AI: BOWLINE KNOT! 1.Bilog 2.Ahas 3.Ikot sa puno 4.Balik sa lungga! <a class=video href="https://youtube.com/results?search_query=bowline+knot" target=_blank>▶️ VIDEO</a>',
+'clove hitch':'AI: CLOVE HITCH boss! X pattern sa post/pole! Basic knot to! <a class=video href="https://youtube.com/results?search_query=clove+hitch+knot" target=_blank>▶️ VIDEO</a>',
+'colregs':'AI: COLREGS boss! Rule 5 Lookout! Rule 15 Crossing=Give way! Rule 19 Fog=Slow ahead!',
+
+// WEATHER
+'weather':'AI: Real-time weather boss! Check Windy.com <a class=link href="https://windy.com" target=_blank>🌪️ WINDY.COM</a>',
+'bagyo':'AI: Typhoon season boss! Signal no.1-5! Secure lahat gamit! Check Windy.com every 3hrs!',
+
+// PORT INFO
+'manila port':'AI: Manila South Harbor boss! Immigration 8am-5pm. Taxi 200php to Mall. WiFi sa gate. LBC sa pier!',
+'cebu port':'AI: Cebu Pier boss! Mall 50php taxi. Lechon Carcar masarap! WiFi 2nd floor free!',
+'singapore':'AI: Singapore boss! MRT 1.5SGD. Free WiFi Changi Airport! Curry sa Little India 5SGD!',
+
+// RECIPES
+'adobo':'AI: ADOBO 🍗 1.Gisa bawang 2.Karne 3.Toyo+Suka 4.Paminta 5.Pakuloan 30mins 6.Tapos! Kain boss!',
+'sinigang':'AI: SINIGANG boss! Baboy+Kamatis+Labanos+Sibuyas+Kangkong+Sinigang Mix=Asim sarap! Kanin pa!',
+
+// MEDICAL FIRST AID
+'sakit ngipin':'AI: Ngipin boss? Clove oil sa bulak + cold compress sa pisngi. 2 days di nawawala = report Medic! Paracetamol 500mg pwede.',
+'lagnat':'AI: Lagnat boss? Paracetamol 500mg + inom tubig madami. Pahinga. Pag 39°C+ = call Medic agad! Delikado!',
+'sugat':'AI: Sugat boss? 1.Hugas tubig+sabon 2.Betadine 3.Bandage. Tetanus shot update ka? Pag malalim = stitches!',
+// CHIKA + LOVE
+'kamusta':'AI: Kaya mo yan kabaro! 4hrs nalang duty! Kape + 30mins pikit = fresh ulit!',
+'girlfriend':'AI: Boss tip: 5mins video call/day kahit busy. Send pic sunset sa barko. 6 months lang to! Kapit!',
+'asawa':'AI: Padala boss kahit 500php surprise! Masaya na si misis. Video call pag libre! Miss na miss ka nyan!',
+'miss':'AI: Normal yan boss! Lahat ng seaman dumadaan dyan. Picture ng pamilya sa wallet = lakas yan!',
+
+// WORKOUT + MONEY
+'workout':'AI: No gym boss? 1.Pushups 20x 2.Squats 30x 3.Plank 1min 4.Takbo paikot deck 10mins! Pawis = healthy!',
+'ipon':'AI: Boss rule: 70% padala, 20% ipon, 10% gastos. Wag sugal sa crew mess! Bahay + lupa goal mo!',
+'sahod':'AI: Compute boss: Sahod x months - allotment = uwi mo! Example $1200x6=$7200. Ipon $1000/month kaya!',
+
+// JOKES + GAMES
+'joke':'AI: Boss joke: Bakit di nalulunod Chief Engineer? Kasi laging afloat utak nya! HAHA',
+'bored':'AI: Boss bored? Type BINGO! O kaya kwentong barko? "Dati may Cadet natulog sa anchor chain..."',
+'bingo':'AI: BINGO CARD BOSS! B:1-15 I:16-30 N:31-45 G:46-60 O:61-75. Copy sa papel! Sample: "B-7 I-22 N-FREE G-52 O-68"'
 };
 
 function ask(){
@@ -65,14 +124,14 @@ let chat=document.getElementById('chat');
 if(!q)return;
 chat.innerHTML+=`<div class=msg u><b>You:</b> ${document.getElementById('q').value}</div>`;
 
-let ans='AI: Boss type "translate [word]" Example: translate mag-ingat ka';
+let ans='AI: Boss type HELP para sa list! Try: quiz, translate salamat, fire, lifeboat, weather, adobo';
 
 if(q.startsWith('translate ')){
  let word=q.replace('translate ','').trim();
  if(dict[word]){
    ans=`AI: <span class=trans>"${document.getElementById('q').value.replace('translate ','')}"</span> = <span class=trans>"${dict[word]}"</span>`;
  }else{
-   ans=`AI: Boss wala pa sa dictionary ko yung "${word}". Try mo: salamat, kumusta, tulong, fire, take care`;
+   ans=`AI: Boss wala pa "${word}" sa dictionary. Try: salamat, kumusta, tulong, fire, take care, mag-ingat ka`;
  }
 }else{
  for(let k in dict){if(q.includes(k)){ans=dict[k];break;}}
