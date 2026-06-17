@@ -1,228 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chief AI V2.0 - Full Maritime Knowledge</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0a1929;
-      color: #e0e0e0;
-      min-height: 100vh;
-      padding: 0;
-      margin: 0;
-    }
-  .container {
-      max-width: 100%; /* FULL WIDTH NA BOSS! */
-      width: 100%;
-      background: #0a1929;
-      padding: 20px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    h1 {
-      color: #4fc3f7;
-      text-align: center;
-      margin-bottom: 8px;
-      font-size: 28px;
-    }
-  .subtitle {
-      text-align: center;
-      color: #90a4ae;
-      margin-bottom: 15px;
-      font-size: 18px;
-    }
-  .topics {
-      text-align: center;
-      font-size: 14px;
-      color: #81d4fa;
-      margin-bottom: 15px;
-      font-weight: bold;
-      line-height: 1.6;
-    }
-  .chat-box {
-      background: transparent; /* WALA NANG BOX! */
-      border-radius: 0;
-      padding: 0;
-      flex: 1;
-      overflow-y: auto;
-      margin-bottom: 15px;
-      border: none;
-    }
-  .message {
-      margin-bottom: 15px;
-      padding: 0; /* WALA NANG PADDING BOX */
-      line-height: 2.0; /* Mas maluwag */
-      font-size: 24px; /* MALAKI TEXT BOSS! */
-      max-width: 100%;
-    }
-  .user-msg {
-      background: transparent;
-      margin-left: 0;
-      text-align: right;
-      color: #4fc3f7;
-      font-weight: bold;
-    }
-  .user-msg strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-  .ai-msg {
-      background: transparent;
-      margin-right: 0;
-      text-align: left;
-      color: #e0e0e0;
-    }
-  .ai-msg strong {
-      display: block;
-      margin-bottom: 5px;
-      color: #ff9800;
-    }
-  .input-area {
-      display: flex;
-      gap: 10px;
-      position: sticky;
-      bottom: 0;
-      background: #0a1929;
-      padding-top: 15px;
-      padding-bottom: 10px;
-    }
-    input {
-      flex: 1;
-      padding: 22px;
-      background: #1a2332;
-      border: 2px solid #2a3441;
-      border-radius: 25px; /* Bilog para parang Messenger */
-      color: #e0e0e0;
-      font-size: 24px; /* MALAKI INPUT */
-    }
-    input:focus {
-      outline: none;
-      border-color: #4fc3f7;
-    }
-    button {
-      padding: 22px 30px;
-      background: #4fc3f7;
-      color: #0a1929;
-      border: none;
-      border-radius: 25px; /* Bilog din */
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 24px;
-    }
-    button:hover {
-      background: #03a9f4;
-    }
-   .lolo-btn {
-      width: 100%;
-      padding: 18px;
-      background: #ff9800;
-      color: #000;
-      font-size: 22px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-   .footer {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 16px;
-      color: #546e7a;
-    }
-
-    /* LOLO MODE - SUPER LAKI */
-    body.lolo-mode .message {
-      font-size: 30px!important;
-      line-height: 2.2!important;
-    }
-    body.lolo-mode input {
-      font-size: 30px!important;
-      padding: 24px!important;
-    }
-    body.lolo-mode button {
-      font-size: 30px!important;
-      padding: 24px 35px!important;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chief AI V4.1 TRANSLATOR</title>
+<style>
+body{margin:0;background:#0a1929;color:#fff;font:18px Arial}
+h3{text-align:center;padding:10px;background:#1a2332;color:#4fc3f7;margin:0}
+#chat{height:60vh;overflow:auto;padding:12px}
+.msg{margin:8px 0;line-height:1.6}
+.u{text-align:right;color:#4fc3f7}
+.a{text-align:left}
+input{width:70%;padding:15px;font-size:18px;background:#0d1b2a;color:#fff;border:2px solid #4fc3f7;border-radius:20px}
+button{width:25%;padding:15px;background:#4fc3f7;border:0;border-radius:20px;font-size:18px;font-weight:bold}
+a.video,a.link{background:red;color:#fff;padding:6px 10px;border-radius:5px;text-decoration:none;font-size:16px;margin:2px;display:inline-block}
+.trans{color:#00ff00;font-weight:bold}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>⚓ Chief AI V2.0</h1>
-    <p class="subtitle">Full Maritime Knowledge Base</p>
-    <p class="topics">BT | COLREGS | MARPOL | GMDSS | STCW<br>NAV | CARGO | MEDICAL | ENGINE</p>
+<h3>⚓ Chief AI V4.1 - WITH TRANSLATOR</h3>
+<div id=chat><div class=msg a><b>AI:</b> Boss! Translator ON! Type: "translate mag-ingat ka" o "translate take care"</div></div>
+<div style="padding:10px;display:flex;gap:8px">
+<input id=q placeholder="translate ___ boss..." onkeypress="if(event.key==13)ask()">
+<button onclick=ask()>➤</button>
+</div>
 
-    <button class="lolo-btn" onclick="toggleLoloMode()">👴 LOLO MODE - LAKIHAN TEXT</button>
+<script>
+const dict={
+// TAGALOG → ENGLISH
+'mag-ingat ka':'Take care boss!',
+'salamat':'Thank you!',
+'kumusta ka':'How are you?',
+'gutom na ako':'I am hungry',
+'pagod na ako':'I am tired',
+'tulong':'Help!',
+'apoy':'Fire!',
+'tigil':'Stop!',
+'bilis':'Hurry up!',
+'ingat sa duty':'Be careful on duty',
+// ENGLISH → TAGALOG
+'take care':'Mag-ingat ka boss!',
+'thank you':'Salamat!',
+'how are you':'Kumusta ka?',
+'i am hungry':'Gutom na ako',
+'i am tired':'Pagod na ako',
+'help':'Tulong!',
+'fire':'Apoy!',
+'stop':'Tigil!',
+'hurry':'Bilis!',
+'be careful':'Mag-ingat ka!',
+// MARITIME + LAHAT NG LUMA
+'fire':'AI: FIRE! PASS method! <a class=video href="https://youtube.com/results?search_query=fire+extinguisher" target=_blank>▶️ VIDEO</a>',
+'adobo':'AI: ADOBO 🍗 Gisa bawang+karne+Toyo+Suka+30mins=Tapos!',
+'bowline':'AI: BOWLINE KNOT! <a class=video href="https://youtube.com/results?search_query=bowline+knot" target=_blank>▶️ VIDEO</a>',
+'weather':'AI: Check Windy.com boss! <a class=link href="https://windy.com" target=_blank>🌪️ WEATHER</a>',
+'joke':'AI: Bakit di nalulunod Chief Engineer? Laging afloat utak! HAHA',
+'workout':'AI: Pushups 20x + Squats 30x + Plank 1min!',
+'ipon':'AI: 70% padala, 20% ipon, 10% gastos boss!'
+};
 
-    <div class="chat-box" id="chatBox">
-      <div class="message ai-msg">
-        <strong>Chief AI V2.0:</strong>
-        Aye aye boss! 100+ Q&A loaded! 
-        Type keyword lang: "COLREGS 5", "MARPOL 1", "FIRE CLASS B", "GM METACENTRIC", "MEDICAL CPR". 
-        Anong tanong mo?
-      </div>
-    </div>
+function ask(){
+let q=document.getElementById('q').value.toLowerCase().trim();
+let chat=document.getElementById('chat');
+if(!q)return;
+chat.innerHTML+=`<div class=msg u><b>You:</b> ${document.getElementById('q').value}</div>`;
 
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="Ask anything maritime..." onkeypress="if(event.key==='Enter') sendMsg()">
-      <button onclick="sendMsg()">SEND</button>
-    </div>
+let ans='AI: Boss type "translate [word]" Example: translate mag-ingat ka';
 
-    <div class="footer">
-      Powered by $SHIPS | 10M OFWs Knowledge Base
-    </div>
-  </div>
+if(q.startsWith('translate ')){
+ let word=q.replace('translate ','').trim();
+ if(dict[word]){
+   ans=`AI: <span class=trans>"${document.getElementById('q').value.replace('translate ','')}"</span> = <span class=trans>"${dict[word]}"</span>`;
+ }else{
+   ans=`AI: Boss wala pa sa dictionary ko yung "${word}". Try mo: salamat, kumusta, tulong, fire, take care`;
+ }
+}else{
+ for(let k in dict){if(q.includes(k)){ans=dict[k];break;}}
+}
 
-  <script>
-    function toggleLoloMode() {
-      document.body.classList.toggle('lolo-mode');
-      const btn = document.querySelector('.lolo-btn');
-      if(document.body.classList.contains('lolo-mode')) {
-        btn.innerHTML = '👁️ NORMAL MODE';
-        btn.style.background = '#4fc3f7';
-      } else {
-        btn.innerHTML = '👴 LOLO MODE - LAKIHAN TEXT';
-        btn.style.background = '#ff9800';
-      }
-    }
-
-    const qa = {
-      "colregs rule 5": "Rule 5: Lookout. Every vessel shall maintain proper lookout by sight & hearing at all times. Kahit may radar!",
-      "marpol annex 1": "MARPOL Annex I: Oil. Discharge <15ppm + >12nm from land + ship moving >4 knots. Oil Record Book mandatory!",
-      "pass": "PASS: P-Pull pin, A-Aim at base, S-Squeeze, S-Sweep. Fire extinguisher method boss!",
-      "fire class b": "Class B: Liquid/Gas - oil, diesel, paint. Use FOAM/CO2/DRY POWDER. Black label. NEVER WATER!",
-      "gm": "Metacentric Height GM: Measure ng stability. GM positive=stable, zero=neutral, negative=capsize! Formula: GM = KM - KG",
-      "cpr": "CPR: 30 compressions : 2 breaths. 100-120/min rate. Depth 5-6cm adults. Continue hanggang may help!",
-      "stcw rest": "STCW Rest hours: 10hrs/24hrs, 77hrs/7days. Emergency pwede ma-deviate pero need record",
-      "mayday": "MAYDAY format: Mayday Mayday Mayday. This is [Ship] [Callsign]. Position [Lat/Long]. Nature distress. Assistance needed. Over"
-    };
-
-    function sendMsg() {
-      const input = document.getElementById('userInput');
-      const chatBox = document.getElementById('chatBox');
-      const question = input.value.toLowerCase().trim();
-
-      if(!question) return;
-
-      chatBox.innerHTML += `<div class="message user-msg"><strong>You:</strong>${input.value}</div>`;
-
-      let answer = "Chief AI: Aye aye boss! Try mo keywords: 'COLREGS', 'MARPOL', 'FIRE CLASS', 'GM', 'CPR', 'STCW'. Anong specific boss?";
-
-      for(let key in qa) {
-        if(question.includes(key)) {
-          answer = `Chief AI: ${qa[key]}`;
-          break;
-        }
-      }
-
-      chatBox.innerHTML += `<div class="message ai-msg"><strong>${answer}</strong></div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
-      input.value = '';
-    }
-  </script>
+chat.innerHTML+=`<div class=msg a><b>${ans}</b></div>`;
+document.getElementById('q').value='';
+chat.scrollTop=99999;
+}
+</script>
 </body>
 </html>
