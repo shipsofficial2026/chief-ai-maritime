@@ -15,13 +15,14 @@
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      transition: all 0.3s;
     }
-   .container {
-      max-width: 600px;
+  .container {
+      max-width: 650px; /* Pinalaki konti */
       width: 100%;
       background: #1a2332;
       border-radius: 16px;
-      padding: 30px;
+      padding: 35px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       border: 2px solid #2a3441;
     }
@@ -29,80 +30,112 @@
       color: #4fc3f7;
       text-align: center;
       margin-bottom: 10px;
-      font-size: 24px;
+      font-size: 32px; /* Dati 24px */
     }
-   .subtitle {
+  .subtitle {
       text-align: center;
       color: #90a4ae;
       margin-bottom: 20px;
-      font-size: 14px;
+      font-size: 20px; /* Dati 14px */
     }
-   .topics {
+  .topics {
       text-align: center;
-      font-size: 11px;
-      color: #546e7a;
-      margin-bottom: 20px;
+      font-size: 16px; /* Dati 11px */
+      color: #81d4fa;
+      margin-bottom: 25px;
+      font-weight: bold;
     }
-   .chat-box {
+  .chat-box {
       background: #0d1b2a;
       border-radius: 12px;
-      padding: 20px;
-      min-height: 300px;
-      max-height: 400px;
+      padding: 25px;
+      min-height: 350px;
+      max-height: 450px;
       overflow-y: auto;
       margin-bottom: 20px;
       border: 1px solid #2a3441;
     }
-   .message {
-      margin-bottom: 15px;
-      padding: 12px;
-      border-radius: 8px;
-      line-height: 1.6;
-      font-size: 14px;
+  .message {
+      margin-bottom: 20px;
+      padding: 18px;
+      border-radius: 10px;
+      line-height: 1.9; /* Dati 1.6 - mas maluwag */
+      font-size: 22px; /* DATI 14px - BOOM! MALAKI NA! */
     }
-   .user-msg {
+  .user-msg {
       background: #1e3a5f;
       margin-left: 40px;
     }
-   .ai-msg {
+  .ai-msg {
       background: #2a3441;
       margin-right: 40px;
     }
-   .input-area {
+  .input-area {
       display: flex;
-      gap: 10px;
+      gap: 12px;
+      margin-bottom: 15px;
     }
     input {
       flex: 1;
-      padding: 14px;
+      padding: 20px; /* Dati 14px */
       background: #0d1b2a;
-      border: 2px solid #2a3441;
-      border-radius: 8px;
+      border: 3px solid #2a3441;
+      border-radius: 10px;
       color: #e0e0e0;
-      font-size: 16px;
+      font-size: 24px; /* DATI 16px - MALAKI INPUT! */
     }
     input:focus {
       outline: none;
       border-color: #4fc3f7;
     }
     button {
-      padding: 14px 24px;
+      padding: 20px 32px; /* Dati 14px 24px */
       background: #4fc3f7;
       color: #0a1929;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: bold;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 24px; /* DATI 16px - MALAKING SEND! */
     }
     button:hover {
       background: #03a9f4;
     }
-   .footer {
+   .lolo-btn {
+      width: 100%;
+      padding: 16px;
+      background: #ff9800;
+      color: #000;
+      font-size: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+   .lolo-btn:hover {
+      background: #ffb74d;
+    }
+  .footer {
       text-align: center;
       margin-top: 20px;
-      font-size: 12px;
-      color: #546e7a;
+      font-size: 18px; /* Dati 12px */
+      color: #81d4fa;
+    }
+
+    /* LOLO MODE - SUPER LAKI TEXT */
+    body.lolo-mode.message {
+      font-size: 28px!important;
+      line-height: 2.1!important;
+      padding: 22px!important;
+    }
+    body.lolo-mode input {
+      font-size: 28px!important;
+      padding: 22px!important;
+    }
+    body.lolo-mode button {
+      font-size: 28px!important;
+      padding: 22px 35px!important;
     }
   </style>
 </head>
@@ -112,6 +145,9 @@
     <p class="subtitle">Full Maritime Knowledge Base</p>
     <p class="topics">BT | COLREGS | MARPOL | GMDSS | STCW | NAV | CARGO | MEDICAL | ENGINE</p>
 
+    <!-- LOLO MODE BUTTON -->
+    <button class="lolo-btn" onclick="toggleLoloMode()">👴 LOLO MODE - LAKIHAN TEXT</button>
+
     <div class="chat-box" id="chatBox">
       <div class="message ai-msg">
         <strong>Chief AI V2.0:</strong> Aye aye boss! 100+ Q&A loaded! Type keyword lang: "COLREGS 5", "MARPOL 1", "FIRE CLASS B", "GM METACENTRIC", "MEDICAL CPR". Anong tanong mo?
@@ -120,7 +156,7 @@
 
     <div class="input-area">
       <input type="text" id="userInput" placeholder="Ask anything maritime..." onkeypress="if(event.key==='Enter') sendMsg()">
-      <button onclick="sendMsg()">Send</button>
+      <button onclick="sendMsg()">SEND</button>
     </div>
 
     <div class="footer">
@@ -131,6 +167,19 @@
   <script>
     // PALITAN MO TO NG TUNAY NA CA MO BOSS!
     const SHIP_MINT = "2WsH3NFFjs57jyczvbVMBSuVgdci5JMbxkHJdZTbpump";
+
+    // LOLO MODE TOGGLE
+    function toggleLoloMode() {
+      document.body.classList.toggle('lolo-mode');
+      const btn = document.querySelector('.lolo-btn');
+      if(document.body.classList.contains('lolo-mode')) {
+        btn.innerHTML = '👁️ NORMAL MODE';
+        btn.style.background = '#4fc3f7';
+      } else {
+        btn.innerHTML = '👴 LOLO MODE - LAKIHAN TEXT';
+        btn.style.background = '#ff9800';
+      }
+    }
 
     const qa = {
       // BT - BASIC TRAINING
