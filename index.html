@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chief AI V5.0 — Maritime Training Mode ⚓</title>
+    <title>Chief AI V5.0 — Maritime Training Center ⚓</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
@@ -13,54 +13,25 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
         header {
             background: #1a2332;
             padding: 15px;
             text-align: center;
             border-bottom: 4px solid #00b4d8;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-        h3 {
-            color: #4fc3f7;
-            font-size: 24px;
-            letter-spacing: 1px;
-        }
-        #chat {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            background: #0d1b2a;
-            line-height: 1.6;
-        }
-        .msg {
-            margin: 15px 0;
-            padding: 12px 16px;
-            border-radius: 18px;
-            max-width: 85%;
-        }
-        .u {
-            background: #4fc3f7;
-            color: #0a1929;
-            align-self: flex-end;
-            margin-left: auto;
-            border-bottom-right-radius: 4px;
-        }
-        .a {
-            background: #1e2a44;
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
+        h3 { color: #4fc3f7; font-size: 23px; }
+        #chat { flex: 1; overflow-y: auto; padding: 20px; background: #0d1b2a; }
+        .msg { margin: 15px 0; padding: 14px 18px; border-radius: 18px; max-width: 90%; }
+        .u { background: #4fc3f7; color: #0a1929; margin-left: auto; }
+        .a { background: #1e2a44; }
         .quiz { color: #ffd700; font-weight: bold; }
         .correct { color: #00ff88; font-weight: bold; }
-        
         .input-area {
             padding: 15px;
             background: #1a2332;
             display: flex;
             gap: 10px;
-            border-top: 3px solid #00b4d8;
         }
         input {
             flex: 1;
@@ -70,7 +41,6 @@
             color: #fff;
             border: 2px solid #4fc3f7;
             border-radius: 30px;
-            outline: none;
         }
         button {
             padding: 16px 24px;
@@ -79,67 +49,71 @@
             border: none;
             border-radius: 30px;
             font-weight: bold;
-            font-size: 18px;
-            cursor: pointer;
         }
-        button:hover { background: #81d4fa; }
     </style>
 </head>
 <body>
-    <header>
-        <h3>⚓ Chief AI V5.0 — Maritime Training Mode</h3>
-    </header>
+    <header><h3>⚓ Chief AI V5.0 — Maritime Training Center</h3></header>
     
     <div id="chat">
         <div class="msg a">
-            <b>AI:</b> Boss! Maritime Training Mode V5.0 is now active!<br>
-            Ready for drills, quizzes, procedures, COLREGS, SOLAS, MARPOL, knots, medical, at marami pa.<br>
+            <b>AI:</b> Boss! Full Maritime Training Center V5.0 is ready!<br>
+            Drills, Quizzes, Procedures, COLREGS, SOLAS, MARPOL, GMDSS, at marami pa.<br>
             Type <b>help</b> to see all commands.
         </div>
     </div>
 
     <div class="input-area">
-        <input id="q" placeholder="Type here... (help, quiz, fire drill, colregs, adobo...)" 
+        <input id="q" placeholder="help, quiz, abandon ship, man overboard..." 
                onkeypress="if(event.key==='Enter') ask()">
         <button onclick="ask()">Send</button>
     </div>
 
 <script>
 const dict = {
-    'help': 'AI: <b>Available Commands:</b><br>• quiz<br>• fire drill<br>• lifeboat<br>• colregs / rule 5 / rule 15<br>• marpol<br>• solas<br>• bowline<br>• cpr<br>• epirb / sart<br>• stcw / bt / aff<br>• weather / bagyo<br>• adobo / sinigang',
+    'help': 'AI: <b>Commands:</b><br>• help<br>• quiz<br>• fire drill<br>• lifeboat<br>• abandon ship<br>• man overboard<br>• colregs / rule 5 / rule 15<br>• marpol<br>• solas<br>• gmdss<br>• ism / isps<br>• bowline<br>• cpr<br>• epirb / sart<br>• stcw / bt / aff<br>• adobo / sinigang',
 
-    // QUIZZES
-    'quiz': 'AI: <span class="quiz">MARITIME QUIZ #1</span><br>Q: How many flares are required in each lifeboat?<br>A) 4  B) 6  C) 12<br>Reply A, B, or C only!',
+    // QUIZ
+    'quiz': 'AI: <span class="quiz">QUIZ #1</span><br>Q: How many flares required in each lifeboat?<br>A)4 B)6 C)12<br>Reply A, B, or C',
+
     '6': 'AI: <span class="correct">CORRECT BOSS!</span> 6 flares + 2 rockets = SOLAS standard!',
     'b': 'AI: <span class="correct">CORRECT BOSS!</span> 6 flares + 2 rockets = SOLAS standard!',
 
     // DRILLS
-    'fire drill': 'AI: FIRE DRILL PROCEDURE:<br>1. Sound General Alarm<br>2. Don Breathing Apparatus<br>3. Muster at Station<br>4. Boundary Cooling<br>5. Extinguish',
-    'lifeboat': 'AI: LIFEBOAT DRILL:<br>1. Immersion suit in 30 seconds<br>2. Board lifeboat<br>3. Lower to water<br>4. Release hooks<br>5. Row away from vessel',
+    'fire drill': 'AI: FIRE DRILL: 1. Sound Alarm 2. Don BA Set 3. Muster 4. Boundary Cooling 5. Extinguish',
+    'lifeboat': 'AI: LIFEBOAT DRILL: Suit up (30sec) → Board → Lower → Release hooks → Row away',
+    'abandon ship': 'AI: ABANDON SHIP: 1. Sound alarm 2. Lifejacket/Immersion suit 3. Go to station 4. Board lifeboat 5. Release & row away from vessel',
+    'man overboard': 'AI: MAN OVERBOARD (MOB): Shout "Man Overboard!", Throw lifebuoy + smoke, Mark position, Inform bridge, Launch rescue boat',
 
     // COLREGS
-    'colregs': 'AI: Key COLREGS Rules:<br>• Rule 5: Proper Lookout<br>• Rule 15: Crossing Situation (Give way to starboard)<br>• Rule 19: Restricted Visibility',
+    'colregs': 'AI: COLREGS Key Rules:<br>• Rule 5: Proper Lookout<br>• Rule 15: Crossing Situation (Give way to starboard)<br>• Rule 19: Restricted Visibility',
     'rule 5': 'AI: RULE 5 — Every vessel shall maintain a proper lookout by sight and hearing at all times.',
-    'rule 15': 'AI: RULE 15 — When two power-driven vessels are crossing, the vessel which has the other on her own starboard side shall keep out of the way.',
+    'rule 15': 'AI: RULE 15 — When two vessels are crossing, the vessel with the other on her starboard side shall keep out of the way.',
 
-    // RECIPES
-    'adobo': 'AI: ADOBO RECIPE:<br>Garlic → Meat → Soy sauce + Vinegar → Pepper → Simmer 30-45 mins. Kain na boss!',
-    'sinigang': 'AI: SINIGANG:<br>Pork + Tomatoes + Labanos + Kangkong + Sinigang Mix = Perfect asim-sarap!',
+    // REGULATIONS
+    'marpol': 'AI: MARPOL Annex I: Oil discharge prohibited within 12 nautical miles from land (<15 ppm).',
+    'solas': 'AI: SOLAS — Safety of Life at Sea. Covers lifeboats, fire safety, GMDSS, etc.',
+    'gmdss': 'AI: GMDSS Areas: A1 (VHF), A2 (MF), A3 (Satellite), A4 (Polar). Check which sea area your ship is in.',
+    'ism': 'AI: ISM Code: International Safety Management Code. Every ship must have SMS (Safety Management System).',
+    'isps': 'AI: ISPS Code: International Ship and Port Facility Security Code. Level 1, 2, 3 security levels.',
 
     // MEDICAL
-    'cpr': 'AI: CPR = 30 compressions : 2 breaths. Rate 100-120/min. Depth 5-6 cm.'
+    'cpr': 'AI: CPR = 30 compressions : 2 breaths. Rate 100-120/min. Depth 5-6 cm.',
+
+    // RECIPES
+    'adobo': 'AI: ADOBO: Garlic → Meat → Soy sauce + Vinegar → Pepper → Simmer 30-45 mins.',
 };
 
 function ask() {
     const input = document.getElementById('q');
-    const q = input.value.trim().toLowerCase();
+    let q = input.value.trim().toLowerCase();
     const chat = document.getElementById('chat');
 
     if (!q) return;
 
     chat.innerHTML += `<div class="msg u"><b>You:</b> ${input.value}</div>`;
 
-    let ans = 'AI: Boss, type <b>help</b> to see all maritime training commands.';
+    let ans = 'AI: Boss, type <b>help</b> for all training commands.';
 
     for (let key in dict) {
         if (q.includes(key)) {
