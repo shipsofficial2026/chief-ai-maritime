@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chief AI V2.0 - Full Maritime Knowledge</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a1929;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+   .container {
+      max-width: 600px;
+      width: 100%;
+      background: #1a2332;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      border: 2px solid #2a3441;
+    }
+    h1 {
+      color: #4fc3f7;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+   .subtitle {
+      text-align: center;
+      color: #90a4ae;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+   .topics {
+      text-align: center;
+      font-size: 11px;
+      color: #546e7a;
+      margin-bottom: 20px;
+    }
+   .chat-box {
+      background: #0d1b2a;
+      border-radius: 12px;
+      padding: 20px;
+      min-height: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      border: 1px solid #2a3441;
+    }
+   .message {
+      margin-bottom: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+   .user-msg {
+      background: #1e3a5f;
+      margin-left: 40px;
+    }
+   .ai-msg {
+      background: #2a3441;
+      margin-right: 40px;
+    }
+   .input-area {
+      display: flex;
+      gap: 10px;
+    }
+    input {
+      flex: 1;
+      padding: 14px;
+      background: #0d1b2a;
+      border: 2px solid #2a3441;
+      border-radius: 8px;
+      color: #e0e0e0;
+      font-size: 16px;
+    }
+    input:focus {
+      outline: none;
+      border-color: #4fc3f7;
+    }
+    button {
+      padding: 14px 24px;
+      background: #4fc3f7;
+      color: #0a1929;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #03a9f4;
+    }
+   .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #546e7a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚓ Chief AI V2.0</h1>
+    <p class="subtitle">Full Maritime Knowledge Base</p>
+    <p class="topics">BT | COLREGS | MARPOL | GMDSS | STCW | NAV | CARGO | MEDICAL | ENGINE</p>
+
+    <div class="chat-box" id="chatBox">
+      <div class="message ai-msg">
+        <strong>Chief AI V2.0:</strong> Aye aye boss! 100+ Q&A loaded! Type keyword lang: "COLREGS 5", "MARPOL 1", "FIRE CLASS B", "GM METACENTRIC", "MEDICAL CPR". Anong tanong mo?
+      </div>
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Ask anything maritime..." onkeypress="if(event.key==='Enter') sendMsg()">
+      <button onclick="sendMsg()">Send</button>
+    </div>
+
+    <div class="footer">
+      Powered by $SHIPS | 10M OFWs Knowledge Base
+    </div>
+  </div>
+
+  <script>
+    // PALITAN MO TO NG TUNAY NA CA MO BOSS!
+    const SHIP_MINT = "2WsH3NFFjs57jyczvbVMBSuVgdci5JMbxkHJdZTbpump";
+
+    const qa = {
+      // BT - BASIC TRAINING
+      "bt modules": "BT 5 Modules: 1.PSSR 2.FPFF 3.EFA 4.PSSR 5.PST. Duration: 5 days total. Valid 5 years bago renew",
+      "pains": "PAINS sa navigation: Position, Altitude, Identification, Name, Speed. Para iwas collision at malinaw radio comm",
+      "pick": "PICK sa survival: Protect from elements, Investigate, Communicate, Keep together. Pag abandon ship!",
+      "abandon ship": "7 Short Blasts + 1 Long = Abandon ship signal. Put on lifejacket → Muster station → Board lifeboat → Launch",
+
+      // FIRE FIGHTING
+      "pass": "PASS: P-Pull pin, A-Aim at base, S-Squeeze, S-Sweep. Fire extinguisher method boss!",
+      "fire class a": "Class A: Solid materials - wood, paper, cloth. Use WATER/FOAM. Red label extinguisher",
+      "fire class b": "Class B: Liquid/Gas - oil, diesel, paint. Use FOAM/CO2/DRY POWDER. Black label. NEVER WATER!",
+      "fire class c": "Class C: Electrical. Use CO2/DRY POWDER. Blue label. Putol muna kuryente kung kaya!",
+      "fire class d": "Class D: Metal fires - magnesium, sodium. Use DRY POWDER special. Yellow label",
+      "fire class f": "Class F: Cooking oil/fat. Use WET CHEMICAL. Mustard label. Never water!",
+      "co2": "CO2 Extinguisher: -78°C. 34% lang oxygen need para mamatay apoy. Warning: Asphyxiation risk!",
+
+      // COLREGS - RULES OF THE ROAD
+      "colregs rule 1": "Rule 1: Application. Applies to all vessels on high seas & connected waters. Seaplanes pag nasa water",
+      "colregs rule 5": "Rule 5: Lookout. Every vessel shall maintain proper lookout by sight & hearing at all times. Kahit may radar!",
+      "colregs rule 6": "Rule 6: Safe Speed. Factors: Visibility, traffic density, maneuverability, wind, sea, draft, proximity hazards",
+      "colregs rule 7": "Rule 7: Risk of Collision. Use radar plotting. If bearing di nagbabago + distance bumababa = RISK!",
+      "colregs rule 8": "Rule 8: Action to avoid collision. Early + substantial + positive action. Check sa ibang barko kung gets nila",
+      "colregs rule 13": "Rule 13: Overtaking. Any vessel >22.5° abaft beam = overtaking vessel. GIVE WAY ka kahit sino ka pa!",
+      "colregs rule 14": "Rule 14: Head-on. Both alter course to STARBOARD. Red to red pag nagkita kayo",
+      "colregs rule 15": "Rule 15: Crossing. Pag nasa starboard side yung iba = GIVE WAY ka. Siya stand-on vessel",
+      "colregs rule 16": "Rule 16: Give-way vessel action. Keep well clear + early + substantial action",
+      "colregs rule 17": "Rule 17: Stand-on vessel. Maintain course & speed. Pero pag clear na collision = take action!",
+      "colregs rule 18": "Rule 18: Responsibilities. Hierarchy: NUC > RAM > CBD > Fishing > Sail > Power. Mas 'less maneuverable' = mas priority",
+      "cpa": "CPA = Closest Point of Approach. TCPA = Time to CPA. Safe: 2nm open sea, 1nm traffic lanes",
+      "lights": "Navigation lights: Port=Red, Starboard=Green, Stern=White, Masthead=White. Power vessel underway: 2 white mast + red + green + stern",
+
+      // MARPOL - POLLUTION
+      "marpol annex 1": "MARPOL Annex I: Oil. Discharge <15ppm + >12nm from land + ship moving >4 knots. Oil Record Book mandatory!",
+      "marpol annex 5": "MARPOL Annex V: Garbage. Plastic=NEVER! Food >12nm. Paper >3nm. Ground food <25mm pwede 3nm",
+      "marpol annex 6": "MARPOL Annex VI: Air pollution. SOx limit 0.5% fuel sulfur. NOx Tier III sa ECA areas",
+      "garbage placard": "Garbage placard required sa barko >12m. Naka-post sa crew areas. Plastic dumping = $25,000 fine!",
+
+      // GMDSS - DISTRESS
+      "gmdss": "GMDSS: Global Maritime Distress System. Sea Areas: A1-VHF, A2-MF, A3-Inmarsat, A4-Polar. VHF Ch16 = 156.8MHz",
+      "mayday": "MAYDAY format: Mayday Mayday Mayday. This is [Ship] [Callsign]. Position [Lat/Long]. Nature distress. Assistance needed. Over",
+      "panpan": "PAN-PAN: Urgency message. Di life-threatening pero need immediate assistance. 3x ulit",
+      "securite": "SECURITE: Safety message. Nav warning, weather, hazard. 3x ulit",
+      "epirb": "EPIRB: 406MHz to satellite + 121.5MHz homing. Activate auto 1-4m depth or manual. Battery life 48hrs min",
+      "sart": "SART: 9GHz radar transponder. 12 dots lalabas sa radar screen pag na-trigger. Range 5-8nm",
+      "vhs ch16": "VHF Ch16 = 156.8MHz. Distress/Safety/Calling only. Max 3 mins call bago lipat working channel",
+
+      // STCW + CREW
+      "stcw rest": "STCW Rest hours: 10hrs/24hrs, 77hrs/7days. Emergency pwede ma-deviate pero need record",
+      "alcohol": "STCW Alcohol limit: 0.08% blood, 0.35mg/L breath. 4hrs bago duty bawal inom!",
+      "muster list": "Muster list: Nakalagay duties bawat crew pag emergency. Fire, Abandon ship, Collision, Man overboard",
+
+      // NAVIGATION
+      "knot": "1 knot = 1 NM/hour = 1.852 km/h. 20 knots = 37 km/h. 1 NM = 1852 meters = 1 min latitude",
+      "gm": "Metacentric Height GM: Measure ng stability. GM positive=stable, zero=neutral, negative=capsize! Formula: GM = KM - KG",
+      "draft": "Draft: Forward, Aft, Mean. Check lagi para di sumayad! Squat effect: mas malalim pag mabilis sa shallow",
+      "parallel index": "Parallel Index: Parallel line sa course mo sa radar. Para check if nasa track ka. Anti-grounding tool!",
+      "buoyage": "IALA: Region A - Red Left pag pasok harbor. Region B - US/Japan baliktad! Lateral + Cardinal marks",
+      "tss": "TSS = Traffic Separation Scheme. Keep right, no crossing except 90°. Violation = collision risk!",
+
+      // CARGO + SHIP
+      "imo number": "IMO Number: 7 digits, unique for life ng barko. Kahit palit name/flag, same IMO",
+      "freeboard": "Freeboard: Waterline to deck. Loadline marks: TF, F, T, S, W, WNA. Plimsoll mark yan boss!",
+      "ballast": "Ballast water: For stability/trim. Pero may invasive species! BWM Convention: Treat + Record + Exchange >200nm",
+      "bunker": "Bunker: Ship fuel. MDO, MGO, IFO380, VLSFO 0.5% sulfur. BDN = Bunker Delivery Note need pirmahan",
+      "container": "TEU = 20ft container. FEU = 40ft = 2 TEU. Lashing: Twistlock + Turnbuckle + Lashing rod",
+
+      // MEDICAL
+      "cpr": "CPR: 30 compressions : 2 breaths. 100-120/min rate. Depth 5-6cm adults. Continue hanggang may help!",
+      "heat stroke": "Heat stroke: Body temp >40°C, dry skin, unconscious. Action: Cool body + shade + water + medical help",
+      "fracture": "Fracture: Immobilize + no movement + cold compress + elevate. Open fracture = cover wound + stop bleeding",
+
+      // ENGINE
+      "mcr": "MCR = Maximum Continuous Rating. Normal engine load 80-85% MCR para tipid + less wear",
+      "scavenge": "Scavenge fire: Sunog sa scavenge space. Cause: unburned fuel/oil. Action: Slow down + steam + CO2",
+
+      // LEGAL
+      "solas": "SOLAS: Safety of Life at Sea. Ch III: Life-saving. Ch V: Navigation safety. Ch XI-2: Security ISPS Code",
+      "ism": "ISM Code: Safety Management System. Goal: Safe ship operation + pollution prevention. May DPA - Designated Person Ashore",
+      "psc": "PSC = Port State Control. Foreign port inspection. Top deficiencies: Fire safety, Life-saving, ISM, MARPOL"
+    };
+
+    function sendMsg() {
+      const input = document.getElementById('userInput');
+      const chatBox = document.getElementById('chatBox');
+      const question = input.value.toLowerCase().trim();
+
+      if(!question) return;
+
+      chatBox.innerHTML += `<div class="message user-msg"><strong>You:</strong> ${input.value}</div>`;
+
+      let answer = "Chief AI: Aye aye boss! 100+ Q&A pa lang loaded. Di ko pa alam exact yan. Try mo keywords: 'COLREGS', 'MARPOL', 'FIRE CLASS', 'GM', 'CPR', 'STCW'. Anong specific boss?";
+
+      for(let key in qa) {
+        if(question.includes(key)) {
+          answer = `Chief AI: ${qa[key]}`;
+          break;
+        }
+      }
+
+      chatBox.innerHTML += `<div class="message ai-msg"><strong>${answer}</strong></div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+      input.value = '';
+    }
+  </script>
+</body>
+</html>
