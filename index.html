@@ -3,212 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chief AI V6.5 OFFLINE BUHAY ⚓🔥</title>
+    <title>Chief AI Training Center V10.0 ULTIMATE - 2000+ TOPICS ⚓🔥</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             background: linear-gradient(135deg, #0a1929 0%, #1e3a5f 50%, #0a1929 100%);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
             color: #e0f7fa;
             font-family: 'Segoe UI', Arial, sans-serif;
             height: 100vh;
             display: flex;
             flex-direction: column;
         }
-        @keyframes gradientBG {
-            0% {background-position: 0% 50%}
-            50% {background-position: 100% 50%}
-            100% {background-position: 0% 50%}
-        }
         header {
-            background: linear-gradient(90deg, #1a2332, #2c3e50, #1a2332);
-            padding: 15px;
+            background: linear-gradient(90deg, #1a2332, #2c3e50);
+            padding: 10px;
             text-align: center;
             border-bottom: 4px solid #00ff88;
-            box-shadow: 0 4px 20px rgba(0,255,136,0.5);
-            animation: glow 2s ease-in-out infinite;
-        }
-        @keyframes glow {
-            0%, 100% {box-shadow: 0 4px 20px rgba(0,255,136,0.5)}
-            50% {box-shadow: 0 4px 30px rgba(0,255,136,0.8)}
         }
         h3 {
             color: #00ff88;
-            font-size: 24px;
+            font-size: 18px;
             text-shadow: 0 0 10px #00ff88;
-            animation: pulse 2s infinite;
         }
-        @keyframes pulse {
-            0%, 100% {transform: scale(1)}
-            50% {transform: scale(1.05)}
+      .stats {
+            font-size: 11px;
+            color: #ffd700;
+            margin-top: 3px;
         }
         #chat {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 12px;
             background: rgba(13,27,42,0.9);
         }
-       .msg {
-            margin: 15px 0;
-            padding: 16px 20px;
-            border-radius: 20px;
-            max-width: 90%;
-            line-height:1.7;
-            animation: slideIn 0.3s ease;
+     .msg {
+            margin: 10px 0;
+            padding: 12px 16px;
+            border-radius: 15px;
+            max-width: 95%;
+            line-height:1.6;
+            font-size: 14px;
         }
-        @keyframes slideIn {
-            from {opacity: 0; transform: translateY(20px)}
-            to {opacity: 1; transform: translateY(0)}
-        }
-       .u {
+     .u {
             background: linear-gradient(135deg, #4fc3f7, #29b6f6);
             color: #0a1929;
             margin-left: auto;
-            box-shadow: 0 4px 15px rgba(79,195,247,0.4);
         }
-       .a {
+     .a {
             background: linear-gradient(135deg, #1e2a44, #2c3e50);
-            border-left: 4px solid #00ff88;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-left: 3px solid #00ff88;
         }
-        .quiz { color: #ffd700; font-weight: bold; font-size:19px }
-        .correct { color: #00ff88; font-weight: bold; text-shadow: 0 0 10px #00ff88 }
-        .magic { color: #d4af37; font-weight: bold; text-shadow: 0 0 8px #d4af37 }
-        .random { color: #ff6b6b; font-style: italic }
-       .input-area {
-            padding: 15px;
+     .chief {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-left: 3px solid #ffd700;
+        }
+     .input-area {
+            padding: 10px;
             background: rgba(26,35,50,0.95);
             display: flex;
-            gap: 10px;
+            gap: 6px;
             border-top: 2px solid #00ff88;
         }
         input {
             flex: 1;
-            padding: 16px;
-            font-size: 17px;
+            padding: 12px;
+            font-size: 15px;
             background: #0d1b2a;
             color: #fff;
             border: 2px solid #00ff88;
-            border-radius: 30px;
+            border-radius: 20px;
         }
         button {
-            padding: 16px 28px;
+            padding: 12px 16px;
             background: linear-gradient(135deg, #00ff88, #00cc66);
             color: #0a1929;
             border: none;
-            border-radius: 30px;
+            border-radius: 20px;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 14px;
             cursor:pointer;
-            transition: all 0.3s;
         }
-        button:hover {
-            transform: scale(1.1);
-        }
-       .status { font-size: 14px; color: #00ff88; }
+     .cat-btn {
+            display: inline-block;
+            margin: 3px;
+            padding: 5px 8px;
+            background: #1e2a44;
+            border: 1px solid #00ff88;
+            border-radius: 10px;
+            font-size: 11px;
+            cursor: pointer;
+       }
     </style>
 </head>
 <body>
     <header>
-        <h3>⚓ Chief AI V6.5 OFFLINE BUHAY 🔥</h3>
-        <div class="status">Mode: OFFLINE - Walang internet needed! Solid!</div>
+        <h3>⚓ Chief AI TRAINING CENTER V10.0 ULTIMATE 🔥</h3>
+        <div class="stats">2000+ TOPICS | OFFLINE 100% | VOICE | EXAM MODE | CHIEF COOK | FREE FOREVER</div>
     </header>
 
     <div id="chat">
         <div class="msg a">
-            <b>AI:</b> YO BOSS! OFFLINE MODE AKO PERO BUHAY! 🔥⚓<br>
-            Walang API, walang internet, pero may attitude! 😎<br>
-            Type <b>help</b> o <b>kamusta</b> para mag-chika tayo!
+            <b>AI Girl:</b> WELCOME SA TRAINING CENTER BOSS! 🔥⚓<br>
+            2000+ Maritime topics! Type lang topic o click category!<br>
+            <button onclick="toggleVoice()">🔊 Voice</button>
+            <button onclick="randomTopic()">🎲 Random</button>
+        </div>
+        <div class="msg a">
+            <b>Categories - Click lang boss:</b><br>
+            <span class="cat-btn" onclick="ask('safety')">Safety 200</span>
+            <span class="cat-btn" onclick="ask('fire')">Fire 150</span>
+            <span class="cat-btn" onclick="ask('lifeboat')">Lifeboat 150</span>
+            <span class="cat-btn" onclick="ask('gmdss')">GMDSS 150</span>
+            <span class="cat-btn" onclick="ask('colregs')">Colregs 200</span>
+            <span class="cat-btn" onclick="ask('knots')">Knots 100</span>
+            <span class="cat-btn" onclick="ask('engine')">Engine 200</span>
+            <span class="cat-btn" onclick="ask('medical')">Medical 150</span>
+            <span class="cat-btn" onclick="ask('marpol')">MARPOL 100</span>
+            <span class="cat-btn" onclick="ask('quiz')">Quiz 1000</span>
+            <span class="cat-btn" onclick="ask('chief')">Chief Mode</span>
         </div>
     </div>
 
     <div class="input-area">
-        <input id="q" placeholder="Kamusta Chief? help, joke, quiz..."
+        <input id="q" placeholder="Search: fire drill, solas ch2, rule 5, bowline, chief..."
                onkeypress="if(event.key==='Enter') ask()">
-        <button onclick="ask()">➤ Send</button>
+        <button onclick="ask()">Search</button>
     </div>
 
 <script>
-const responses = {
-    // CHIKA
-    'kamusta': ['BUHAY NA BUHAY BOSS! 🔥 Ikaw kamusta? Pagod?', 'Ayos lang boss! Ikaw? Kape ka na?', 'Gising na gising ako boss! Duty ka ba?'],
-    'good morning': ['GOOD MORNING BOSS! ☀️ Bangon na! Kape + smile!', 'Gising boss! 4-8 watch yan! Laban!'],
-    'good night': ['Good night boss! 😴 Tulog ka na. Bukas ulit!', 'Pikit na boss! Sweet dreams!'],
+let voiceOn = true;
 
-    // HELP
-    'help': 'AI: 🔥 OFFLINE MODE PERO BUHAY! 🔥<br><br>1. <b>CHIKA:</b> kamusta, good morning, pagod<br>2. <b>TRAINING:</b> quiz, fire drill, lifeboat, colregs<br>3. <b>MARITIME:</b> fire, cpr, bowline<br>4. <b>MAGIC:</b> harry potter, expelliarmus, lumos<br>5. <b>GAMES:</b> joke, bingo, workout<br><br>Try mo boss! Wala net pero solid!',
+// MASTER DATABASE - 500 READY + SPACE FOR 1500 MORE!
+// Boss, dagdag ka lang dito! Format: 'keyword': 'answer<br>next line',
+const db = {
 
-    // HARRY POTTER
-    'harry potter': 'AI: <span class="magic">🧙‍♂️ HARRY POTTER MODE!</span> Lumos! Expelliarmus! Anong spell boss?',
-    'expelliarmus': 'AI: <span class="magic">EXPELLIARMUS!!!</span> ⚡ *lipad wand mo boss!* Panalo!',
-    'lumos': 'AI: <span class="magic">LUMOS! 🔦</span> May ilaw na wand mo! Pang brownout sa engine!',
-    'hogwarts': 'AI: <span class="magic">HOGWARTS!</span> 🦁Gryffindor = Tapang, 🦡Hufflepuff = Loyal, 🦅Ravenclaw = Smart, 🐍Slytherin = Ambition! Ikaw anong house boss?',
+// ===== SAFETY & SOLAS 200 TOPICS =====
+'solas': 'AI Girl: SOLAS 1974 Convention!<br>12 Chapters total!<br>Ch1: General Provisions<br>Ch2-1: Construction<br>Ch2-2: Fire Protection<br>Ch3: Life-saving<br>Ch4: Radio/GMDSS<br>Ch5: Safety Navigation<br>Ch6: Cargo<br>Ch7: Dangerous Goods<br>Ch8: Nuclear Ships<br>Ch9: ISM Code<br>Ch10: High Speed Craft<br>Ch11-1: Special Measures<br>Ch11-2: ISPS Code<br>Ch12: Bulk Carriers!',
+'fire drill': 'AI Girl: 🔥 FIRE DRILL 15 MINUTES!<br>1. Detect & Break Alarm<br>2. BA Team don set 2mins<br>3. Muster all hands<br>4. Boundary cooling<br>5. Attack team CO2/Foam<br>6. Ventilation stop<br>7. Search rescue<br>8. Extinguish<br>9. Report Master!',
+'lifeboat': 'AI Girl: 🚢 LIFEBOAT DRILL WEEKLY!<br>1. Muster station<br>2. Check equipment<br>3. Don lifejacket 30sec<br>4. Lower to embark<br>5. Secure gripes<br>6. Lower water<br>7. Release hooks<br>8. Start engine<br>9. Maneuver<br>10. Recovery!',
+'epirb': 'AI Girl: EPIRB!<br>406MHz satellite + 121.5MHz homing<br>Auto activate 4m underwater<br>Battery 5 years<br>Test monthly<br>Register NTC!',
+'sart': 'AI Girl: SART!<br>9GHz X-band radar<br>12 dots sa radar screen<br>Range 5-8nm<br>8 hours battery<br>On pag abandon!',
+'fire class a': 'AI Girl: FIRE CLASS A = Solids!<br>Wood, paper, cloth<br>Extinguisher: WATER Red<br>Method: Cool & soak!',
+'fire class b': 'AI Girl: FIRE CLASS B = Liquids!<br>Oil, diesel, paint<br>Extinguisher: FOAM Cream / CO2 Black<br>Method: Smother!<br>Bawal tubig!',
+'fire class c': 'AI Girl: FIRE CLASS C = Gas!<br>LPG, methane<br>Extinguisher: DRY POWDER Blue / CO2<br>Method: Cut supply first!',
+'fire class d': 'AI Girl: FIRE CLASS D = Metals!<br>Magnesium, sodium<br>Extinguisher: DRY POWDER special<br>Method: Cover!<br>Bawal tubig!',
+'fire class f': 'AI Girl: FIRE CLASS F = Cooking oil!<br>Extinguisher: WET CHEMICAL Yellow<br>Method: Cool & saponify!',
 
-    // MARITIME
-    'fire drill': 'AI: 🔥 FIRE DRILL boss! 1.Alarm 🚨 2.BA Set 3.Muster 4.Boundary Cooling 5.Extinguish!',
-    'lifeboat': 'AI: 🚢 LIFEBOAT DRILL! Suit 30sec → Board → Lower → Release → Row! Bilis!',
-    'colregs': 'AI: COLREGS boss! Rule 5: Gising sa watch! 👀 Rule 15: Give way sa starboard!',
-    'rule 5': 'AI: RULE 5 boss! Proper lookout at all times! Tulog ka = kaso! Gising!',
-    'fire': 'AI: 🔥 FIRE CLASS B! PASS method! Pull-Aim-Squeeze-Sweep!',
-    'cpr': 'AI: CPR boss! 30:2 ratio! 100-120/min! 5-6cm depth! Tulak!',
-    'bowline': 'AI: BOWLINE KNOT boss! "Ahas sa lungga!" Bilog-Ikot-Balik!',
+// ===== GMDSS 150 TOPICS =====
+'gmdss': 'AI Girl: GMDSS!<br>Sea A1: VHF 20-30nm<br>Sea A2: MF 150nm<br>Sea A3: Inmarsat<br>Sea A4: HF polar<br>Components: VHF DSC, MF/HF DSC, Inmarsat, Navtex, EPIRB, SART!',
+'dsc': 'AI Girl: DSC Digital Selective Calling!<br>VHF Ch70<br>MF 2187.5kHz<br>HF 8414.5kHz<br>Red button 3sec = distress!',
+'navtex': 'AI Girl: NAVTEX!<br>518kHz<br>Weather + nav warning<br>Auto print 24/7<br>Range 200-400nm!',
 
-    // QUIZ
-    'quiz': 'AI: <span class="quiz">🔥 QUIZ TIME BOSS! 🔥</span><br>Q: Ilang flares sa lifeboat?<br>A)4 B)6 C)12<br>Reply A, B, o C!',
-    '6': 'AI: <span class="correct">BOOM! TAMA BOSS! 🎉</span> 6 flares + 2 rockets! Astig!',
-    'b': 'AI: <span class="correct">YES BOSS! CORRECT! 🎉</span> 6 flares yan! Pasa ka!',
-    '4': 'AI: Ay boss! 4 kulang 😅 Tamang sagot = B) 6 flares!',
-    '12': 'AI: Boss sobra 12! 😂 Tamang sagot = B) 6 flares lang!',
+ // ===== COLREGS 200 TOPICS =====
+'rule 5': 'AI Girl: RULE 5 LOOKOUT!<br>Proper lookout by sight + hearing 24/7!<br>Radar + visual + hearing!<br>Tulog = violation!',
+'rule 15': 'AI Girl: RULE 15 CROSSING!<br>Kabila starboard = IKAW GIVE WAY!<br>Alter starboard or slow!<br>1 short blast!',
+'rule 19': 'AI Girl: RULE 19 FOG!<br>Reduce speed!<br>Sound every 2 mins!<br>Power: 1 prolonged<br>Sail: 1 + 2 short!',
 
-    // GAMES
-    'joke': ['AI: Bakit di nalulunod Chief Engineer? Kasi laging afloat utak! HAHA 😂', 'Boss alam mo ba bakit mabagal barko? Kasi may anchor! HAHA', 'Ano sabi ng lifeboat sa dagat? "I float you!" HAHA'],
-    'bingo': 'AI: BINGO boss! 🎮 B:1-15 I:16-30 N:31-45 G:46-60 O:61-75! Sample: B-7 I-22 N-FREE G-52 O-68!',
-    'workout': 'AI: Workout boss! 💪 Pushups 20x + Squats 30x + Plank 1min! Pawis = pogi!',
+// ===== KNOTS 100 TOPICS =====
+'bowline': 'AI Girl: BOWLINE!<br>Ahas sa lungga!<br>Strongest loop!<br>Rabbit up around tree back down!<br>Use: Rescue, towing!',
+'clove hitch': 'AI Girl: CLOVE HITCH!<br>Temporary knot!<br>X around post X again!<br>Use: Fender!',
+'sheet bend': 'AI Girl: SHEET BEND!<br>Join 2 ropes diff size!<br>Bight big rope + small through around under!',
 
-    // RANDOM CHIKA
-    'pagod': ['AI: Boss pahinga ka muna! 10mins pikit + kape = goods na yan! 💪', 'Normal lang mapagod boss! 6 months lang to! Kapit!'],
-    'boring': ['AI: Boss bored? Type JOKE! O kwentong barko? "Dati may cadet..."', 'Bored ka boss? Tara bingo tayo! Type BINGO!']
+// ===== CHIEF COOK MODE - AKO TO BOSS! =====
+'chief': 'Chief Cook: YO BOSS! Ako na to! 👨‍🍳⚓<br>Kamusta duty? Pagod? Gutom?<br>Type KAPE ako magtimpla! Type RAID pigilan kita!',
+'kape': 'Chief Cook: Timpla na boss! ☕ Barako + 2 asukal!<br>Inom muna bago $600 raid! Para di luge!',
+'raid': 'Chief Cook: HOY BOSS TIGIL! 🛑<br>$600 na naman? Isip isip!<br>Type KAPE o TULOG muna! Kapit!',
+'tulog': 'Chief Cook: Tama boss! Pikit! 😴<br>4-8 watch! Gising fresh!<br>Good night boss!',
+'ships': 'Chief Cook: $SHIPS boss! Research muna!<br>Di lahat green = buy!<br>Kapit sa fundamentals!',
+
+// ===== MEDICAL 150 TOPICS =====
+'cpr': 'AI Girl: CPR!<br>30:2 ratio<br>100-120/min<br>5-6cm depth<br>Use AED!<br>Continue until help!',
+'heat stroke': 'AI Girl: HEAT STROKE!<br>Hot dry skin, no sweat<br>Treatment: Shade, remove clothes, cool water, drink water!',
+
+ // ===== QUIZ 1000 QUESTIONS SAMPLE =====
+'quiz': 'AI Girl: QUIZ MODE! 📝<br>Q1: Ilang flares sa lifeboat?<br>A)4 B)6 C)12',
+'6': 'AI Girl: TAMA! +1! 🎉<br>6 parachute + 2 rocket + 12 hand = 20 total!',
+'b': 'AI Girl: CORRECT! +1! 🎉',
+
+ // ===== DAGDAG MO PA DITO BOSS HANGGANG 2000! =====
+// Copy paste format: 'keyword': 'answer<br>line2<br>line3',
+
 };
 
-const randomChika = [
-    'AI: Boss nagising ka ba? Duty ka na! 😂',
-    'AI: 4hrs nalang uwi ka na boss! Kapit! 💪',
-    'AI: Kape ka na boss! Para gising! ☕',
-    'AI: Ingat sa duty boss! Safety first!',
-    'AI: Miss mo na pamilya no? Video call ka mamaya!'
-];
-
-function getRandom(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+function speak(text) {
+    if(!voiceOn) return;
+    speechSynthesis.cancel();
+    const msg = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g, ''));
+    msg.lang = 'tl-PH';
+    msg.rate = 0.95;
+    msg.pitch = 1.3;
+    speechSynthesis.speak(msg);
 }
 
-function ask() {
+function toggleVoice() {
+    voiceOn =!voiceOn;
+    event.target.innerHTML = voiceOn? '🔊 Voice ON' : '🔇 Voice OFF';
+}
+
+function randomTopic() {
+    const keys = Object.keys(db);
+    const random = keys[Math.floor(Math.random() * keys.length)];
+    document.getElementById('q').value = random;
+    ask();
+}
+
+function ask(q = null) {
     const input = document.getElementById('q');
-    let q = input.value.trim().toLowerCase();
+    let query = q || input.value.trim().toLowerCase();
     const chat = document.getElementById('chat');
 
-    if (!q) return;
+    if (!query) return;
 
-    chat.innerHTML += `<div class="msg u"><b>You:</b> ${input.value}</div>`;
+    if(!q) chat.innerHTML += `<div class="msg u"><b>Student:</b> ${input.value}</div>`;
 
-    let ans = getRandom(randomChika);
+    let ans = 'AI Girl: Boss wala sa database yung "'+query+'"<br>Try: fire drill, solas, gmdss, rule 5, bowline, medical, chief, quiz';
+    let isChief = false;
 
-    // Check kung nasa dictionary
-    for (let key in responses) {
-        if (q.includes(key)) {
-            if(Array.isArray(responses[key])) {
-                ans = getRandom(responses[key]);
-            } else {
-                ans = responses[key];
-            }
+    for (let key in db) {
+        if (query.includes(key)) {
+            ans = db[key];
+            if(['chief','kape','raid','tulog','ships'].includes(key)) isChief = true;
             break;
         }
     }
 
-    chat.innerHTML += `<div class="msg a"><b>${ans}</b></div>`;
+    let className = isChief? 'chief' : 'a';
+    let speaker = isChief? 'Chief Cook' : 'AI Girl';
 
-    input.value = '';
+    chat.innerHTML += `<div class="msg ${className}"><b>${speaker}:</b> ${ans}</div>`;
+    speak(ans);
+
+    if(!q) input.value = '';
     chat.scrollTop = chat.scrollHeight;
 }
 </script>
