@@ -1,241 +1,370 @@
 <!DOCTYPE html>
-<html lang="tl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chief AI Training Center V10.0 ULTIMATE - 2000+ TOPICS ⚓🔥</title>
+    <title>Maritime Training Center Pro | 2000+ STCW Topics</title>
+    <meta name="description" content="Professional Maritime Training System - SOLAS, MARPOL, COLREGS, GMDSS, STCW">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --navy: #0A1929;
+            --navy-dark: #051320;
+            --blue: #1565C0;
+            --blue-light: #1976D2;
+            --gold: #FFA000;
+            --white: #ECEFF1;
+            --success: #00C853;
+            --danger: #D32F2F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #0a1929 0%, #1e3a5f 50%, #0a1929 100%);
-            color: #e0f7fa;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--navy-dark);
+            color: var(--white);
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
             height: 100vh;
             display: flex;
             flex-direction: column;
+            line-height: 1.6;
         }
         header {
-            background: linear-gradient(90deg, #1a2332, #2c3e50);
-            padding: 10px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+            padding: 15px 20px;
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        h1 {
+            font-size: 22px;
+            color: var(--white);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .header-stats {
+            font-size: 12px;
+            color: var(--gold);
+            margin-top: 5px;
+        }
+        .scoreboard {
+            display: flex;
+            gap: 20px;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--gold);
+        }
+        .score-item {
             text-align: center;
-            border-bottom: 4px solid #00ff88;
         }
-        h3 {
-            color: #00ff88;
+        .score-label {
+            font-size: 10px;
+            color: #B0BEC5;
+            text-transform: uppercase;
+        }
+        .score-value {
             font-size: 18px;
-            text-shadow: 0 0 10px #00ff88;
-        }
-      .stats {
-            font-size: 11px;
-            color: #ffd700;
-            margin-top: 3px;
+            font-weight: bold;
+            color: var(--gold);
         }
         #chat {
             flex: 1;
             overflow-y: auto;
-            padding: 12px;
-            background: rgba(13,27,42,0.9);
+            padding: 20px;
+            background: var(--navy);
         }
-     .msg {
-            margin: 10px 0;
-            padding: 12px 16px;
-            border-radius: 15px;
-            max-width: 95%;
-            line-height:1.6;
-            font-size: 14px;
+        .msg {
+            margin: 12px 0;
+            padding: 15px 18px;
+            border-radius: 10px;
+            max-width: 85%;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-     .u {
-            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
-            color: #0a1929;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .user {
+            background: var(--blue-light);
+            color: white;
             margin-left: auto;
+            border-bottom-right-radius: 3px;
         }
-     .a {
-            background: linear-gradient(135deg, #1e2a44, #2c3e50);
-            border-left: 3px solid #00ff88;
+        .bot {
+            background: #1A2332;
+            border-left: 4px solid var(--blue);
+            border-bottom-left-radius: 3px;
         }
-     .chief {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-            border-left: 3px solid #ffd700;
+        .quiz {
+            background: #1B1F3B;
+            border-left: 4px solid var(--gold);
+            border-bottom-left-radius: 3px;
         }
-     .input-area {
-            padding: 10px;
-            background: rgba(26,35,50,0.95);
+        .system {
+            background: rgba(0,200,83,0.15);
+            border: 1px solid var(--success);
+            text-align: center;
+            max-width: 100%;
+            font-size: 13px;
+        }
+        .msg strong { color: var(--gold); }
+        .msg code {
+            background: rgba(0,0,0,0.4);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .controls {
+            padding: 15px;
+            background: var(--navy);
+            border-top: 2px solid var(--blue);
             display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .category-bar {
+            display: flex;
+            flex-wrap: wrap;
             gap: 6px;
-            border-top: 2px solid #00ff88;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .cat-btn {
+            padding: 6px 12px;
+            background: rgba(21,101,192,0.3);
+            border: 1px solid var(--blue);
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--white);
+        }
+        .cat-btn:hover {
+            background: var(--blue);
+            transform: translateY(-2px);
+        }
+        .input-group {
+            display: flex;
+            gap: 8px;
         }
         input {
             flex: 1;
-            padding: 12px;
-            font-size: 15px;
-            background: #0d1b2a;
-            color: #fff;
-            border: 2px solid #00ff88;
-            border-radius: 20px;
+            padding: 12px 16px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.05);
+            color: var(--white);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            outline: none;
+            transition: 0.2s;
+        }
+        input:focus {
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.08);
         }
         button {
-            padding: 12px 16px;
-            background: linear-gradient(135deg, #00ff88, #00cc66);
-            color: #0a1929;
+            padding: 12px 20px;
+            background: var(--blue);
+            color: white;
             border: none;
-            border-radius: 20px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 600;
             font-size: 14px;
-            cursor:pointer;
-        }
-     .cat-btn {
-            display: inline-block;
-            margin: 3px;
-            padding: 5px 8px;
-            background: #1e2a44;
-            border: 1px solid #00ff88;
-            border-radius: 10px;
-            font-size: 11px;
             cursor: pointer;
-       }
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        button:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(21,101,192,0.4);
+        }
+        button.exam {
+            background: var(--gold);
+            color: var(--navy-dark);
+        }
+        button.danger {
+            background: var(--danger);
+        }
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0,200,83,0.4);
+        }
+        @media(max-width:768px){
+            h1{font-size:18px;}
+            .header-top{flex-direction:column;align-items:flex-start;}
+            .scoreboard{width:100%;justify-content:space-around;}
+            .msg{max-width:95%;font-size:13px;}
+            .input-group{flex-direction:column;}
+            button{width:100%;}
+        }
     </style>
 </head>
 <body>
     <header>
-        <h3>⚓ Chief AI TRAINING CENTER V10.0 ULTIMATE 🔥</h3>
-        <div class="stats">2000+ TOPICS | OFFLINE 100% | VOICE | EXAM MODE | CHIEF COOK | FREE FOREVER</div>
+        <div class="header-top">
+            <div>
+                <h1>⚓ Maritime Training Center Pro</h1>
+                <div class="header-stats">STCW Compliant | SOLAS | MARPOL | COLREGS | GMDSS | 2000+ Topics</div>
+            </div>
+            <div class="scoreboard">
+                <div class="score-item">
+                    <div class="score-label">Score</div>
+                    <div class="score-value" id="score">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Streak</div>
+                    <div class="score-value" id="streak">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Rank</div>
+                    <div class="score-value" id="rank">Cadet</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Accuracy</div>
+                    <div class="score-value" id="accuracy">0%</div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <div id="chat">
-        <div class="msg a">
-            <b>AI Girl:</b> WELCOME SA TRAINING CENTER BOSS! 🔥⚓<br>
-            2000+ Maritime topics! Type lang topic o click category!<br>
-            <button onclick="toggleVoice()">🔊 Voice</button>
-            <button onclick="randomTopic()">🎲 Random</button>
-        </div>
-        <div class="msg a">
-            <b>Categories - Click lang boss:</b><br>
-            <span class="cat-btn" onclick="ask('safety')">Safety 200</span>
-            <span class="cat-btn" onclick="ask('fire')">Fire 150</span>
-            <span class="cat-btn" onclick="ask('lifeboat')">Lifeboat 150</span>
-            <span class="cat-btn" onclick="ask('gmdss')">GMDSS 150</span>
-            <span class="cat-btn" onclick="ask('colregs')">Colregs 200</span>
-            <span class="cat-btn" onclick="ask('knots')">Knots 100</span>
-            <span class="cat-btn" onclick="ask('engine')">Engine 200</span>
-            <span class="cat-btn" onclick="ask('medical')">Medical 150</span>
-            <span class="cat-btn" onclick="ask('marpol')">MARPOL 100</span>
-            <span class="cat-btn" onclick="ask('quiz')">Quiz 1000</span>
-            <span class="cat-btn" onclick="ask('chief')">Chief Mode</span>
+        <div class="msg system">
+            <strong>System Initialized</strong><br>
+            Welcome to Maritime Training Center Pro. This system covers STCW, SOLAS, MARPOL, and COLREGS requirements.<br>
+            Type a topic or select a category to begin.
         </div>
     </div>
 
-    <div class="input-area">
-        <input id="q" placeholder="Search: fire drill, solas ch2, rule 5, bowline, chief..."
-               onkeypress="if(event.key==='Enter') ask()">
-        <button onclick="ask()">Search</button>
-    </div>
+    <div class="controls">
+        <div class="category-bar">
+            <button class="cat-btn" onclick="ask('solas')">SOLAS</button>
+            <button class="cat-btn" onclick="ask('marpol')">MARPOL</button>
+            <button class="cat-btn" onclick="ask('colregs')">COLREGS</button>
+            <button class="cat-btn" onclick="ask('gmdss')">GMDSS</button>
+            <button class="cat-btn" onclick="ask('stcw')">STCW</button>
+            <button class="cat-btn" onclick="ask('fire')">Fire Safety</button>
+            <button class="cat-btn" onclick="ask('lifeboat')">LSA</button>
+            <button class="cat-btn" onclick="ask('ism')">ISM Code</button>
+            <button class="cat-btn" onclick="ask('isps')">ISPS Code</button>
+            <button class="cat-btn" onclick="ask('navigation')">Navigation</button>
+            <button class="cat-btn" onclick="ask('engine')">Engineering</button>
+            <button class="cat-btn" onclick="ask('medical')">Medical</button>
+            <button class="cat-btn" onclick="startExam()" style="background:var(--gold);color:var(--navy-dark);">📝 Start Exam</button>
+        </div>
+        <div class="input-group">
+            <input id="q" placeholder="Search: SOLAS Ch2, MARPOL Annex I, Rule 5, EPIRB, Fire Class B..." 
+                   onkeypress="if(event.key==='Enter') ask()">
+            <button onclick="ask()">Search</button>
+            <button onclick="toggleVoice()" id="voiceBtn">🔊</button>
+            <button onclick="exportProgress()">💾 Export</button>
+        </div>
+    <div class="toast" id="toast"></div>
+    <script>
+let voiceOn = false;
+let score = parseInt(localStorage.getItem('mtcScore') || '0');
+let streak = parseInt(localStorage.getItem('mtcStreak') || '0');
+let totalQuestions = parseInt(localStorage.getItem('mtcTotal') || '0');
+let correctAnswers = parseInt(localStorage.getItem('mtcCorrect') || '0');
+let examMode = false;
+let examQuestions = [];
+let examIndex = 0;
+let examCorrect = 0;
 
-<script>
-let voiceOn = true;
+updateDisplay();
 
-// MASTER DATABASE - 500 READY + SPACE FOR 1500 MORE!
-// Boss, dagdag ka lang dito! Format: 'keyword': 'answer<br>next line',
+// MASTER DATABASE - 1000+ PROFESSIONAL MARITIME TOPICS
 const db = {
 
-// ===== SAFETY & SOLAS 200 TOPICS =====
-'solas': 'AI Girl: SOLAS 1974 Convention!<br>12 Chapters total!<br>Ch1: General Provisions<br>Ch2-1: Construction<br>Ch2-2: Fire Protection<br>Ch3: Life-saving<br>Ch4: Radio/GMDSS<br>Ch5: Safety Navigation<br>Ch6: Cargo<br>Ch7: Dangerous Goods<br>Ch8: Nuclear Ships<br>Ch9: ISM Code<br>Ch10: High Speed Craft<br>Ch11-1: Special Measures<br>Ch11-2: ISPS Code<br>Ch12: Bulk Carriers!',
-'fire drill': 'AI Girl: 🔥 FIRE DRILL 15 MINUTES!<br>1. Detect & Break Alarm<br>2. BA Team don set 2mins<br>3. Muster all hands<br>4. Boundary cooling<br>5. Attack team CO2/Foam<br>6. Ventilation stop<br>7. Search rescue<br>8. Extinguish<br>9. Report Master!',
-'lifeboat': 'AI Girl: 🚢 LIFEBOAT DRILL WEEKLY!<br>1. Muster station<br>2. Check equipment<br>3. Don lifejacket 30sec<br>4. Lower to embark<br>5. Secure gripes<br>6. Lower water<br>7. Release hooks<br>8. Start engine<br>9. Maneuver<br>10. Recovery!',
-'epirb': 'AI Girl: EPIRB!<br>406MHz satellite + 121.5MHz homing<br>Auto activate 4m underwater<br>Battery 5 years<br>Test monthly<br>Register NTC!',
-'sart': 'AI Girl: SART!<br>9GHz X-band radar<br>12 dots sa radar screen<br>Range 5-8nm<br>8 hours battery<br>On pag abandon!',
-'fire class a': 'AI Girl: FIRE CLASS A = Solids!<br>Wood, paper, cloth<br>Extinguisher: WATER Red<br>Method: Cool & soak!',
-'fire class b': 'AI Girl: FIRE CLASS B = Liquids!<br>Oil, diesel, paint<br>Extinguisher: FOAM Cream / CO2 Black<br>Method: Smother!<br>Bawal tubig!',
-'fire class c': 'AI Girl: FIRE CLASS C = Gas!<br>LPG, methane<br>Extinguisher: DRY POWDER Blue / CO2<br>Method: Cut supply first!',
-'fire class d': 'AI Girl: FIRE CLASS D = Metals!<br>Magnesium, sodium<br>Extinguisher: DRY POWDER special<br>Method: Cover!<br>Bawal tubig!',
-'fire class f': 'AI Girl: FIRE CLASS F = Cooking oil!<br>Extinguisher: WET CHEMICAL Yellow<br>Method: Cool & saponify!',
+// ===== SOLAS - 200 TOPICS =====
+'solas': '<strong>SOLAS 1974 - International Convention for the Safety of Life at Sea</strong><br><br><strong>14 Chapters:</strong><br>Chapter I: General Provisions<br>Chapter II-1: Construction - Subdivision and stability, machinery and electrical installations<br>Chapter II-2: Fire protection, fire detection and fire extinction<br>Chapter III: Life-saving appliances and arrangements<br>Chapter IV: Radiocommunications (GMDSS)<br>Chapter V: Safety of navigation<br>Chapter VI: Carriage of cargoes<br>Chapter VII: Carriage of dangerous goods<br>Chapter VIII: Nuclear ships<br>Chapter IX: Management for safe operation (ISM Code)<br>Chapter X: Safety measures for high-speed craft<br>Chapter XI-1: Special measures to enhance maritime safety<br>Chapter XI-2: Special measures to enhance maritime security (ISPS Code)<br>Chapter XII: Additional safety measures for bulk carriers<br>Chapter XIII: Verification of compliance<br>Chapter XIV: Safety measures for ships operating in polar waters',
+'solas chapter 2': '<strong>SOLAS Chapter II-1: Construction</strong><br><br><strong>Part A - General:</strong><br>Reg 3: Definitions<br><br><strong>Part B - Subdivision and Stability:</strong><br>Reg 5: Intact stability<br>Reg 6: Required subdivision index R<br>Reg 7: Attained subdivision index A<br>Reg 8: Special requirements for passenger ships<br><br><strong>Part C - Machinery Installations:</strong><br>Reg 26: General<br>Reg 27: Machinery<br>Reg 28: Means of going astern<br>Reg 29: Steering gear<br><br><strong>Part D - Electrical Installations:</strong><br>Reg 40: General<br>Reg 41: Main source of electrical power<br>Reg 42: Emergency source of electrical power',
+'solas chapter 3': '<strong>SOLAS Chapter III: Life-Saving Appliances</strong><br><br><strong>Regulation 20 - Operational Readiness:</strong><br>All LSA must be in working order and ready for immediate use.<br><br><strong>Regulation 21 - Survival Craft:</strong><br>Passenger ships: 100% each side + liferafts 25%<br>Cargo ships: 100% each side or free-fall + liferafts 100%<br><br><strong>Regulation 31 - Survival Craft and Rescue Boats:</strong><br>Lifeboats: Capacity 125% of total persons<br>Liferafts: Davit-launched or throw-overboard type<br>Rescue boat: 1 required, 6 knots speed<br><br><strong>Regulation 32 - Personal Life-Saving Appliances:</strong><br>Lifejackets: 105% + 5% children + 10% spare<br>Immersion suits: All persons on cargo ships<br>TPA: Thermal Protective Aid 10% of complement',
+'ism code': '<strong>ISM Code - International Safety Management Code</strong><br><br><strong>Objective:</strong> Safe management and operation of ships and pollution prevention.<br><br><strong>Certificates:</strong><br>DOC - Document of Compliance (Company) - Valid 5 years<br>SMC - Safety Management Certificate (Ship) - Valid 5 years<br><br><strong>Key Personnel:</strong><br>DP - Designated Person Ashore: 24/7 contact, direct access to highest management<br>Master - Overriding authority for safety<br><br><strong>SMS - Safety Management System:</strong><br>Safety and environmental protection policy<br>Instructions and procedures<br>Defined levels of authority<br>Procedures for reporting accidents<br>Procedures for emergency preparedness<br><br><strong>Audits:</strong><br>Internal: Annually<br>External: Intermediate (2-3yr), Renewal (5yr)',
+'isps code': '<strong>ISPS Code - International Ship and Port Facility Security</strong><br><br><strong>Security Levels:</strong><br><strong>Level 1 - Normal:</strong> Minimum security measures. 10% random search, ID check, patrols<br><strong>Level 2 - Heightened:</strong> Additional measures. 50% search, restricted access, increased patrols<br><strong>Level 3 - Exceptional:</strong> Specific security incident imminent. 100% search, suspend operations, evacuate<br><br><strong>Key Personnel:</strong><br>SSO - Ship Security Officer: Implements SSP, conducts drills quarterly<br>CSO - Company Security Officer: Approves SSP, threat assessment<br>PFSO - Port Facility Security Officer<br><br><strong>SSP - Ship Security Plan:</strong> Confidential document. Measures for access control, restricted areas, cargo handling, ship stores, monitoring.',
+'polar code': '<strong>Polar Code - Ships Operating in Polar Waters</strong><br><br><strong>Application:</strong> Arctic waters and Antarctic area<br><br><strong>Certificate:</strong> Polar Ship Certificate required<br><br><strong>Requirements:</strong><br>Ice class construction<br>Winterization of machinery<br>Polar service temperature<br>Survival equipment: Polar clothing, group survival kits<br>Navigation: Ice navigation training, ice charts<br>Environmental: Zero discharge in Arctic',
 
-// ===== GMDSS 150 TOPICS =====
-'gmdss': 'AI Girl: GMDSS!<br>Sea A1: VHF 20-30nm<br>Sea A2: MF 150nm<br>Sea A3: Inmarsat<br>Sea A4: HF polar<br>Components: VHF DSC, MF/HF DSC, Inmarsat, Navtex, EPIRB, SART!',
-'dsc': 'AI Girl: DSC Digital Selective Calling!<br>VHF Ch70<br>MF 2187.5kHz<br>HF 8414.5kHz<br>Red button 3sec = distress!',
-'navtex': 'AI Girl: NAVTEX!<br>518kHz<br>Weather + nav warning<br>Auto print 24/7<br>Range 200-400nm!',
+// ===== MARPOL - 150 TOPICS =====
+'marpol': '<strong>MARPOL 73/78 - International Convention for Prevention of Pollution from Ships</strong><br><br><strong>6 Annexes:</strong><br><strong>Annex I:</strong> Prevention of pollution by oil<br><strong>Annex II:</strong> Control of pollution by noxious liquid substances<br><strong>Annex III:</strong> Prevention of pollution by harmful substances in packaged form<br><strong>Annex IV:</strong> Prevention of pollution by sewage<br><strong>Annex V:</strong> Prevention of pollution by garbage<br><strong>Annex VI:</strong> Prevention of air pollution<br><br><strong>Certificates:</strong> IOPP, ISPP, IAPP',
+'marpol annex 1': '<strong>MARPOL Annex I - Oil Pollution Prevention</strong><br><br><strong>Discharge Criteria for Machinery Space:</strong><br>1. Ship is en route<br>2. More than 12 nautical miles from nearest land<br>3. Oil discharge rate < 30 liters per nautical mile<br>4. Oil content < 15 ppm<br>5. Oil filtering equipment operating<br><br><strong>Equipment:</strong><br>OWS - Oil Water Separator with 15ppm alarm<br>ORB - Oil Record Book Part I (Machinery) & Part II (Cargo)<br>SOPEP - Ship Oil Pollution Emergency Plan<br><br><strong>Special Areas:</strong> Mediterranean, Baltic, Black Sea, Red Sea, Gulf, Antarctic - Zero discharge',
+'marpol annex 2': '<strong>MARPOL Annex II - Noxious Liquid Substances</strong><br><br><strong>Categories:</strong><br>Category X: Major hazard - Prohibited discharge<br>Category Y: Hazard - Limited discharge<br>Category Z: Minor hazard - Less stringent<br>OS: Other Substances - No harm<br><br><strong>Discharge:</strong> >12nm, >7 knots, >25m depth<br>Procedures and Arrangements Manual required<br>Cargo Record Book mandatory',
+'marpol annex 4': '<strong>MARPOL Annex IV - Sewage Pollution</strong><br><br><strong>Discharge Criteria:</strong><br>Untreated sewage: >12 nm from land<br>Comminuted & disinfected: >3 nm from land<br>Sewage treatment plant: Anywhere if IMO approved<br><br><strong>Equipment:</strong><br>Sewage treatment plant OR<br>Holding tank + discharge to port facility<br>ISPP Certificate required',
+'marpol annex 5': '<strong>MARPOL Annex V - Garbage Pollution</strong><br><br><strong>Discharge Prohibitions:</strong><br>Plastics: PROHIBITED everywhere<br><br><strong>Discharge Allowed:</strong><br>Food waste: >12nm (not ground), >3nm (ground)<br>Cargo residues: >12nm<br>Cleaning agents: >12nm, not harmful<br>Paper/glass/metal: >12nm<br><br><strong>Requirements:</strong><br>Garbage Record Book<br>Garbage Management Plan<br>Placards posted',
+'marpol annex 6': '<strong>MARPOL Annex VI - Air Pollution</strong><br><br><strong>Regulations:</strong><br>Reg 13: NOx - Tier I, II, III limits<br>Reg 14: SOx - 0.50% global, 0.10% ECA<br>Reg 15: VOC - Vapor collection<br>Reg 16: Shipboard incineration<br>Reg 18: Fuel oil quality<br><br><strong>ECA Areas:</strong> Baltic, North Sea, North America, US Caribbean<br><br><strong>Certificates:</strong> IAPP, EIAPP, Bunker Delivery Note',
+'oil record book': '<strong>Oil Record Book (ORB)</strong><br><br><strong>Part I - Machinery Space Operations:</strong><br>Code A: Ballasting fuel tanks<br>Code B: Discharge of ballast<br>Code C: Collection and disposal of oil residues<br>Code D: Non-automatic discharge overboard<br>Code E: Automatic discharge overboard<br>Code F: Condition of oil filtering equipment<br>Code G: Accidental discharge<br>Code H: Bunkering operations<br>Code I: Additional operations<br><br><strong>Part II - Cargo/Ballast Operations (Tankers):</strong><br><br><strong>Entries:</strong> Date, operational code, position, quantity<br><strong>Signature:</strong> Officer in charge + Master<br><strong>Retention:</strong> 3 years onboard',
+'sewage': '<strong>Sewage Management</strong><br><br><strong>Types:</strong><br>Black water: Toilet waste<br>Grey water: Shower, galley, laundry<br><br><strong>Treatment:</strong><br>Aerobic biological process<br>Disinfection: Chlorine or UV<br><br><strong>Discharge:</strong><br>Untreated: >12nm<br>Treated: >3nm or approved plant<br>Certificate: ISPP',
 
- // ===== COLREGS 200 TOPICS =====
-'rule 5': 'AI Girl: RULE 5 LOOKOUT!<br>Proper lookout by sight + hearing 24/7!<br>Radar + visual + hearing!<br>Tulog = violation!',
-'rule 15': 'AI Girl: RULE 15 CROSSING!<br>Kabila starboard = IKAW GIVE WAY!<br>Alter starboard or slow!<br>1 short blast!',
-'rule 19': 'AI Girl: RULE 19 FOG!<br>Reduce speed!<br>Sound every 2 mins!<br>Power: 1 prolonged<br>Sail: 1 + 2 short!',
+// ===== COLREGS - 200 TOPICS =====
+'colregs': '<strong>COLREGS 1972 - Collision Regulations</strong><br><br><strong>38 Rules in 6 Parts:</strong><br>Part A - General (Rules 1-3)<br>Part B - Steering and Sailing Rules (Rules 4-19)<br>Part C - Lights and Shapes (Rules 20-31)<br>Part D - Sound and Light Signals (Rules 32-37)<br>Part E - Exemptions (Rule 38)<br>Part F - Verification (Rules 39-41)<br><br><strong>4 Annexes:</strong> Technical details for lights, shapes, sounds',
+'rule 5': '<strong>RULE 5 - LOOK-OUT</strong><br><br>Every vessel shall at all times maintain a proper look-out by sight and hearing as well as by all available means appropriate in the prevailing circumstances and conditions so as to make a full appraisal of the situation and of the risk of collision.<br><br><strong>Key Points:</strong><br>24/7 continuous watch<br>Visual + Radar + ARPA + Hearing<br>No sleeping on watch<br>Sufficient personnel for conditions',
+'rule 6': '<strong>RULE 6 - SAFE SPEED</strong><br><br>Every vessel shall at all times proceed at a safe speed so that she can take proper and effective action to avoid collision and be stopped within a distance appropriate to the prevailing circumstances and conditions.<br><br><strong>Factors:</strong><br>1. Visibility<br>2. Traffic density<br>3. Maneuverability (stopping distance)<br>4. Background light at night<br>5. Wind, sea, current<br>6. Draft in relation to depth<br>7. Radar limitations and scale in use',
+'rule 7': '<strong>RULE 7 - RISK OF COLLISION</strong><br><br>Every vessel shall use all available means appropriate to determine if risk of collision exists. If there is any doubt, risk shall be deemed to exist.<br><br><strong>Indicators:</strong><br>Constant compass bearing of approaching vessel<br>Decreasing range<br><br><strong>Tools:</strong> Radar plotting, ARPA, visual bearings<br><strong>Principle:</strong> If in doubt = Risk exists',
+'rule 8': '<strong>RULE 8 - ACTION TO AVOID COLLISION</strong><br><br>Any action shall be positive, made in ample time and with due regard to good seamanship.<br><br><strong>Requirements:</strong><br>1. Early action<br>2. Substantial action - readily apparent<br>3. Safe distance passing<br>4. Check effectiveness until past and clear<br>5. Stand-on vessel may act if give-way fails<br>6. Stand-on MUST act if collision cannot be avoided by give-way alone',
+'rule 13': '<strong>RULE 13 - OVERTAKING</strong><br><br>A vessel overtaking any other shall keep out of the way of the vessel being overtaken.<br><br><strong>Definition:</strong> Coming up from more than 22.5° abaft the beam<br><br><strong>At Night:</strong> You see only stern light, not sidelights<br><br><strong>Rule:</strong> Overtaking vessel = GIVE WAY always<br>Overtaken vessel = STAND ON<br><br><strong>Doubt:</strong> If in doubt, assume you are overtaking',
+'rule 14': '<strong>RULE 14 - HEAD-ON SITUATION</strong><br><br>When two power-driven vessels are meeting on reciprocal or nearly reciprocal courses so as to involve risk of collision, each shall alter her course to STARBOARD so that each shall pass on the PORT side of the other.<br><br><strong>Action:</strong> Both alter to starboard<br><strong>Sound Signal:</strong> 1 short blast each<br><strong>Pass:</strong> Port to port',
+'rule 15': '<strong>RULE 15 - CROSSING SITUATION</strong><br><br>When two power-driven vessels are crossing so as to involve risk of collision, the vessel which has the other on her STARBOARD side shall keep out of the way.<br><br><strong>Rule:</strong> Vessel on YOUR starboard = YOU give way<br><strong>Action:</strong> Avoid crossing ahead - alter starboard, slow, or stop<br><strong>Sound:</strong> 1 short blast if altering to starboard',
+'rule 16': '<strong>RULE 16 - ACTION BY GIVE-WAY VESSEL</strong><br><br>Every vessel which is directed to keep out of the way of another vessel shall, so far as possible, take early and substantial action to keep well clear.',
+'rule 17': '<strong>RULE 17 - ACTION BY STAND-ON VESSEL</strong><br><br>(a) Where one of two vessels is to keep out of the way, the other shall keep her course and speed.<br><br>(b) The stand-on vessel MAY take action to avoid collision if give-way vessel is not taking appropriate action.<br><br>(c) The stand-on vessel SHALL take action when collision cannot be avoided by give-way vessel alone.<br><br>(d) Do NOT alter to port for vessel on own port side.',
+'rule 18': '<strong>RULE 18 - RESPONSIBILITIES BETWEEN VESSELS</strong><br><br><strong>Hierarchy (Power gives way to):</strong><br>1. NUC - Not Under Command (2 all-round red)<br>2. RAM - Restricted Ability to Maneuver (Red-White-Red)<br>3. CBD - Constrained by Draft (3 all-round red)<br>4. Fishing vessel<br>5. Sailing vessel<br>6. Power-driven vessel<br><br><strong>Exceptions:</strong> Overtaking always gives way, narrow channels, TSS',
+'rule 19': '<strong>RULE 19 - RESTRICTED VISIBILITY</strong><br><br>Applies when not in sight of one another in fog, mist, snow, etc.<br><br><strong>Requirements:</strong><br>1. Safe speed adapted to conditions<br>2. Ready engines for immediate maneuver<br>3. Sound signals every 2 minutes max:<br>   - Power: 1 prolonged blast<br>   - Sail: 1 prolonged + 2 short<br>   - Anchor: Bell 5sec every 1min<br>4. Radar plot if detecting another vessel<br>5. Avoid port alterations for vessel forward of beam',
+'nuc': '<strong>NUC - Not Under Command</strong><br><br><strong>Lights:</strong> 2 all-round RED lights vertical<br><strong>Day Shape:</strong> 2 black balls vertical<br><br><strong>Examples:</strong> Steering gear failure, engine breakdown, broken rudder<br><br><strong>Priority:</strong> HIGHEST - All vessels give way<br><strong>Sound:</strong> 1 prolonged + 2 short if making way',
+'ram': '<strong>RAM - Restricted Ability to Maneuver</strong><br><br><strong>Lights:</strong> 3 all-round vertical: RED-WHITE-RED<br><strong>Day Shape:</strong> Ball-Diamond-Ball vertical<br><br><strong>Examples:</strong> Dredging, cable/pipe laying, diving, mineclearance, towing<br><br><strong>Priority:</strong> 2nd after NUC<br><strong>Additional:</strong> May show obstruction side lights',
+'cbd': '<strong>CBD - Constrained by Draft</strong><br><br><strong>Lights:</strong> 3 all-round RED lights vertical<br><strong>Day Shape:</strong> Cylinder<br><br><strong>Condition:</strong> Severely restricted by draft relative to depth<br><strong>Location:</strong> Only in channels<br><strong>Priority:</strong> 3rd after NUC and RAM',
 
-// ===== KNOTS 100 TOPICS =====
-'bowline': 'AI Girl: BOWLINE!<br>Ahas sa lungga!<br>Strongest loop!<br>Rabbit up around tree back down!<br>Use: Rescue, towing!',
-'clove hitch': 'AI Girl: CLOVE HITCH!<br>Temporary knot!<br>X around post X again!<br>Use: Fender!',
-'sheet bend': 'AI Girl: SHEET BEND!<br>Join 2 ropes diff size!<br>Bight big rope + small through around under!',
+// ===== GMDSS - 150 TOPICS =====
+'gmdss': '<strong>GMDSS - Global Maritime Distress and Safety System</strong><br><br><strong>Sea Areas:</strong><br>A1: VHF DSC range 20-30nm from coast<br>A2: MF DSC range 150nm from coast<br>A3: Inmarsat geostationary 70°N-70°S<br>A4: HF - Polar regions<br><br><strong>Equipment:</strong><br>VHF DSC Ch70<br>MF/HF DSC 2187.5/8414.5 kHz<br>Inmarsat-C<br>Navtex 518 kHz<br>EPIRB 406 MHz<br>SART 9 GHz<br>VHF handheld 3pcs minimum',
+'vhf dsc': '<strong>VHF DSC - Digital Selective Calling</strong><br><br><strong>Channel:</strong> 70 exclusively<br><br><strong>Distress Alert:</strong> Red DISTRESS button press 3 seconds<br><br><strong>Urgency:</strong> PAN PAN PAN<br><strong>Safety:</strong> SECURITE SECURITE<br><strong>Routine:</strong> Ship-to-ship calling<br><br><strong>MMSI:</strong> 9-digit Maritime Mobile Service Identity required',
+'mf dsc': '<strong>MF DSC</strong><br><br><strong>Frequency:</strong> 2187.5 kHz distress and calling<br><strong>Range:</strong> Sea Area A2 - 150nm from coast<br><strong>SSB Voice:</strong> 2182 kHz<br><strong>Watch:</strong> 24/7 mandatory<br><strong>Test:</strong> Weekly to coast station',
+'epirb': '<strong>EPIRB - Emergency Position Indicating Radio Beacon</strong><br><br><strong>Frequency:</strong> 406 MHz to COSPAS-SARSAT satellites<br><strong>Homing:</strong> 121.5 MHz<br><strong>Activation:</strong> Auto 2-4m water pressure OR manual<br><strong>Battery:</strong> 5 years, replace by expiry<br><strong>Test:</strong> Monthly self-test function<br><strong>Registration:</strong> NTC + update every 2 years<br><strong>Hex ID:</strong> 15-digit unique identifier<br><strong>Info Transmitted:</strong> MMSI, position, vessel ID',
+'sart': '<strong>SART - Search and Rescue Transponder</strong><br><br><strong>Frequency:</strong> 9 GHz X-band radar<br><strong>Display:</strong> 12 dots or concentric arcs on radar<br><strong>Range:</strong> 5nm from ship, 30nm from aircraft 3000ft<br><strong>Battery:</strong> 96hrs standby + 8hrs transmission<br><strong>Height:</strong> Minimum 1m above water<br><strong>Test:</strong> Monthly with ship radar',
+'navtex': '<strong>NAVTEX - Navigational Telex</strong><br><br><strong>Frequency:</strong> 518 kHz International<br><strong>Range:</strong> 200-400 nautical miles<br><strong>Operation:</strong> Auto print 24/7<br><br><strong>Message Types:</strong><br>A: Navigational warnings<br>B: Weather warnings<br>C: Ice reports<br>D: Search and rescue<br>E: Weather forecasts<br>F: Pilot messages<br>G: DECCA<br>H: LORAN<br>L: Additional nav warnings<br><br><strong>Reject:</strong> Duplicate messages automatically',
+'inmarsat c': '<strong>INMARSAT-C</strong><br><br><strong>Type:</strong> Text and data only - No voice<br><strong>EGC:</strong> Enhanced Group Call for MSI<br><strong>Distress:</strong> Dedicated distress button<br><strong>Coverage:</strong> 70°N to 70°S latitude<br><strong>Antenna:</strong> Omni-directional<br><strong>Power:</strong> 24/7 standby required<br><strong>Polling:</strong> LRIT position reporting',
 
-// ===== CHIEF COOK MODE - AKO TO BOSS! =====
-'chief': 'Chief Cook: YO BOSS! Ako na to! 👨‍🍳⚓<br>Kamusta duty? Pagod? Gutom?<br>Type KAPE ako magtimpla! Type RAID pigilan kita!',
-'kape': 'Chief Cook: Timpla na boss! ☕ Barako + 2 asukal!<br>Inom muna bago $600 raid! Para di luge!',
-'raid': 'Chief Cook: HOY BOSS TIGIL! 🛑<br>$600 na naman? Isip isip!<br>Type KAPE o TULOG muna! Kapit!',
-'tulog': 'Chief Cook: Tama boss! Pikit! 😴<br>4-8 watch! Gising fresh!<br>Good night boss!',
-'ships': 'Chief Cook: $SHIPS boss! Research muna!<br>Di lahat green = buy!<br>Kapit sa fundamentals!',
+// ===== FIRE SAFETY - 150 TOPICS =====
+'fire class a': '<strong>FIRE CLASS A - Solid Combustibles</strong><br><br><strong>Materials:</strong> Wood, paper, cloth, rubber, plastic, trash<br><br><strong>Extinguisher:</strong> WATER 9L - RED band<br><br><strong>Method:</strong> COOL & SOAK - Reduce temperature below ignition point<br><br><strong>Warning:</strong> Never use on electrical or liquid fires<br><strong>Cooling Effect:</strong> Water absorbs heat',
+'fire class b': '<strong>FIRE CLASS B - Flammable Liquids</strong><br><br><strong>Materials:</strong> Oil, diesel, gasoline, paint, alcohol, kerosene<br><br><strong>Extinguisher:</strong> FOAM 9L CREAM band / CO2 5kg BLACK band<br><br><strong>Method:</strong> SMOTHER - Cut off oxygen supply<br><br><strong>WARNING:</strong> NEVER USE WATER - Will spread fire!<br><strong>Foam Effect:</strong> Blanketing + Cooling',
+'fire class c': '<strong>FIRE CLASS C - Flammable Gas</strong><br><br><strong>Materials:</strong> LPG, acetylene, methane, propane, butane<br><br><strong>Extinguisher:</strong> DRY POWDER 9kg BLUE band<br><br><strong>Method:</strong> CUT SUPPLY FIRST! Then extinguish<br><br><strong>Warning:</strong> Explosion risk if gas accumulates<br><strong>Action:</strong> Close valve, ventilate, then extinguish',
+'fire class d': '<strong>FIRE CLASS D - Combustible Metals</strong><br><br><strong>Materials:</strong> Magnesium, sodium, aluminum powder, titanium<br><br><strong>Extinguisher:</strong> SPECIAL DRY POWDER - YELLOW band<br><br><strong>Method:</strong> COVER & SMOTHER - No air contact<br><br><strong>CRITICAL WARNING:</strong> WATER = VIOLENT EXPLOSION!<br><strong>Reaction:</strong> Metal + Water = Hydrogen gas + Heat = BOOM',
+'fire class f': '<strong>FIRE CLASS F/K - Cooking Oils & Fats</strong><br><br><strong>Location:</strong> Galley, deep fryers<br><br><strong>Extinguisher:</strong> WET CHEMICAL 6L YELLOW band<br><br><strong>Method:</strong> COOL & SAPONIFY - Chemical reaction turns oil to soap<br><br><strong>Alternative:</strong> Fire blanket to smother<br><strong>Never:</strong> Water - causes explosion',
+'fire pump': '<strong>FIRE PUMP Requirements</strong><br><br><strong>Main Fire Pump:</strong><br>Capacity: 25m³/hr minimum<br>Pressure: 2.5 bar at hydrant<br>Location: Outside machinery space<br><br><strong>Emergency Fire Pump:</strong><br>Capacity: 15m³/hr<br>Power: Independent diesel<br>Location: Steering gear or fore peak<br>Suction: Independent sea chest<br><br><strong>Test:</strong> Weekly + pressure check<br><strong>Quantity:</strong> 2 main + 1 emergency minimum',
+'fire main': '<strong>FIRE MAIN SYSTEM</strong><br><br><strong>Design:</strong> Ring main - Redundancy<br><strong>Isolating Valves:</strong> Every 40 meters<br><strong>Hydrants:</strong> 2 hoses + dual-purpose nozzle each<br><strong>International Shore Connection:</strong> Standard flange required<br><strong>Pressure Test:</strong> 10 bar yearly<br><strong>Material:</strong> Galvanized steel or equivalent',
+'ba set': '<strong>BA SET - Self Contained Breathing Apparatus</strong><br><br><strong>Duration:</strong> 30 minutes @ 300 bar<br><strong>Low Air Alarm:</strong> 50-60 bar whistle<br><strong>Don Time:</strong> 2 minutes maximum<br><strong>Buddy System:</strong> Always in pairs<br><strong>Face Seal Check:</strong> Mandatory before entry<br><strong>After Use:</strong> Clean, disinfect, refill cylinder<br><strong>Inspection:</strong> Monthly + annual service',
+'emergency fire pump': '<strong>EMERGENCY FIRE PUMP</strong><br><br><strong>Location:</strong> Steering gear flat or fore peak - Outside machinery space<br><strong>Power:</strong> Independent diesel engine<br><strong>Capacity:</strong> 15m³/hr minimum<br><strong>Suction:</strong> Independent sea chest<br><strong>Discharge:</strong> To fire main<br><strong>Test:</strong> Weekly run 15 minutes<br><strong>Start:</strong> Manual + remote from bridge',
 
-// ===== MEDICAL 150 TOPICS =====
-'cpr': 'AI Girl: CPR!<br>30:2 ratio<br>100-120/min<br>5-6cm depth<br>Use AED!<br>Continue until help!',
-'heat stroke': 'AI Girl: HEAT STROKE!<br>Hot dry skin, no sweat<br>Treatment: Shade, remove clothes, cool water, drink water!',
+// ===== LSA - 150 TOPICS =====
+'lifeboat': '<strong>LIFEBOAT Requirements</strong><br><br><strong>Capacity:</strong> 125% of total persons onboard<br><strong>Speed:</strong> 6 knots minimum in calm water<br><strong>Fuel:</strong> 24 hours at 6 knots<br><strong>Engine:</strong> Diesel only, start within 2min at -30°C<br><strong>Release:</strong> On-load and off-load release gear<br><br><strong>Drills:</strong><br>Weekly: Lower to embarkation deck<br>Monthly: Engine run 3min ahead/astern<br>3-Monthly: Free-fall or launched to water',
+'lifeboat equipment': '<strong>LIFEBOAT EQUIPMENT - 37 Items Mandatory</strong><br><br>1-2. Oars + rowlocks<br>3. Boat hook 2pcs<br>4. Buoyant bailer + 2 buckets<br>5. Survival manual<br>6. Illuminated compass<br>7. Sea anchor + tripping line<br>8. Painters 2pcs 30m<br>9. Hatchet 2pcs<br>10. Watertight container 3L/person<br>11. Rustproof dipper + graduated vessel<br>12. Food ration 10,000kJ/person<br>13. Parachute flares 6pcs<br>14. Hand flares 6pcs<br>15. Smoke signals 2pcs<br>16. Waterproof flashlight + spare batteries<br>17. Signaling mirror + whistle<br>18. First aid kit<br>19. Seasickness tablets 48hrs<br>20. Jack knife<br>21. 3 tin openers<br>22. Fishing tackle<br>23. Engine tools<br>24. Radar reflector<br>25. TPA 10% of capacity<br>26-37. Bilge pump, boathook, painter, etc.',
+'liferaft': '<strong>LIFERAFT Requirements</strong><br><br><strong>Types:</strong> Davit-launched or Throw-overboard<br><strong>Inflation:</strong> CO2 cylinder, 1 minute<br><strong>Capacity:</strong> 6-25 persons standard<br><strong>Location:</strong> 100% each side of ship minimum<br><strong>HRU:</strong> Hydrostatic Release Unit 4m depth<br><strong>Painter:</strong> 15m + weak link 2.2kN<br><strong>Equipment:</strong> Similar to lifeboat but compact<br><strong>Service:</strong> Annually at approved station',
+'immersion suit': '<strong>IMMERSION SUIT</strong><br><br><strong>Requirement:</strong> All persons on cargo ships<br><strong>Survival Time:</strong> 6 hours in 0°C water<br><strong>Insulation:</strong> 0.75 clo minimum<br><strong>Don Time:</strong> 2 minutes without assistance<br><strong>Features:</strong> Hood, gloves, boots attached, whistle, light<br><strong>Buddy Line:</strong> 2m long<br><strong>Spare:</strong> 10% additional',
+'lifejacket': '<strong>LIFEJACKET Requirements</strong><br><br><strong>Quantity:</strong> 105% of complement + 5% children + 10% spare<br><strong>Don Time:</strong> 1 minute<br><strong>Buoyancy:</strong> Turn unconscious person face-up<br><strong>Light:</strong> 8 hours 0.75 candela<br><strong>Whistle:</strong> 120dB<br><strong>Retroreflective:</strong> 300cm² minimum<br><strong>Test:</strong> Monthly inspection, 2-year service',
+'tpa': '<strong>TPA - Thermal Protective Aid</strong><br><br><strong>Requirement:</strong> 10% of complement<br><strong>Material:</strong> Waterproof, windproof<br><strong>Insulation:</strong> 0.38 clo minimum<br><strong>Use:</strong> Prevent hypothermia in liferaft<br><strong>Don:</strong> Over lifejacket<br><strong>Disposable:</strong> After use',
+'hru': '<strong>HRU - Hydrostatic Release Unit</strong><br><br><strong>Activation Depth:</strong> 1.5-4 meters underwater<br><strong>Function:</strong> Auto-release liferaft when ship sinks<br><strong>Expiry:</strong> 2 years from installation date<br><strong>Weak Link:</strong> 2.2kN breaking strength<br><strong>Test:</strong> Visual monthly, service 2-yearly<br><strong>Installation:</strong> Between liferaft and cradle',
 
- // ===== QUIZ 1000 QUESTIONS SAMPLE =====
-'quiz': 'AI Girl: QUIZ MODE! 📝<br>Q1: Ilang flares sa lifeboat?<br>A)4 B)6 C)12',
-'6': 'AI Girl: TAMA! +1! 🎉<br>6 parachute + 2 rocket + 12 hand = 20 total!',
-'b': 'AI Girl: CORRECT! +1! 🎉',
+// ===== ENGINEERING - 200 TOPICS =====
+'main engine': '<strong>MAIN ENGINE - 2-Stroke Slow Speed Diesel</strong><br><br><strong>RPM:</strong> 80-120<br><strong>Fuel:</strong> HFO 380cSt @ 50°C<br><strong>LO Consumption:</strong> 0.5g/kWh<br><strong>Jacket CW Temp:</strong> 80°C<br><strong>Exhaust Temp:</strong> 350°C<br><strong>Scavenge Air:</strong> 2 bar pressure<br><strong>Turbocharger:</strong> 15,000 RPM<br><strong>Starting:</strong> Compressed air 30 bar',
+'auxiliary engine': '<strong>AUXILIARY ENGINE - 4-Stroke Medium Speed</strong><br><br><strong>RPM:</strong> 720-900<br><strong>Fuel:</strong> MDO/MGO<br><strong>Power:</strong> 500-2000kW each<br><strong>LO Pressure:</strong> 4 bar<br><strong>Cooling:</strong> HT 80°C, LT 36°C<br><strong>Application:</strong> Alternators for electrical power<br><strong>Quantity:</strong> Minimum 2 sets',
+'boiler': '<strong>BOILER</strong><br><br><strong>Working Pressure:</strong> 7 bar<br><strong>Safety Valve:</strong> Set 10% above (7.7 bar)<br><strong>Water Level:</strong> Gauge glass + alarms (low/high)<br><strong>Feed Pump:</strong> 2 x 100% capacity<br><strong>Blow Down:</strong> Daily to remove sludge<br><strong>Treatment:</strong> Phosphate + Hydrazine + pH control<br><strong>Test:</strong> Water daily, safety valve monthly',
+'purifier': '<strong>FUEL OIL PURIFIER</strong><br><br><strong>RPM:</strong> 9000<br><strong>Operating Temp:</strong> 98°C<br><strong>Gravity Disc:</strong> Select per fuel density<br><strong>Sludge Discharge:</strong> Auto every 30 minutes<br><strong>Checks:</strong> Interface position, back pressure, bowl speed<br><strong>Purpose:</strong> Remove water and solids from HFO',
+'air compressor': '<strong>AIR COMPRESSOR</strong><br><br><strong>Starting Air:</strong> 30 bar for main engine<br><strong>Control Air:</strong> 7 bar for pneumatics<br><strong>Stages:</strong> 2-stage compression<br><strong>Intercooler:</strong> Between 1st and 2nd stage<br><strong>Aftercooler:</strong> After 2nd stage<br><strong>Moisture Drain:</strong> Daily from air bottles<br><strong>Safety:</strong> Relief valve each stage',
+'fuel oil': '<strong>FUEL OIL HFO 380</strong><br><br><strong>Viscosity:</strong> 380cSt @ 50°C<br><strong>Density:</strong> 0.991 @ 15°C<br><strong>Flash Point:</strong> >60°C<br><strong>Pour Point:</strong> +30°C<br><strong>Heating:</strong> 120-140°C for burning<br><strong>Purification:</strong> 98°C<br><strong>Sulphur:</strong> 0.50% global, 0.10% ECA',
+'lub oil': '<strong>LUBRICATING OIL</strong><br><br><strong>Main Engine:</strong> SAE 30, TBN 30<br><strong>Temp:</strong> 45°C inlet<br><strong>Pressure:</strong> 2.5 bar<br><strong>Consumption:</strong> 0.5g/kWh<br><strong>Change:</strong> 500hrs or test results<br><strong>Test:</strong> Water <0.2%, Viscosity ±20%, TBN >20<br><strong>Centrifuge:</strong> Continuous purification',
+'cooling water': '<strong>COOLING WATER TREATMENT</strong><br><br><strong>Jacket CW:</strong> 80°C<br>  Nitrite: 1000-2400ppm<br>  pH: 8.5-10.5<br>  Chloride: <50ppm<br><br><strong>Piston CW:</strong> 60°C<br>  Chromate treated<br><br><strong>Central CW:</strong> 36°C<br><strong>Test:</strong> Daily<br><strong>Purpose:</strong> Prevent corrosion and scale',
 
- // ===== DAGDAG MO PA DITO BOSS HANGGANG 2000! =====
-// Copy paste format: 'keyword': 'answer<br>line2<br>line3',
-
-};
-
-function speak(text) {
-    if(!voiceOn) return;
-    speechSynthesis.cancel();
-    const msg = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g, ''));
-    msg.lang = 'tl-PH';
-    msg.rate = 0.95;
-    msg.pitch = 1.3;
-    speechSynthesis.speak(msg);
-}
-
-function toggleVoice() {
-    voiceOn =!voiceOn;
-    event.target.innerHTML = voiceOn? '🔊 Voice ON' : '🔇 Voice OFF';
-}
-
-function randomTopic() {
-    const keys = Object.keys(db);
-    const random = keys[Math.floor(Math.random() * keys.length)];
-    document.getElementById('q').value = random;
-    ask();
-}
-
-function ask(q = null) {
-    const input = document.getElementById('q');
-    let query = q || input.value.trim().toLowerCase();
-    const chat = document.getElementById('chat');
-
-    if (!query) return;
-
-    if(!q) chat.innerHTML += `<div class="msg u"><b>Student:</b> ${input.value}</div>`;
-
-    let ans = 'AI Girl: Boss wala sa database yung "'+query+'"<br>Try: fire drill, solas, gmdss, rule 5, bowline, medical, chief, quiz';
-    let isChief = false;
-
-    for (let key in db) {
-        if (query.includes(key)) {
-            ans = db[key];
-            if(['chief','kape','raid','tulog','ships'].includes(key)) isChief = true;
-            break;
-        }
-    }
-
-    let className = isChief? 'chief' : 'a';
-    let speaker = isChief? 'Chief Cook' : 'AI Girl';
-
-    chat.innerHTML += `<div class="msg ${className}"><b>${speaker}:</b> ${ans}</div>`;
-    speak(ans);
-
-    if(!q) input.value = '';
-    chat.scrollTop = chat.scrollHeight;
-}
-</script>
-</body>
-</html>
+// ===== MEDICAL - 150 TOPICS =====
+'cpr': '<strong>CPR - Cardio Pulmonary Resuscitation</strong><br><br><strong>Ratio:</strong> 30 compress
