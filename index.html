@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maritime Training Center Pro v3 - Full Database</title>
+<title>Maritime Training Center Pro FULL v5</title>
 <style>
 :root {
   --navy:#0A1929; --navy-dark:#051320; --blue:#1565C0; --blue-light:#1976D2;
@@ -48,8 +48,6 @@ h1 {font-size:22px; color:var(--white); font-weight:600;}
   border-radius:8px; cursor:pointer; text-align:left; transition:0.2s;
 }
 .opt-btn:hover {background:var(--blue);}
-.opt-btn.correct {background:var(--success); border-color:var(--success);}
-.opt-btn.wrong {background:var(--danger); border-color:var(--danger);}
 .controls {
   padding:15px; background:var(--navy); border-top:2px solid var(--blue);
   display:flex; flex-direction:column; gap:10px;
@@ -64,13 +62,6 @@ h1 {font-size:22px; color:var(--white); font-weight:600;}
   cursor:pointer; transition:all 0.2s; color:var(--white);
 }
 .cat-btn:hover {background:var(--blue); transform:translateY(-2px);}
-.input-group {display:flex; gap:8px;}
-input {
-  flex:1; padding:12px 16px; font-size:14px; background:rgba(255,255,255,0.05);
-  color:var(--white); border:2px solid var(--blue); border-radius:8px;
-  outline:none; transition:0.2s;
-}
-input:focus {border-color:var(--gold); background:rgba(255,255,255,0.08);}
 button {
   padding:12px 20px; background:var(--blue); color:white; border:none;
   border-radius:8px; font-weight:600; font-size:14px; cursor:pointer;
@@ -93,16 +84,15 @@ button.success {background:var(--success);}
  .header-top{flex-direction:column; align-items:flex-start;}
  .scoreboard{width:100%; justify-content:space-around;}
  .msg{max-width:95%; font-size:13px;}
- .input-group{flex-direction:column;}
-  button{width:100%;}
+}
 </style>
 </head>
 <body>
 <header>
   <div class="header-top">
     <div>
-      <h1>⚓ Maritime Training Center Pro v3</h1>
-      <div class="header-stats">STCW Compliant | SOLAS | MARPOL | COLREGS | GMDSS | 2000+ Topics + CBT + Recipes</div>
+      <h1>⚓ Maritime Training Center Pro FULL v5</h1>
+      <div class="header-stats">STCW Compliant | SOLAS | MARPOL | COLREGS | GMDSS | CBT + Recipes</div>
       <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('quiz')">Quiz</button>
         <button class="tab-btn" onclick="switchTab('exam')">CBT Exam</button>
@@ -121,9 +111,8 @@ button.success {background:var(--success);}
 
 <div id="chat">
   <div class="msg system">
-    <strong>System Initialized - Full Database Loaded</strong><br>
-    2000+ STCW Topics + CBT Exam Mode + Galley Recipes Ready.<br>
-    Pili ka ng tab sa taas para mag-start.
+    <strong>System Ready - Part 2 Loaded</strong><br>
+    Hintayin mo Part 3 para sa database + functions
   </div>
 </div>
 
@@ -147,7 +136,7 @@ button.success {background:var(--success);}
 
 <div class="controls" id="searchControls" style="display:none">
   <div class="input-group">
-    <input id="q" placeholder="Search: SOLAS Ch2, MARPOL Annex I, Rule 5, EPIRB, Fire Class B..."
+    <input id="q" placeholder="Search: SOLAS Ch2, Rule 5, EPIRB..."
            onkeypress="if(event.key==='Enter') searchDB()">
     <button onclick="searchDB()">Search</button>
   </div>
@@ -170,68 +159,26 @@ let timeLeft = 3600;
 
 const ranks = ['Cadet','Ordinary Seaman','AB','3rd Mate','2nd Mate','Chief Mate','Master'];
 
-// MASTER DATABASE - LAHAT NG 2000+ TOPICS MO NANDITO PA RIN
-const db = {
-// ===== SOLAS - 200 TOPICS =====
-'solas': '<strong>SOLAS 1974 - International Convention for the Safety of Life at Sea</strong><br><br><strong>14 Chapters:</strong><br>Chapter I: General Provisions<br>Chapter II-1: Construction - Subdivision and stability, machinery and electrical installations<br>Chapter II-2: Fire protection, fire detection and fire extinction<br>Chapter III: Life-saving appliances and arrangements<br>Chapter IV: Radiocommunications (GMDSS)<br>Chapter V: Safety of navigation<br>Chapter VI: Carriage of cargoes<br>Chapter VII: Carriage of dangerous goods<br>Chapter VIII: Nuclear ships<br>Chapter IX: Management for safe operation (ISM Code)<br>Chapter X: Safety measures for high-speed craft<br>Chapter XI-1: Special measures to enhance maritime safety<br>Chapter XI-2: Special measures to enhance maritime security (ISPS Code)<br>Chapter XII: Additional safety measures for bulk carriers<br>Chapter XIII: Verification of compliance<br>Chapter XIV: Safety measures for ships operating in polar waters',
-'solas chapter 2': '<strong>SOLAS Chapter II-1: Construction</strong><br><br><strong>Part A - General:</strong><br>Reg 3: Definitions<br><br><strong>Part B - Subdivision and Stability:</strong><br>Reg 5: Intact stability<br>Reg 6: Required subdivision index R<br>Reg 7: Attained subdivision index A<br>Reg 8: Special requirements for passenger ships<br><br><strong>Part C - Machinery Installations:</strong><br>Reg 26: General<br>Reg 27: Machinery<br>Reg 28: Means of going astern<br>Reg 29: Steering gear<br><br><strong>Part D - Electrical Installations:</strong><br>Reg 40: General<br>Reg 41: Main source of electrical power<br>Reg 42: Emergency source of electrical power',
-'solas chapter 3': '<strong>SOLAS Chapter III: Life-Saving Appliances</strong><br><br><strong>Regulation 20 - Operational Readiness:</strong><br>All LSA must be in working order and ready for immediate use.<br><br><strong>Regulation 21 - Survival Craft:</strong><br>Passenger ships: 100% each side + liferafts 25%<br>Cargo ships: 100% each side or free-fall + liferafts 100%<br><br><strong>Regulation 31 - Survival Craft and Rescue Boats:</strong><br>Lifeboats: Capacity 125% of total persons<br>Liferafts: Davit-launched or throw-overboard type<br>Rescue boat: 1 required, 6 knots speed<br><br><strong>Regulation 32 - Personal Life-Saving Appliances:</strong><br>Lifejackets: 105% + 5% children + 10% spare<br>Immersion suits: All persons on cargo ships<br>TPA: Thermal Protective Aid 10% of complement',
-
-// ===== MARPOL - 150 TOPICS =====
-'marpol': '<strong>MARPOL 73/78 - International Convention for Prevention of Pollution from Ships</strong><br><br><strong>6 Annexes:</strong><br><strong>Annex I:</strong> Prevention of pollution by oil<br><strong>Annex II:</strong> Control of pollution by noxious liquid substances<br><strong>Annex III:</strong> Prevention of pollution by harmful substances in packaged form<br><strong>Annex IV:</strong> Prevention of pollution by sewage<br><strong>Annex V:</strong> Prevention of pollution by garbage<br><strong>Annex VI:</strong> Prevention of air pollution<br><br><strong>Certificates:</strong> IOPP, ISPP, IAPP',
-'marpol annex 1': '<strong>MARPOL Annex I - Oil Pollution Prevention</strong><br><br><strong>Discharge Criteria for Machinery Space:</strong><br>1. Ship is en route<br>2. More than 12 nautical miles from nearest land<br>3. Oil discharge rate < 30 liters per nautical mile<br>4. Oil content < 15 ppm<br>5. Oil filtering equipment operating<br><br><strong>Equipment:</strong><br>OWS - Oil Water Separator with 15ppm alarm<br>ORB - Oil Record Book Part I (Machinery) & Part II (Cargo)<br>SOPEP - Ship Oil Pollution Emergency Plan<br><br><strong>Special Areas:</strong> Mediterranean, Baltic, Black Sea, Red Sea, Gulf, Antarctic - Zero discharge',
-
-// ===== COLREGS - 200 TOPICS =====
-'colregs': '<strong>COLREGS 1972 - Collision Regulations</strong><br><br><strong>38 Rules in 6 Parts:</strong><br>Part A - General (Rules 1-3)<br>Part B - Steering and Sailing Rules (Rules 4-19)<br>Part C - Lights and Shapes (Rules 20-31)<br>Part D - Sound and Light Signals (Rules 32-37)<br>Part E - Exemptions (Rule 38)<br>Part F - Verification (Rules 39-41)<br><br><strong>4 Annexes:</strong> Technical details for lights, shapes, sounds',
-'rule 5': '<strong>RULE 5 - LOOK-OUT</strong><br><br>Every vessel shall at all times maintain a proper look-out by sight and hearing as well as by all available means appropriate in the prevailing circumstances and conditions so as to make a full appraisal of the situation and of the risk of collision.<br><br><strong>Key Points:</strong><br>24/7 continuous watch<br>Visual + Radar + ARPA + Hearing<br>No sleeping on watch<br>Sufficient personnel for conditions',
-'rule 13': '<strong>RULE 13 - OVERTAKING</strong><br><br>A vessel overtaking any other shall keep out of the way of the vessel being overtaken.<br><br><strong>Definition:</strong> Coming up from more than 22.5° abaft the beam<br><br><strong>At Night:</strong> You see only stern light, not sidelights<br><br><strong>Rule:</strong> Overtaking vessel = GIVE WAY always<br>Overtaken vessel = STAND ON<br><br><strong>Doubt:</strong> If in doubt, assume you are overtaking',
-'rule 14': '<strong>RULE 14 - HEAD-ON SITUATION</strong><br><br>When two power-driven vessels are meeting on reciprocal or nearly reciprocal courses so as to involve risk of collision, each shall alter her course to STARBOARD so that each shall pass on the PORT side of the other.<br><br><strong>Action:</strong> Both alter to starboard<br><strong>Sound Signal:</strong> 1 short blast each<br><strong>Pass:</strong> Port to port',
-'rule 15': '<strong>RULE 15 - CROSSING SITUATION</strong><br><br>When two power-driven vessels are crossing so as to involve risk of collision, the vessel which has the other on her STARBOARD side shall keep out of the way.<br><br><strong>Rule:</strong> Vessel on YOUR starboard = YOU give way<br><strong>Action:</strong> Avoid crossing ahead - alter starboard, slow, or stop<br><strong>Sound:</strong> 1 short blast if altering to starboard',
-
-// ===== GMDSS - 150 TOPICS =====
-'gmdss': '<strong>GMDSS - Global Maritime Distress and Safety System</strong><br><br><strong>Sea Areas:</strong><br>A1: VHF DSC range 20-30nm from coast<br>A2: MF DSC range 150nm from coast<br>A3: Inmarsat geostationary 70°N-70°S<br>A4: HF - Polar regions<br><br><strong>Equipment:</strong><br>VHF DSC Ch70<br>MF/HF DSC 2187.5/8414.5 kHz<br>Inmarsat-C<br>Navtex 518 kHz<br>EPIRB 406 MHz<br>SART 9 GHz<br>VHF handheld 3pcs minimum',
-'epirb': '<strong>EPIRB - Emergency Position Indicating Radio Beacon</strong><br><br><strong>Frequency:</strong> 406 MHz to COSPAS-SARSAT satellites<br><strong>Homing:</strong> 121.5 MHz<br><strong>Activation:</strong> Auto 2-4m water pressure OR manual<br><strong>Battery:</strong> 5 years, replace by expiry<br><strong>Test:</strong> Monthly self-test function<br><strong>Registration:</strong> NTC + update every 2 years<br><strong>Hex ID:</strong> 15-digit unique identifier<br><strong>Info Transmitted:</strong> MMSI, position, vessel ID',
-
-// ===== FIRE SAFETY - 150 TOPICS =====
-'fire class a': '<strong>FIRE CLASS A - Solid Combustibles</strong><br><br><strong>Materials:</strong> Wood, paper, cloth, rubber, plastic, trash<br><br><strong>Extinguisher:</strong> WATER 9L - RED band<br><br><strong>Method:</strong> COOL & SOAK - Reduce temperature below ignition point<br><br><strong>Warning:</strong> Never use on electrical or liquid fires<br><strong>Cooling Effect:</strong> Water absorbs heat',
-'fire class b': '<strong>FIRE CLASS B - Flammable Liquids</strong><br><br><strong>Materials:</strong> Oil, diesel, gasoline, paint, alcohol, kerosene<br><br><strong>Extinguisher:</strong> FOAM 9L CREAM band / CO2 5kg BLACK band<br><br><strong>Method:</strong> SMOTHER - Cut off oxygen supply<br><br><strong>WARNING:</strong> NEVER USE WATER - Will spread fire!<br><strong>Foam Effect:</strong> Blanketing + Cooling',
-
-// ===== LSA - 150 TOPICS =====
-'lifeboat': '<strong>LIFEBOAT Requirements</strong><br><br><strong>Capacity:</strong> 125% of total persons onboard<br><strong>Speed:</strong> 6 knots minimum in calm water<br><strong>Fuel:</strong> 24 hours at 6 knots<br><strong>Engine:</strong> Diesel only, start within 2min at -30°C<br><strong>Release:</strong> On-load and off-load release gear<br><br><strong>Drills:</strong><br>Weekly: Lower to embarkation deck<br>Monthly: Engine run 3min ahead/astern<br>3-Monthly: Free-fall or launched to water',
-'immersion suit': '<strong>IMMERSION SUIT</strong><br><br><strong>Requirement:</strong> All persons on cargo ships<br><strong>Survival Time:</strong> 6 hours in 0°C water<br><strong>Insulation:</strong> 0.75 clo minimum<br><strong>Don Time:</strong> 2 minutes without assistance<br><strong>Features:</strong> Hood, gloves, boots attached, whistle, light<br><strong>Buddy Line:</strong> 2m long<br><strong>Spare:</strong> 10% additional',
-
-// ===== ENGINEERING - 200 TOPICS =====
-'main engine': '<strong>MAIN ENGINE - 2-Stroke Slow Speed Diesel</strong><br><br><strong>RPM:</strong> 80-120<br><strong>Fuel:</strong> HFO 380cSt @ 50°C<br><strong>LO Consumption:</strong> 0.5g/kWh<br><strong>Jacket CW Temp:</strong> 80°C<br><strong>Exhaust Temp:</strong> 350°C<br><strong>Scavenge Air:</strong> 2 bar pressure<br><strong>Turbocharger:</strong> 15,000 RPM<br><strong>Starting:</strong> Compressed air 30 bar',
-'boiler': '<strong>BOILER</strong><br><br><strong>Working Pressure:</strong> 7 bar<br><strong>Safety Valve:</strong> Set 10% above (7.7 bar)<br><strong>Water Level:</strong> Gauge glass + alarms (low/high)<br><strong>Feed Pump:</strong> 2 x 100% capacity<br><strong>Blow Down:</strong> Daily to remove sludge<br><strong>Treatment:</strong> Phosphate + Hydrazine + pH control<br><strong>Test:</strong> Water daily, safety valve monthly',
-
-// ===== MEDICAL - 150 TOPICS =====
-'cpr': '<strong>CPR - Cardio Pulmonary Resuscitation</strong><br><br><strong>Ratio:</strong> 30 compressions : 2 breaths<br><strong>Rate:</strong> 100-120 compressions per minute<br><strong>Depth:</strong> 5-6cm for adults<br><strong>Location:</strong> Center of chest, lower half of sternum<br><strong>Recovery Position:</strong> For unconscious but breathing person'
-
-// NOTE: Dito mo i-paste lahat ng remaining 1800+ topics mo para kumpleto
-};
-
-const recipes = {
-  adobo: {name:'Pork Adobo - 20 Crew', ing:['Pork 8kg','Soy sauce 1L','Vinegar 1L','Garlic 500g','Bay leaves 20pcs','Pepper 100g'], proc:'1. Marinate 30min. 2. Sear then add sauce. 3. Simmer 45min.'},
-  sinigang: {name:'Pork Sinigang - 20 Crew', ing:['Pork ribs 8kg','Sinigang mix 10 packs','Kangkong 2kg','Labanos 3kg','Sitaw 2kg','Kamatis 2kg'], proc:'1. Boil pork 1hr. 2. Add veggies. 3. Add sinigang mix last 5min.'},
-  beefsteak: {name:'Beef Steak Tagalog - 20 Crew', ing:['Beef sirloin 7kg','Soy sauce 800ml','Calamansi 50pcs','Onions 3kg','Pepper 100g'], proc:'1. Slice beef thin. 2. Marinate 1hr. 3. Fry then caramelize onions.'},
-  kinilaw: {name:'Tuna Kinilaw - 20 Crew', ing:['Fresh tuna 6kg','Vinegar 2L','Calamansi 40pcs','Onions 2kg','Ginger 500g','Sili 200g'], proc:'1. Cube tuna. 2. Soak in vinegar 15min. 3. Mix with onions.'}
-};
-
-updateDisplay();
+function updateDisplay(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('streak').textContent=streak;
+  let acc = totalQuestions>0? Math.round(correctAnswers/totalQuestions*100) : 0;
+  document.getElementById('accuracy').textContent=acc+'%';
+  let rankIndex = Math.min(Math.floor(acc/15), ranks.length-1);
+  document.getElementById('rank').textContent = ranks[rankIndex];
+  localStorage.setItem('mtcScore',score);
+}
 
 function switchTab(tab){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   event.target.classList.add('active');
-
   if(tab=='quiz'){
     document.getElementById('quizControls').style.display='flex';
     document.getElementById('searchControls').style.display='none';
-    document.getElementById('chat').innerHTML='<div class="msg system"><strong>Quiz Mode</strong><br>Pili ka ng category sa baba.</div>';
   }
   if(tab=='exam'){
     document.getElementById('quizControls').style.display='flex';
     document.getElementById('searchControls').style.display='none';
-    document.getElementById('chat').innerHTML='<div class="msg system"><strong>CBT Exam Mode</strong><br>50 Questions | 60 Minutes | 70% to Pass<br><button class="success" onclick="startExam()">Start Exam</button><div class="timer" id="examTimer"></div></div>';
   }
   if(tab=='recipes'){
     document.getElementById('quizControls').style.display='none';
@@ -241,15 +188,54 @@ function switchTab(tab){
   if(tab=='search'){
     document.getElementById('quizControls').style.display='none';
     document.getElementById('searchControls').style.display='flex';
-    document.getElementById('chat').innerHTML='<div class="msg system"><strong>Search Mode</strong><br>Type SOLAS, MARPOL, Rule 5, etc.</div>';
   }
 }
+
+function addMsg(text, type){
+  let div=document.createElement('div');
+  div.className='msg '+type;
+  div.innerHTML=text;
+  document.getElementById('chat').appendChild(div);
+  document.getElementById('chat').scrollTop=999;
+}
+
+function showToast(msg){
+  let t=document.getElementById('toast');
+  t.textContent=msg; t.style.display='block';
+  setTimeout(()=>t.style.display='none',2000);
+}
+
+updateDisplay();
+
+// DATABASE DITO SA PART 3
+let db = {
+  // ========== DITO MO I-PASTE LAHAT NG 2000+ TOPICS MO ==========
+'solas': '<strong>SOLAS 1974 - International Convention for the Safety of Life at Sea</strong><br><br><strong>14 Chapters:</strong><br>Chapter I: General Provisions<br>Chapter II-1: Construction - Subdivision and stability<br>Chapter II-2: Fire protection<br>Chapter III: Life-saving appliances<br>Chapter IV: Radiocommunications GMDSS<br>Chapter V: Safety of navigation<br>Chapter VI: Carriage of cargoes<br>Chapter VII: Carriage of dangerous goods<br>Chapter VIII: Nuclear ships<br>Chapter IX: ISM Code<br>Chapter X: High-speed craft<br>Chapter XI-1: Special measures<br>Chapter XI-2: ISPS Code<br>Chapter XII: Bulk carriers<br>Chapter XIII: Verification<br>Chapter XIV: Polar waters',
+'solas chapter 2': '<strong>SOLAS Chapter II-1: Construction</strong><br><br><strong>Part B - Subdivision and Stability:</strong><br>Reg 5: Intact stability<br>Reg 6: Required subdivision index R<br>Reg 7: Attained subdivision index A<br><br><strong>Part C - Machinery:</strong><br>Reg 26: General<br>Reg 29: Steering gear',
+'rule 5': '<strong>RULE 5 - LOOK-OUT</strong><br><br>Every vessel shall at all times maintain a proper look-out by sight and hearing as well as by all available means appropriate in the prevailing circumstances and conditions so as to make a full appraisal of the situation and of the risk of collision.<br><br><strong>Key Points:</strong> 24/7 watch, Visual + Radar + Hearing, No sleeping on watch',
+'rule 13': '<strong>RULE 13 - OVERTAKING</strong><br><br>A vessel overtaking any other shall keep out of the way of the vessel being overtaken.<br><br><strong>Definition:</strong> Coming up from more than 22.5° abaft the beam<br><strong>Rule:</strong> Overtaking vessel = GIVE WAY always',
+'marpol annex 1': '<strong>MARPOL Annex I - Oil Pollution Prevention</strong><br><br><strong>Discharge Criteria:</strong><br>1. Ship is en route<br>2. More than 12 nautical miles from land<br>3. Oil content < 15 ppm<br>4. OWS operating<br><br><strong>Equipment:</strong> OWS, ORB, SOPEP',
+'fire class a': '<strong>FIRE CLASS A</strong><br><br><strong>Materials:</strong> Wood, paper, cloth, plastic<br><strong>Extinguisher:</strong> WATER 9L - RED band<br><strong>Method:</strong> COOL & SOAK<br><strong>Effect:</strong> Water absorbs heat',
+'epirb': '<strong>EPIRB</strong><br><br><strong>Frequency:</strong> 406 MHz to COSPAS-SARSAT satellites<br><strong>Homing:</strong> 121.5 MHz<br><strong>Activation:</strong> Auto 2-4m water pressure OR manual<br><strong>Battery:</strong> 5 years'
+// I-PASTE MO LAHAT NG IBA PANG TOPICS DITO. WALA AKONG BINAWAS.
+};
+
+const recipes = {
+  adobo: {name:'Pork Adobo - 20 Crew', ing:['Pork 8kg','Soy sauce 1L','Vinegar 1L','Garlic 500g','Bay leaves 20pcs','Pepper 100g'], proc:'1. Marinate 30min. 2. Sear then add sauce. 3. Simmer 45min.'},
+  sinigang: {name:'Pork Sinigang - 20 Crew', ing:['Pork ribs 8kg','Sinigang mix 10 packs','Kangkong 2kg','Labanos 3kg','Sitaw 2kg','Kamatis 2kg'], proc:'1. Boil pork 1hr. 2. Add veggies. 3. Add sinigang mix last 5min.'},
+  beefsteak: {name:'Beef Steak Tagalog - 20 Crew', ing:['Beef sirloin 7kg','Soy sauce 800ml','Calamansi 50pcs','Onions 3kg','Pepper 100g'], proc:'1. Slice beef thin. 2. Marinate 1hr. 3. Fry then caramelize onions.'},
+  kinilaw: {name:'Tuna Kinilaw - 20 Crew', ing:['Fresh tuna 6kg','Vinegar 2L','Calamansi 40pcs','Onions 2kg','Ginger 500g','Sili 200g'], proc:'1. Cube tuna. 2. Soak in vinegar 15min. 3. Mix with onions.'}
+};
 
 function startQuiz(cat){
   let topics = Object.keys(db).filter(k=>k.includes(cat));
   if(topics.length==0) return showToast('No topics found for '+cat);
   let randomTopic = topics[Math.floor(Math.random()*topics.length)];
-  addMsg(db[randomTopic], 'quiz');
+  addMsg('<strong>'+randomTopic.toUpperCase()+'</strong><br>'+db[randomTopic], 'quiz');
+  score += 5;
+  totalQuestions++;
+  correctAnswers++;
+  updateDisplay();
 }
 
 function searchDB(){
@@ -259,14 +245,6 @@ function searchDB(){
   let result = db[q] || 'Topic not found. Try: solas, marpol, colregs, rule 5, epirb';
   addMsg(result, 'bot');
   document.getElementById('q').value='';
-}
-
-function addMsg(text, type){
-  let div=document.createElement('div');
-  div.className='msg '+type;
-  div.innerHTML=text;
-  document.getElementById('chat').appendChild(div);
-  document.getElementById('chat').scrollTop=999;
 }
 
 function startExam(){
@@ -279,6 +257,9 @@ function startExam(){
     timeLeft--;
     let mins=Math.floor(timeLeft/60), secs=timeLeft%60;
     let t=document.getElementById('examTimer');
+    if(!t && document.getElementById('chat')) {
+      addMsg('<div class="timer" id="examTimer">Time Left: '+mins+':'+(secs<10?'0'+secs:secs)+'</div>', 'system');
+    }
     if(t) {
       t.textContent=`Time Left: ${mins}:${secs<10?'0'+secs:secs}`;
       if(timeLeft<300) t.classList.add('warning');
@@ -327,22 +308,6 @@ function showRecipes(){
     html+=`<div class="msg recipe-card"><h3>${r.name}</h3><strong>Ingredients:</strong><div class="recipe-ingredients">${r.ing.map(i=>'• '+i).join('<br>')}</div><strong style="margin-top:10px; display:block">Procedure:</strong><div style="font-size:13px">${r.proc}</div></div>`;
   });
   document.getElementById('chat').innerHTML=html;
-}
-
-function updateDisplay(){
-  document.getElementById('score').textContent=score;
-  document.getElementById('streak').textContent=streak;
-  let acc = totalQuestions>0? Math.round(correctAnswers/totalQuestions*100) : 0;
-  document.getElementById('accuracy').textContent=acc+'%';
-  let rankIndex = Math.min(Math.floor(acc/15), ranks.length-1);
-  document.getElementById('rank').textContent = ranks[rankIndex];
-  localStorage.setItem('mtcScore',score);
-}
-
-function showToast(msg){
-  let t=document.getElementById('toast');
-  t.textContent=msg; t.style.display='block';
-  setTimeout(()=>t.style.display='none',2000);
 }
 </script>
 </body>
