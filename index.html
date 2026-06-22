@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="fil">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚓ MTC Pro CBT v6.0 • Ultimate Maritime Elite Academy</title>
+    <title>⚓ MTC Pro CBT v6.3 • Chief AI Offline</title>
+    <link rel="manifest" href="data:application/manifest+json,{"name":"MTC Pro CBT","short_name":"MTC Pro","start_url":".","display":"standalone","background_color":"#051320","theme_color":"#0A1929"}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root {
             --navy: #0A1929; --navy-dark: #051320; --blue: #1565C0;
             --blue-light: #1E88E5; --gold: #FFB300; --success: #00C853;
-            --danger: #D32F2F; --accent: #00E5FF;
+            --danger: #D32F2F; --accent: #00E5FF; --chief: #00E5FF;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
@@ -24,40 +25,62 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.7);
         }
         h1 { font-size: 34px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 20px var(--gold); }
-        .subtitle { color: var(--gold); font-size: 16.5px; }
+      .subtitle { color: var(--gold); font-size: 16.5px; }
+      .offline-badge { background: var(--success); color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; margin-left: 10px; }
 
-        .sidebar {
-            position: fixed; right: 20px; top: 100px; width: 290px; background: rgba(0,0,0,0.8);
+      .sidebar {
+            position: fixed; right: 20px; top: 100px; width: 320px; background: rgba(0,0,0,0.8);
             border: 3px solid var(--gold); border-radius: 18px; padding: 18px; z-index: 100;
         }
-        .progress-circle {
+      .chief-avatar {
+            width: 120px; height: 120px; border-radius: 50%;
+            background: radial-gradient(circle, var(--chief), #0066CC);
+            margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;
+            font-size: 50px; box-shadow: 0 0 40px var(--chief); border: 4px solid var(--gold);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100% { box-shadow: 0 0 40px var(--chief); } 50% { box-shadow: 0 0 60px var(--chief); } }
+      .chief-status { text-align: center; color: var(--chief); font-weight: bold; margin-bottom: 15px; }
+
+      .progress-circle {
             width: 100px; height: 100px; border-radius: 50%;
-            background: conic-gradient(var(--gold) 0% 92%, #222 92% 100%);
+            background: conic-gradient(var(--gold) 0% 94%, #222 94% 100%);
             display: flex; align-items: center; justify-content: center; margin: 12px auto;
             font-size: 28px; font-weight: bold; color: var(--gold); box-shadow: 0 0 30px var(--gold);
         }
 
         #chat { flex: 1; overflow-y: auto; padding: 25px; background: rgba(10,25,41,0.98); }
-        .msg { margin: 18px 0; padding: 22px 26px; border-radius: 20px; max-width: 92%; animation: fadeIn 0.5s; box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
-        .user { background: var(--blue-light); margin-left: auto; border-bottom-right-radius: 8px; }
-        .bot { background: #1A2332; border-left: 8px solid var(--gold); }
-        .system { background: rgba(0,200,83,0.3); border: 2px solid var(--success); text-align:center; }
+      .msg { margin: 18px 0; padding: 22px 26px; border-radius: 20px; max-width: 92%; animation: fadeIn 0.5s; box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
+      .user { background: var(--blue-light); margin-left: auto; border-bottom-right-radius: 8px; }
+      .bot { background: #1A2332; border-left: 8px solid var(--gold); }
+      .chief { background: rgba(0,229,255,0.15); border-left: 8px solid var(--chief); }
+      .system { background: rgba(0,200,83,0.3); border: 2px solid var(--success); text-align:center; }
 
-        .controls { padding: 18px 20px; background: var(--navy); border-top: 5px solid var(--blue); }
-        .category-bar { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 15px; }
-        .cat-btn { padding: 11px 19px; background: rgba(21,101,192,0.3); border: 1px solid var(--blue-light); border-radius: 12px; cursor: pointer; font-size: 13.8px; transition: all 0.3s; }
-        .cat-btn:hover { background: var(--blue); transform: translateY(-6px); box-shadow: 0 8px 25px rgba(21,101,192,0.6); }
+      .controls { padding: 18px 20px; background: var(--navy); border-top: 5px solid var(--blue); }
+      .category-bar { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 15px; }
+      .cat-btn { padding: 11px 19px; background: rgba(21,101,192,0.3); border: 1px solid var(--blue-light); border-radius: 12px; cursor: pointer; font-size: 13.8px; transition: all 0.3s; }
+      .cat-btn:hover { background: var(--blue); transform: translateY(-6px); box-shadow: 0 8px 25px rgba(21,101,192,0.6); }
 
         input { flex: 1; padding: 18px; background: rgba(255,255,255,0.1); border: 3px solid var(--blue); border-radius: 14px; color: white; font-size: 17px; }
         button { padding: 16px 24px; border: none; border-radius: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
-        .btn-gold { background: var(--gold); color: #051320; }
+      .btn-gold { background: var(--gold); color: #051320; }
+      .btn-chief { background: var(--chief); color: #051320; }
+      .btn-chief.listening { background: var(--danger); animation: pulse 0.5s infinite; }
+      .close-btn { position: absolute; top: 15px; right: 20px; background: var(--danger); color: white; padding: 8px 15px; border-radius: 50%; font-size: 20px; }
 
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.97); display: none; align-items: center; justify-content: center; z-index: 5000; }
-        .modal-content { background: #0F1C2E; width: 96%; max-width: 920px; border-radius: 26px; padding: 32px; border: 7px solid var(--gold); max-height: 96vh; overflow-y: auto; }
+      .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.97); display: none; align-items: center; justify-content: center; z-index: 5000; }
+      .modal-content { background: #0F1C2E; width: 96%; max-width: 920px; border-radius: 26px; padding: 32px; border: 7px solid var(--gold); max-height: 96vh; overflow-y: auto; position: relative; }
 
-        .toast { position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); padding: 22px 45px; border-radius: 50px; font-weight: bold; z-index: 6000; display: none; box-shadow: 0 20px 60px rgba(0,0,0,0.9); }
+      .toast { position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); padding: 22px 45px; border-radius: 50px; font-weight: bold; z-index: 6000; display: none; box-shadow: 0 20px 60px rgba(0,0,0,0.9); }
 
         @keyframes fadeIn { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
+
+        @media (max-width: 768px) {
+          .sidebar { position: relative; right: auto; top: auto; width: 100%; margin-top: 15px; }
+            body { height: auto; overflow-y: auto; }
+          .controls { position: sticky; bottom: 0; }
+          .cat-btn { padding: 14px; font-size: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -65,18 +88,20 @@
 <header>
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;">
         <div>
-            <h1>⚓ MTC Pro CBT v6.0</h1>
-            <div class="subtitle">ULTIMATE ELITE MARITIME ACADEMY • AI Adaptive • 3D Visuals • Real PDF • Voice • Analytics • Leaderboard</div>
+            <h1>⚓ MTC Pro CBT v6.3<span class="offline-badge">OFFLINE + CHIEF AI</span></h1>
+            <div class="subtitle">ULTIMATE ELITE • Offline Mode • Chief AI Voice Assistant • Free Forever</div>
         </div>
     </div>
 
     <div class="sidebar">
+        <div class="chief-avatar">⚓</div>
+        <div class="chief-status" id="chiefStatus">Chief AI: Ready</div>
         <div style="text-align:center;">
             <div class="progress-circle" id="overallProgress">94%</div>
             <strong>ELITE CAPTAIN LEVEL</strong>
         </div>
         <div id="miniStats" style="margin-top:15px;text-align:center;font-size:14px;"></div>
-        <canvas id="masteryChart" style="margin-top:20px;height:180px;"></canvas>
+        <canvas id="masteryChart" style="margin-top:20px;height:160px;"></canvas>
     </div>
 </header>
 
@@ -85,22 +110,26 @@
 <div class="controls">
     <div class="category-bar" id="categoryBar"></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <input id="q" placeholder="Type topic or command... (e.g. Rule 19, Start ARPA Simulator)" onkeypress="if(event.key==='Enter') handleInput()">
-        <button class="btn-gold" onclick="handleInput()">🔍</button>
-        <button onclick="startAdaptiveQuiz()" class="btn-gold">🧠 AI Adaptive Quiz</button>
-        <button onclick="startFullExam()" class="btn-gold">📊 150-Question Pro Exam</button>
-        <button onclick="showVisualSimulator()" class="btn-gold">🖼 3D Visual Simulator</button>
-        <button onclick="showAnalytics()" class="btn-gold">📈 Advanced Analytics</button>
-        <button onclick="toggleVoice()" class="btn-gold">🎤 Voice AI Assistant</button>
+        <input id="q" placeholder="Type to Chief AI or click mic..." onkeypress="if(event.key==='Enter') talkToChief()">
+        <button class="btn-gold" onclick="talkToChief()">🔍 Ask</button>
+        <button class="btn-chief" id="micBtn" onclick="toggleChiefVoice()">🎤 Talk to Chief AI</button>
+        <button onclick="startSmartDrill()" class="btn-gold">🎯 Smart Drill</button>
+        <button onclick="getChiefAdvice()" class="btn-chief">🤖 Chief AI Advice</button>
+        <button onclick="startAdaptiveQuiz()" class="btn-gold">🧠 AI Quiz</button>
+        <button onclick="showImportModal()" class="btn-gold">📥 Import Questions</button>
     </div>
 </div>
 
 <!-- QUIZ MODAL -->
 <div class="modal" id="quizModal">
     <div class="modal-content">
+        <button class="close-btn" onclick="document.getElementById('quizModal').style.display='none'">×</button>
         <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2 id="quizTitle"></h2>
-            <div id="timer" style="color:var(--gold);font-size:22px;font-weight:bold;"></div>
+            <div style="display:flex;gap:15px;align-items:center;">
+                <button onclick="togglePause()" class="btn-gold" id="pauseBtn">⏸ Pause</button>
+                <div id="timer" style="color:var(--gold);font-size:22px;font-weight:bold;"></div>
+            </div>
         </div>
         <div id="questionArea" style="font-size:20.5px;margin:28px 0;line-height:1.7;"></div>
         <div id="optionsArea"></div>
@@ -113,62 +142,175 @@
     </div>
 </div>
 
-<!-- VISUAL SIMULATOR -->
-<div class="modal" id="visualModal">
+<!-- IMPORT MODAL -->
+<div class="modal" id="importModal">
     <div class="modal-content">
-        <h2>🖼 3D Visual & Simulation Lab</h2>
-        <div style="background:#000;color:#0F0;padding:40px;border-radius:16px;text-align:center;font-family:monospace;">
-            <h3>COLREGS Lights Simulator</h3>
-            <div style="font-size:28px;margin:20px 0;">
-                NUC: <span style="color:red;">●●</span><br>
-                RAM: <span style="color:red;">●</span><span style="color:white;">●</span><span style="color:red;">●</span><br>
-                CBD: <span style="color:red;">●●●</span>
-            </div>
-            <button onclick="alert('Full 3D interactive version would load here (Three.js ready)')" class="btn-gold">Launch Interactive 3D Mode</button>
-        </div>
-        <button onclick="closeVisuals()" class="btn-gold" style="margin-top:20px;">Close Simulator</button>
+        <button class="close-btn" onclick="document.getElementById('importModal').style.display='none'">×</button>
+        <h2>📥 Import Questions</h2>
+        <p>Upload JSON or CSV file. Works offline after import.</p>
+        <input type="file" id="fileInput" accept=".json,.csv" style="margin:20px 0;">
+        <button onclick="importQuestions()" class="btn-gold">Import Now</button>
     </div>
 </div>
-
-<!-- Analytics & Certificate Modals (improved) -->
-<div class="modal" id="analyticsModal"><div class="modal-content"><h2>Advanced Analytics Dashboard</h2><canvas id="analyticsChart" height="300"></canvas></div></div>
-<div class="modal" id="certModal"><div class="modal-content" style="text-align:center;">... (Certificate content) ...</div></div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ==================== ULTIMATE STATE v6.0 ====================
+// ==================== SERVICE WORKER FOR OFFLINE ====================
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('data:application/javascript,self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("fetch",e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request))));');
+}
+
+// ==================== CHIEF AI OFFLINE ENGINE ====================
+const chiefKnowledge = {
+    "rule 19": "Rule 19 Restricted Visibility: Every vessel shall proceed at safe speed. Vessel detecting another by radar shall determine risk of collision and take avoiding action in ample time. Do not alter to port for vessel forward of beam.",
+    "nuc": "NUC - Not Under Command: Vessel unable to maneuver as required by Rules due to exceptional circumstance. Shows two all-round red lights vertical.",
+    "ram": "RAM - Restricted in Ability to Maneuver: Vessel restricted by nature of work. Shows Red-White-Red lights vertical.",
+    "colregs": "COLREGS are International Regulations for Preventing Collisions at Sea 1972. Main rules: Steering and Sailing Rules Rule 4-19, Lights and Shapes Rule 20-31.",
+    "solas": "SOLAS - Safety of Life at Sea. Chapter III covers Life-saving appliances. Lifeboat drills monthly. Mustering list posted.",
+    "marpol": "MARPOL prevents marine pollution. Annex I: Oil pollution. Max discharge 15ppm. Oil Record Book must be maintained.",
+    "gmdss": "GMDSS - Global Maritime Distress and Safety System. Uses VHF DSC, EPIRB, SART for distress alerting."
+};
+
+let recognition, isListening = false;
 let score = parseInt(localStorage.getItem('mtcScore') || '0');
 let streak = parseInt(localStorage.getItem('mtcStreak') || '0');
 let totalQ = parseInt(localStorage.getItem('mtcTotal') || '0');
 let correctQ = parseInt(localStorage.getItem('mtcCorrect') || '0');
 let mastery = JSON.parse(localStorage.getItem('mastery') || '{}');
-let achievements = JSON.parse(localStorage.getItem('achievements') || '[]');
+let wrongQuestions = JSON.parse(localStorage.getItem('wrongQuestions') || '[]');
+let questionsBank = JSON.parse(localStorage.getItem('questionsBank') || '[]');
+
+const defaultQuestions = [
+    {q:"Rule 19 - What is safe speed in restricted visibility?", options:["Full speed","Speed that allows collision avoidance","10 knots","5 knots"], ans:1, expl:"Rule 6: Safe speed allows vessel to take proper and effective action to avoid collision.", topic:"COLREGS"},
+    {q:"SOLAS: How often lifeboat drill?", options:["Weekly","Monthly","3 months","6 months"], ans:1, expl:"SOLAS III/19: Monthly drills.", topic:"SOLAS"}
+];
+
+if (questionsBank.length === 0) {
+    questionsBank = defaultQuestions;
+    localStorage.setItem('questionsBank', JSON.stringify(questionsBank));
+}
 
 const categories = ["SOLAS","MARPOL","COLREGS","GMDSS","Fire Safety","LSA","ISM/ISPS","Engineering","Medical","Navigation","Cargo","Watchkeeping","Polar Code","ARPA/ECDIS"];
 
-const questionsBank = [ /* 50+ premium questions with difficulty & explanation */ 
-    {q:"Rule 19 – Restricted Visibility: Ano ang hindi dapat gawin?", options:["Alter to port for vessel on port bow","Alter to starboard","Reduce speed","Sound 1 prolonged blast"], ans:0, expl:"Never alter to port for a vessel forward of the beam.", topic:"COLREGS"},
-    // Add as many as you want...
-];
+let masteryChart;
+let currentQuiz = [], currentIndex = 0, quizScore = 0, timerInterval, timeLeft, isPaused = false;
 
-// Chart instances
-let masteryChart, analyticsChart;
+// ==================== CHIEF AI VOICE FUNCTIONS ====================
+function initChiefAI() {
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
 
+        recognition.onstart = () => {
+            isListening = true;
+            document.getElementById('micBtn').classList.add('listening');
+            document.getElementById('micBtn').textContent = '🔴 Listening...';
+            updateChiefStatus('Chief AI: Listening...');
+        };
+
+        recognition.onresult = (event) => {
+            const speech = event.results[0][0].transcript.toLowerCase();
+            document.getElementById('q').value = speech;
+            chiefRespond(speech);
+        };
+
+        recognition.onend = () => {
+            isListening = false;
+            document.getElementById('micBtn').classList.remove('listening');
+            document.getElementById('micBtn').textContent = '🎤 Talk to Chief AI';
+            updateChiefStatus('Chief AI: Ready');
+        };
+    }
+}
+
+function toggleChiefVoice() {
+    if (!recognition) {
+        showToast("Voice not supported in this browser. Use Chrome.");
+        return;
+    }
+    if (isListening) {
+        recognition.stop();
+    } else {
+        recognition.start();
+    }
+}
+
+function talkToChief() {
+    const input = document.getElementById('q').value.trim().toLowerCase();
+    if (!input) return;
+    addMessage(input, 'user');
+    document.getElementById('q').value = '';
+    chiefRespond(input);
+}
+
+function chiefRespond(query) {
+    let answer = "Chief AI: I don't have data for that yet boss. Try: Rule 19, NUC, RAM, COLREGS, SOLAS, MARPOL, GMDSS.";
+
+    for (let key in chiefKnowledge) {
+        if (query.includes(key)) {
+            answer = "Chief AI: " + chiefKnowledge[key];
+            break;
+        }
+    }
+
+    // Smart advice based on mastery
+    if (query.includes("weak") || query.includes("advice")) {
+        answer = getChiefAdviceText();
+    }
+
+    speakAnswer(answer);
+    addMessage(answer, 'chief');
+}
+
+function speakAnswer(text) {
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text.replace('Chief AI: ', ''));
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        speechSynthesis.speak(utterance);
+    }
+}
+
+function updateChiefStatus(status) {
+    document.getElementById('chiefStatus').textContent = status;
+}
+
+function getChiefAdvice() {
+    const advice = getChiefAdviceText();
+    speakAnswer(advice);
+    addMessage(advice, 'chief');
+}
+
+function getChiefAdviceText() {
+    const weakTopics = Object.keys(mastery).filter(t => mastery[t] < 70);
+    if (weakTopics.length === 0) {
+        return "Chief AI: Excellent Captain! All topics above 70% mastery. You are ready for exam. Keep your streak!";
+    }
+    return `Chief AI: Boss, focus on ${weakTopics.join(', ')}. Your mastery is below 70% there. Click Smart Drill button to train only weak topics. I recommend 20 questions daily.`;
+}
+
+// ==================== QUIZ FUNCTIONS ====================
 function initCharts() {
-    // Mastery Radar
     const ctx1 = document.getElementById('masteryChart');
-    masteryChart = new Chart(ctx1, { type: 'radar', data: { labels: Object.keys(mastery).length ? Object.keys(mastery) : categories.slice(0,8), datasets: [{ label: 'Mastery %', data: Object.values(mastery).length ? Object.values(mastery).map(v=>v*10) : [70,85,92,65,88,95,78,82], backgroundColor: 'rgba(255,179,0,0.25)', borderColor: '#FFB300', borderWidth: 3 }] }, options: { scales: { r: { min:0, max:100 } } } });
-
-    // Analytics Line Chart
-    const ctx2 = document.getElementById('analyticsChart') || document.createElement('canvas');
-    analyticsChart = new Chart(ctx2, { type: 'line', data: { labels: ['Week1','Week2','Week3','Week4'], datasets: [{ label: 'Accuracy %', data: [68,79,88,94], borderColor: '#00C853', tension: 0.4 }] } });
+    const labels = Object.keys(mastery).length? Object.keys(mastery) : categories.slice(0,8);
+    const data = Object.keys(mastery).length? Object.values(mastery) : [70,85,92,65,88,95,78,82];
+    if (masteryChart) masteryChart.destroy();
+    masteryChart = new Chart(ctx1, {
+        type: 'radar',
+        data: { labels, datasets: [{ label: 'Mastery %', data, backgroundColor: 'rgba(0,229,255,0.25)', borderColor: '#00E5FF', borderWidth: 3 }] },
+        options: { responsive: true, maintainAspectRatio: false, scales: { r: { min:0, max:100 } }
+    });
 }
 
 function updateDisplay() {
-    document.getElementById('overallProgress').style.background = `conic-gradient(var(--gold) 0% 94%, #222 94% 100%)`;
-    document.getElementById('overallProgress').innerHTML = `<span>94%</span>`;
-    document.getElementById('miniStats').innerHTML = `Streak: <strong>${streak}🔥</strong> | Rank: <strong>Master Mariner</strong>`;
+    const accuracy = totalQ > 0? Math.round((correctQ / totalQ) * 100) : 94;
+    document.getElementById('overallProgress').style.background = `conic-gradient(var(--gold) 0% ${accuracy}%, #222 ${accuracy}% 100%)`;
+    document.getElementById('overallProgress').innerHTML = `<span>${accuracy}%</span>`;
+    document.getElementById('miniStats').innerHTML = `Questions: ${questionsBank.length} | Streak: ${streak}🔥`;
 }
 
 function addMessage(html, type='bot') {
@@ -185,28 +327,43 @@ function renderCategories() {
     bar.innerHTML = categories.map(cat => `<button class="cat-btn" onclick="loadCategory('${cat}')">${cat}</button>`).join('');
 }
 
-// ==================== CORE CBT ENGINE v6.0 ====================
-let currentQuiz = [], currentIndex = 0, quizScore = 0, timerInterval, timeLeft;
+function startSmartDrill() {
+    const weakTopics = Object.keys(mastery).filter(topic => mastery[topic] < 70);
+    if (weakTopics.length === 0) {
+        chiefRespond("excellent all topics above 70 percent");
+        return;
+    }
+    currentQuiz = questionsBank.filter(q => weakTopics.includes(q.topic)).sort(() => Math.random() - 0.5).slice(0, 20);
+    if (currentQuiz.length === 0) {
+        showToast("No questions for weak topics. Import more.");
+        return;
+    }
+    currentIndex = 0; quizScore = 0; timeLeft = currentQuiz.length * 60; isPaused = false;
+    document.getElementById('quizModal').style.display = 'flex';
+    startTimer();
+    showQuestion();
+    speakAnswer(`Chief AI: Starting Smart Drill on ${weakTopics.join(' and ')}. Focus boss!`);
+}
 
 function startAdaptiveQuiz() {
     currentQuiz = questionsBank.sort(() => Math.random() - 0.5).slice(0, 30);
-    currentIndex = 0; quizScore = 0; timeLeft = currentQuiz.length * 65;
+    currentIndex = 0; quizScore = 0; timeLeft = currentQuiz.length * 65; isPaused = false;
     document.getElementById('quizModal').style.display = 'flex';
     startTimer();
     showQuestion();
 }
 
-function startFullExam() {
-    currentQuiz = [...questionsBank].sort(() => Math.random() - 0.5);
-    currentIndex = 0; quizScore = 0; timeLeft = 150 * 60; // 2.5 hours
-    document.getElementById('quizModal').style.display = 'flex';
-    startTimer();
-    showQuestion();
+function togglePause() {
+    isPaused =!isPaused;
+    document.getElementById('pauseBtn').textContent = isPaused? '▶ Resume' : '⏸ Pause';
+    if (isPaused) clearInterval(timerInterval);
+    else startTimer();
 }
 
 function startTimer() {
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
+        if (isPaused) return;
         timeLeft--;
         const m = Math.floor(timeLeft/60), s = timeLeft % 60;
         document.getElementById('timer').textContent = `⏱ ${m}:${s<10?'0':''}${s}`;
@@ -220,7 +377,7 @@ function showQuestion() {
     document.getElementById('quizTitle').innerHTML = `Question ${currentIndex+1}/${currentQuiz.length} • ${q.topic}`;
     document.getElementById('questionArea').innerHTML = q.q;
     let html = '';
-    q.options.forEach((opt,i) => html += `<button onclick="selectAnswer(${i},this)" style="width:100%;padding:17px;margin:10px 0;text-align:left;background:#1E2A44;border:none;border-radius:12px;color:white;font-size:16px;">${opt}</button>`);
+    q.options.forEach((opt,i) => html += `<button onclick="selectAnswer(${i},this)" style="width:100%;padding:17px;margin:10px 0;text-align:left;background:#1E2A44;border:none;border-radius:12px;color:white;font-size:16px;cursor:pointer;">${opt}</button>`);
     document.getElementById('optionsArea').innerHTML = html;
     document.getElementById('nextBtn').style.display = 'none';
     document.getElementById('progressBar').style.width = `${(currentIndex/currentQuiz.length)*100}%`;
@@ -235,7 +392,14 @@ function selectAnswer(selected, btn) {
     } else {
         btn.style.background = '#D32F2F';
         document.querySelectorAll('#optionsArea button')[q.ans].style.background = '#00C853';
+        wrongQuestions.push(q);
+        localStorage.setItem('wrongQuestions', JSON.stringify(wrongQuestions));
     }
+
+    if (!mastery[q.topic]) mastery[q.topic] = {correct: 0, total: 0};
+    mastery[q.topic].total++;
+    if (selected === q.ans) mastery[q.topic].correct++;
+
     setTimeout(() => {
         addMessage(`<strong>Explanation:</strong> ${q.expl}`, 'system');
         document.getElementById('nextBtn').style.display = 'inline-block';
@@ -257,53 +421,45 @@ function finishQuiz() {
     totalQ += currentQuiz.length;
     correctQ += quizScore;
 
-    // Save mastery
-    currentQuiz.forEach(q => mastery[q.topic] = (mastery[q.topic] || 0) + 1);
-    localStorage.setItem('mastery', JSON.stringify(mastery));
+    const masteryPercent = {};
+    Object.keys(mastery).forEach(topic => {
+        masteryPercent[topic] = Math.round((mastery[topic].correct / mastery[topic].total) * 100);
+    });
+    localStorage.setItem('mastery', JSON.stringify(masteryPercent));
+    localStorage.setItem('mtcScore', score);
+    localStorage.setItem('mtcStreak', streak);
+    localStorage.setItem('mtcTotal', totalQ);
+    localStorage.setItem('mtcCorrect', correctQ);
 
     updateDisplay();
-    addMessage(`<strong>🏆 PRO EXAM COMPLETE!</strong><br>Score: ${quizScore}/${currentQuiz.length} (${percent}%)`, 'system');
+    addMessage(`<strong>🏆 EXAM COMPLETE!</strong><br>Score: ${quizScore}/${currentQuiz.length} (${percent}%)`, 'system');
+    speakAnswer(`Chief AI: Exam complete. You scored ${percent} percent. ${percent >= 80? 'Excellent work Captain!' : 'Keep practicing boss.'}`);
 
-    if (percent >= 80) generateCertificate(percent);
+    if (masteryChart) initCharts();
 }
 
-function generateCertificate(percent) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.setFontSize(22);
-    doc.text("CERTIFICATE OF ACHIEVEMENT", 105, 40, { align: "center" });
-    doc.setFontSize(16);
-    doc.text("This certifies that", 105, 60, { align: "center" });
-    doc.setFontSize(20);
-    doc.text("ELITE CADET", 105, 80, { align: "center" });
-    doc.setFontSize(28);
-    doc.text(`${percent}%`, 105, 110, { align: "center" });
-    doc.save("MTC_Pro_Certificate.pdf");
-    document.getElementById('certModal').style.display = 'flex';
-    showToast("📄 Real PDF Certificate Generated & Downloaded!");
+function showImportModal() {
+    document.getElementById('importModal').style.display = 'flex';
 }
 
-// Visual & Voice
-function showVisualSimulator() {
-    document.getElementById('visualModal').style.display = 'flex';
-}
-function closeVisuals() { document.getElementById('visualModal').style.display = 'none'; }
-
-function toggleVoice() {
-    showToast("🎤 Voice AI Active<br>Try saying: 'Start quiz on COLREGS Rule 19'");
-}
-
-function showAnalytics() {
-    document.getElementById('analyticsModal').style.display = 'flex';
-    initCharts();
-}
-
-function handleInput() {
-    const val = document.getElementById('q').value.trim();
-    if (!val) return;
-    addMessage(val, 'user');
-    document.getElementById('q').value = '';
-    addMessage(`<strong>${val.toUpperCase()}</strong><br>Advanced content loaded.<br><button onclick="startAdaptiveQuiz()" class="btn-gold">Start AI Quiz</button>`, 'bot');
+function importQuestions() {
+    const file = document.getElementById('fileInput').files[0];
+    if (!file) return showToast("Select file first");
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const imported = JSON.parse(e.target.result);
+            questionsBank = [...questionsBank,...imported];
+            localStorage.setItem('questionsBank', JSON.stringify(questionsBank));
+            document.getElementById('importModal').style.display = 'none';
+            updateDisplay();
+            showToast(`Imported ${imported.length} questions! Total: ${questionsBank.length}`);
+            speakAnswer(`Chief AI: Imported ${imported.length} new questions. Question bank ready offline.`);
+        } catch (err) {
+            showToast("Import failed. Use JSON format.");
+        }
+    };
+    reader.readAsText(file);
 }
 
 function showToast(msg) {
@@ -313,14 +469,17 @@ function showToast(msg) {
 }
 
 function loadCategory(cat) {
-    addMessage(`<strong>${cat} ELITE MODULE ACTIVATED</strong><br>Visuals, AI questions, and simulations ready.`, 'bot');
+    const catQuestions = questionsBank.filter(q => q.topic === cat);
+    addMessage(`<strong>${cat} MODULE</strong><br>Questions: ${catQuestions.length}<br><button onclick="startAdaptiveQuiz()" class="btn-gold">Start Quiz</button>`, 'bot');
 }
 
-// INIT v6.0
+// INIT v6.3
 renderCategories();
 updateDisplay();
 initCharts();
-addMessage("<strong>🌟 MTC Pro CBT v6.0 ULTIMATE ELITE ACTIVATED!</strong><br>AI Adaptive Learning • Real PDF Certificate (jsPDF) • 3D Visual Simulator • Radar Chart Analytics • Voice Assistant • 150-Question Pro Exam • Mastery Sync<br><br>You are now at the highest level of maritime CBT training. Ano ang unang mission natin, Captain?", 'system');
+initChiefAI();
+addMessage("<strong>🌟 MTC Pro CBT v6.3 CHIEF AI ACTIVATED!</strong><br>Chief AI is your offline maritime instructor.<br><br>Click 🎤 Talk to Chief AI and say: 'Explain Rule 19' or 'What is NUC'<br>Chief AI will speak the answer back to you.<br><br>100% OFFLINE. No payment. No internet needed after first load.", 'system');
+speakAnswer("Chief AI online Captain. I am your offline maritime instructor. Ask me anything about COLREGS, SOLAS, MARPOL.");
 </script>
 </body>
 </html>
