@@ -1,221 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MTC Pro v7.4 BOSS MODE</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chief AI</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0A1929;color:#DDD;font-family:Arial,sans-serif;display:flex;flex-direction:column;height:100vh;font-size:14px}
-header{background:#0F1C2E;padding:10px;text-align:center;border-bottom:2px solid #FFB300}
-header h1{font-size:16px;color:#FFB300}
-#chat{flex:1;overflow-y:auto;padding:10px;background:#051320}
-.msg{margin:8px 0;padding:10px;border-radius:6px;max-width:95%}
-.user{background:#1565C0;margin-left:auto}
-.bot{background:#1A2332}
-.chief{background:#0D2B36;border-left:3px solid #00E5FF}
-.exam{background:#2B0F0F;border:2px solid #FF3333}
-.controls{padding:8px;background:#0A1929;border-top:1px solid #1565C0}
-input{width:100%;padding:10px;background:#1A2332;border:1px solid #333;border-radius:6px;color:white;font-size:14px;margin-bottom:6px}
-.btn-row{display:flex;gap:5px;flex-wrap:wrap}
-button{flex:1;min-width:70px;padding:8px;border:none;border-radius:6px;background:#2A3F54;color:#DDD;cursor:pointer;font-size:12px}
-button:hover{background:#1565C0}
-button.danger{background:#B71C1C}
-button.danger:hover{background:#D32F2F}
-#stats{padding:8px;text-align:center;font-size:12px;color:#FFB300;background:#0F1C2E;font-weight:bold}
-.timer{color:#FF3333;font-size:18px}
-.certificate{background:#0A3D0A;border:3px solid #FFD700;padding:20px;text-align:center;border-radius:10px}
+body{background:#000;color:#0f0;font-family:Arial;padding:10px}
+.chat{height:350px;overflow:auto;border:2px solid #0f0;padding:8px;margin:5px 0;border-radius:8px;font-size:14px}
+input,button{padding:10px;margin:3px;font-size:15px;border-radius:5px;border:1px solid #0f0}
+input{background:#111;color:#0f0;width:68%}
+button{background:#0f0;color:#000;border:none;font-weight:bold;cursor:pointer}
 </style>
 </head>
 <body>
-
-<header><h1>MTC Pro v7.4 BOSS MODE - MARINA CBT</h1></header>
-<div id="stats">Loaded: 2000 Qs | Score: 0/0 = 0%</div>
-<div id="chat"><div class="msg bot">Chief AI: Boss Mode Activated. Ready for exam?</div></div>
-
-<div class="controls">
-<input id="q" placeholder="Ask Chief AI..." onkeypress="if(event.key==='Enter') ask()">
-<div class="btn-row">
+<h3>🤖 Chief AI - Barko + Lahat Alam</h3>
+<div class="chat" id="chat">Boss: Tanong ka kahit ano kay Chief AI<br>Try mo: rule 5, 2+2, may crush ako</div>
+<input id="ask" placeholder="Chief tanong ko...">
 <button onclick="ask()">Send</button>
-<button onclick="mic()">Mic</button>
-<button onclick="marinaExam()">1. EXAM</button>
-<button onclick="laotMode()">2. LAOT</button>
-<button onclick="basagMode()">3. BASH</button>
-<button onclick="smartDrill()">Weak</button>
-</div>
-</div>
 
 <script>
-// 2000 QUESTIONS BUILT-IN - Sample 50 muna, dagdagan mo later
-const QBANK = [
-{q:"Rule 1 - COLREGS apply to?",options:["All vessels on high seas","Only cargo ships","Only >500GT","Territorial waters only"],ans:0,expl:"Rule 1a: All vessels upon high seas and connected waters.",topic:"COLREGS",rule:1},
-{q:"Rule 14 - Head-on action?",options:["Turn port","Alter starboard","Stop","Sound 5 short"],ans:1,expl:"Rule 14a: Both vessels alter course to starboard.",topic:"COLREGS",rule:14},
-{q:"Rule 15 - Crossing give-way?",options:["Vessel to port","Vessel to starboard","Bigger vessel","Faster vessel"],ans:1,expl:"Rule 15: Vessel with other on starboard side shall keep out of way.",topic:"COLREGS",rule:15},
-{q:"Rule 18 - Power vs Sail?",options:["Power over sail","Sail over power","Tug over all","Fishing over all"],ans:1,expl:"Rule 18: Power-driven vessel keep out of way of sailing vessel.",topic:"COLREGS",rule:18},
-{q:"Rule 19 - Port turn in fog?",options:["Always","Never","If vessel forward beam","If vessel aft beam"],ans:2,expl:"Rule 19d: Do not alter course to port for vessel forward of beam.",topic:"COLREGS",rule:19},
-{q:"SOLAS - Lifeboat drill?",options:["Weekly","Monthly","Quarterly","Yearly"],ans:1,expl:"SOLAS Ch3 Reg 19: Lifeboat drill monthly.",topic:"SOLAS",rule:19},
-{q:"MARPOL - Oil discharge limit?",options:["50ppm","30ppm","15ppm","100ppm"],ans:2,expl:"MARPOL Annex I Reg 9: Max 15ppm oil content.",topic:"MARPOL",rule:9},
-//... ADD 1993 MORE QUESTIONS HERE
-];
+// DITO MO ILALAGAY KEY MO BOSS - PALITAN MO LANG YUNG NASA QUOTES
+const API_KEY =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
 
-let mastery={}, total=0, correct=0, examMode=false, examQ=[], examTime=0, timer;
-let rec, listening=false;
-let mistakeBank = [];
+const offlineBrain = {
+"rule 5": "Rule 5 LOOK-OUT boss: Dapat may tao nagbabantay 24/7. Mata + tenga + radar.",
+"rule 15": "Rule 15 CROSSING boss: Barko sa kanan = HARI. Ikaw give way.",
+"solas": "SOLAS boss: Lifeboat drill monthly. Fire drill weekly pag nasa port.",
+"nuc": "NUC boss: Not Under Command = 2 red lights vertical. Walang galaw."
+};
 
-// CHIEF AI KNOWLEDGE
-const chief = {
-"rule 19":"Rule 19b boss: Safe speed adapted to circumstances. Do not turn to port for vessel forward of beam sa fog.",
-"nuc":"NUC = Not Under Command boss. Sira makina yan. 2 red lights vertical.",
-"ram":"RAM = Restricted Ability to Maneuver. Red-White-Red vertical. Dredger yan boss.",
-"colregs":"COLREGS 1972 boss. Rules 1-38. Aralin mo Rule 5, 6, 7, 8, 15, 18, 19 - yan madalas sa exam.",
-"advice":()=>{let weak = Object.keys(mastery).filter(t=>mastery[t]<70);return weak.length==0?"Boss 70%+ ka na lahat. Ready ka na!":"Boss focus ka dito: "+weak.join(", ")}
-}
+async function ask(){
+let t=document.getElementById('ask').value.toLowerCase().trim();
+let c=document.getElementById('chat');
+if(!t) return;
+c.innerHTML += "<br><b>You:</b> "+t;
 
-function add(t,type){
-let d=document.createElement('div');
-d.className='msg '+type;
-d.innerHTML=t;
-document.getElementById('chat').appendChild(d);
-document.getElementById('chat').scrollTop=99999;
-}
-
-function ask(){
-let q=document.getElementById('q').value.trim().toLowerCase();
-if(!q) return;
-add('<b>You:</b> '+q,'user');
-document.getElementById('q').value='';
-let a="Chief AI: Try: Rule 19, NUC, RAM, COLREGS, Advice";
-for(let k in chief){
-if(q.includes(k) && typeof chief[k]=='string') a="Chief AI: "+chief[k];
-}
-if(q.includes('advice')) a="Chief AI: "+chief.advice();
-add(a,'chief');
-if('speechSynthesis' in window)speechSynthesis.speak(new SpeechSynthesisUtterance(a.replace('Chief AI: ','')));
-}
-
-function mic(){
-if(!('webkitSpeechRecognition' in window)){alert('Use Chrome browser boss');return;}
-if(!rec){
-rec=new webkitSpeechRecognition();
-rec.lang='en-US';
-rec.onresult=e=>{document.getElementById('q').value=e.results[0][0].transcript;ask();}
-rec.onend=()=>{listening=false;}
-}
-listening?!rec.stop():rec.start();
-listening=!listening;
-}
-
-// FEATURE 1: MARINA SIMULATOR EXAM MODE
-function marinaExam(){
-examMode=true;
-examQ = QBANK.sort(()=>0.5-Math.random()).slice(0,50); // Random 50 questions
-total=0; correct=0; examTime=7200; // 2 hours = 7200 seconds
-document.getElementById('chat').innerHTML='';
-add('<b>MARINA CBT EXAM STARTED</b><br>50 Questions | 2 Hours Timer | Bawal back','exam');
-startTimer();
-nextExamQ();
-}
-
-function startTimer(){
-clearInterval(timer);
-timer=setInterval(()=>{
-examTime--;
-let mins=Math.floor(examTime/60);
-let secs=examTime%60;
-document.getElementById('stats').innerHTML=`<span class="timer">Time: ${mins}:${secs<10?'0':''}${secs}</span> | Score: ${correct}/${total}`;
-if(examTime<=0){
-clearInterval(timer);
-finishExam();
-}
-},1000);
-}
-
-function nextExamQ(){
-if(total>=50 || examQ.length==0){
-finishExam();
+// 1. OFFLINE MUNA - pag barko tanong
+for(let key in offlineBrain){
+if(t.includes(key)){
+c.innerHTML += "<br><b>Chief AI [OFFLINE]:</b> "+offlineBrain[key];
+c.scrollTop = c.scrollHeight;
+document.getElementById('ask').value='';
 return;
 }
-let q=examQ.shift();
-add(`<b>Q${total+1}/50:</b> ${q.q}`,'bot');
-let o='';
-q.options.forEach((x,i)=>o+=`<button onclick="examAnswer(${i},${q.ans},'${q.expl}','${q.topic}')" style="width:100%;margin:4px 0;padding:10px;background:#1A2332;border:1px solid #333;color:#DDD;border-radius:4px;text-align:left">${String.fromCharCode(65+i)}. ${x}</button>`);
-add(o,'bot');
 }
 
-function examAnswer(s,a,e,topic){
-total++;
-if(s==a){
-correct++;
-mastery[topic]=(mastery[topic]||100)+2;
-}else{
-mistakeBank.push({q:examQ[0]?.q, correct:a, your:s, expl:e});
-mastery[topic]=(mastery[topic]||100)-3;
+// 2. GROQ API - pag kahit ano tanong
+c.innerHTML += "<br><b>Chief AI:</b> Tatawag kay Groq boss...";
+try{
+let res = await fetch("https://api.groq.com/openai/v1/chat/completions",{
+method: "POST",
+headers: {
+"Authorization": "Bearer "+API_KEY,
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+model: "llama-3.1-8b-instant",
+messages: [{"role":"user","content":"Sagot ka bilang Chief Officer pero friendly. Tagalog + English mix. Kahit ano tanong pwede: math, chika, barko, advice. Short lang 2-3 sentences. Tanong: "+t}],
+max_tokens: 200
+})
+});
+let data = await res.json();
+let sagot = data.choices[0].message.content;
+c.innerHTML = c.innerHTML.replace("Tatawag kay Groq boss...","<b>Chief AI [ONLINE]:</b> "+sagot);
+}catch(e){
+c.innerHTML += "<br><b>Chief AI:</b> Boss walang internet. Barko lang alam ko offline: rule 5, rule 15, solas.";
 }
-setTimeout(nextExamQ,1000);
-}
-
-function finishExam(){
-clearInterval(timer);
-examMode=false;
-let acc=Math.round(correct/total*100);
-document.getElementById('chat').innerHTML='';
-if(acc>=70){
-add(`<div class="certificate"><h2>🏆 CERTIFICATE OF PASSING</h2><h3>MARINA CBT SIMULATOR</h3><p>Score: ${correct}/${total} = ${acc}%</p><p>Status: PASSED</p><p>Ready for actual MARINA exam!</p></div>`,'chief');
-speak('Congratulations boss! Passed ka. Ready ka na sa MARINA exam.');
-}else{
-add(`<div class="certificate"><h2>📝 EXAM RESULT</h2><p>Score: ${correct}/${total} = ${acc}%</p><p>Status: FAILED - Need 70%</p><p>Click Weak button to drill mistakes</p></div>`,'bot');
-}
-document.getElementById('stats').innerHTML=`Final Score: ${acc}% | Mistakes: ${mistakeBank.length}`;
-}
-
-// FEATURE 2: LAOT MODE - Random question every 30 mins
-function laotMode(){
-if('Notification' in window){
-Notification.requestPermission();
-}
-add('Chief AI: Laot Mode ON. Every 30 mins may random question kahit naka-lock phone mo.','chief');
-setInterval(()=>{
-if(document.hidden){
-let q=QBANK[Math.floor(Math.random()*QBANK.length)];
-new Notification('MTC Laot Mode', {body: q.q.substring(0,50)+'...'});
-}
-},1800000); // 30 mins
-speak('Laot mode activated boss. Kahit tulog ka, mag-aaral ka pa rin.');
+c.scrollTop = c.scrollHeight;
+document.getElementById('ask').value='';
 }
 
-// FEATURE 3: BASAG-BASHER MODE
-function basagMode(){
-let roasts=[
-"Rule 19 boss: Safe speed in fog. Ikaw boss, alam mo ba CPA formula? HAHA",
-"NUC = Not Under Command. 2 red lights. Ikaw boss, ilang red lights alam mo?",
-"Rule 18: Sail over power. Basic yan boss. Aral ka muna bago mang-bash.",
-"MARPOL 15ppm lang boss. Ikaw boss, ilang ppm alam mo? 0? HAHA"
-];
-let r=roasts[Math.floor(Math.random()*roasts.length)];
-add('<b>Chief AI Roast:</b> '+r,'chief');
-speak(r);
-}
-
-// SMART DRILL + MISTAKE REVIEW
-function smartDrill(){
-if(mistakeBank.length==0){
-add('Chief AI: Wala ka pang mali boss. Magaling!','chief');
-return;
-}
-add('<b>Mistake Review:</b> '+mistakeBank.length+' questions mali mo','bot');
-let m=mistakeBank.shift();
-add('<b>Review:</b> '+m.expl,'chief');
-mistakeBank.push(m); // Ibalik para ma-review ulit
-}
-
-function speak(text){
-if('speechSynthesis' in window){
-speechSynthesis.cancel();
-speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-}
-}
-
-document.getElementById('stats').innerHTML=`Loaded: ${QBANK.length} Qs | Boss Mode Ready`;
+// Enter key din pwede
+document.getElementById('ask').addEventListener('keypress',function(e){
+if(e.key==='Enter') ask();
+});
 </script>
 </body>
 </html>
