@@ -1,28 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXMC462LH8"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-CXMC462LH8');
-  </script> 
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>$SHIPS - A Seaman Token | From Galley to Blockchain</title>
-  <meta name="description" content="Official website of $SHIPS - A Seaman Token on Solana. From Galley to Blockchain. Built by Filipino OFWs for OFWs. Contract Renounced. 1B Supply. 0% Tax.">
-
-  <meta property="og:title" content="$SHIPS - A Seaman Token">
-  <meta property="og:description" content="From Galley to Blockchain. Built by 20-year OFW Chief Cook for 10M OFWs worldwide. 100% Fair Launch. 0% Tax.">
-  <meta property="og:image" content="https://i.imgur.com/8KQwZbF.png">
-  <meta property="og:url" content="https://shipsofficial.com">
-  <meta name="twitter:card" content="summary_large_image">
+  <title>$SHIPS - A Seaman Token | Chief AI</title>
+  <meta name="description" content="$SHIPS Token + Chief AI Seaman Tutor. Built by 20-year OFW Chief Cook.">
   <meta name="theme-color" content="#0A1A2F">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100'><text y='.9em' font-size='90' filter='drop-shadow(0 0 5px gold)'>⚓</text></svg>">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <style>
     :root {
@@ -35,61 +20,56 @@
     html {scroll-behavior: smooth;}
     
     body {
-      background-image: url('compass-bg.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      background-color: #061018;
+      background: var(--navy);
       font-family: 'Segoe UI', Tahoma;
       color: var(--white);
-      line-height: 1.6;
       overflow-x: hidden;
-      animation: fadeIn 1s ease-in;
     }
     
-    @keyframes fadeIn {from {opacity: 0;} to {opacity: 1;}}
-    .content-wrapper {background: rgba(6, 16, 24, 0.88); backdrop-filter: blur(4px); min-height: 100vh; padding: 20px;}
-  
-    .sailing-ship {position: fixed; bottom: 15%; left: -100px; font-size: 60px; z-index: 1; animation: sail 20s linear infinite; filter: drop-shadow(0 0 10px rgba(212,175,55,0.5));}
-    @keyframes sail {0% { left: -100px; transform: rotate(-5deg); } 50% { transform: rotate(5deg); } 100% { left: 110%; transform: rotate(-5deg); }}
+    header {
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(212,175,55,0.3);
+      background: rgba(10,26,47,0.98);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
     
-    .waves {position: fixed; bottom: 0; left: 0; width: 100%; height: 120px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".15" fill="%23D4AF37"/></svg>') repeat-x; animation: wave 12s linear infinite; z-index: 1;}
-    @keyframes wave { 0% {background-position-x: 0;} 100% {background-position-x: 1200px;} }
-    
-    .container {max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2;}
-    header {padding: 20px 0; border-bottom: 1px solid rgba(212,175,55,0.2); position: sticky; top: 0; background: rgba(10,26,47,0.95); backdrop-filter: blur(10px); z-index: 100;}
-    
-    .nav {display: flex; justify-content: space-between; align-items: center;}
-    .logo-text {font-size: 1.8rem; font-weight: bold; color: var(--gold);}
-    .nav-links {display: flex; gap: 25px; list-style: none; align-items: center;}
-    .nav-links a {color: var(--white); text-decoration: none; transition: 0.3s;}
+    .nav {display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;}
+    .logo-text {font-size: 1.5rem; font-weight: bold; color: var(--gold);}
+    .nav-links {display: flex; gap: 25px; list-style: none;}
+    .nav-links a {color: var(--white); text-decoration: none; font-weight: 500; transition: 0.3s;}
     .nav-links a:hover {color: var(--gold);}
-    .menu-btn {display: none; background: none; border: 1px solid var(--gold); color: var(--gold); padding: 8px 12px; border-radius: 6px; font-size: 1.2rem; cursor: pointer;}
+    .menu-btn {display: none; background: none; border: 1px solid var(--gold); color: var(--gold); padding: 8px 12px; border-radius: 6px; cursor: pointer;}
     
     @media (max-width: 768px) {
-      .nav-links {display: none; flex-direction: column; position: absolute; top: 70px; right: 20px; background: var(--navy); padding: 20px; border: 1px solid var(--gold); border-radius: 8px;}
+      .nav-links {display: none; position: absolute; top: 60px; right: 20px; background: var(--navy); padding: 20px; border: 1px solid var(--gold); border-radius: 8px; flex-direction: column;}
       .nav-links.show {display: flex;}
       .menu-btn {display: block;}
-      .hero h1 {font-size: 2.5rem;}
-      .sailing-ship {font-size: 40px;}
     }
     
-    .hero {padding: 120px 0 60px; text-align: center;}
-    .hero h1 {font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(45deg, var(--gold), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
-    .hero p {font-size: 1.3rem; color: #b8c5d6; margin-bottom: 40px; max-width: 700px; margin: 0 auto 40px;}
+    .hero {text-align: center; padding: 80px 20px;}
+    .hero h1 {font-size: 3rem; background: linear-gradient(45deg, var(--gold), var(--white)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;}
+    .hero p {font-size: 1.2rem; color: #b8c5d6; max-width: 600px; margin: 0 auto 30px;}
     
-    .btn {display: inline-block; padding: 14px 30px; background: var(--gold); color: var(--navy); text-decoration: none; border-radius: 8px; font-weight: bold; margin: 8px; border: 2px solid var(--gold); transition: 0.3s;}
+    .btn {display: inline-block; padding: 14px 30px; background: var(--gold); color: var(--navy); text-decoration: none; border-radius: 8px; font-weight: bold; border: 2px solid var(--gold); transition: 0.3s;}
     .btn:hover {transform: translateY(-3px); box-shadow: 0 10px 25px rgba(212,175,55,0.4);}
-    .btn-outline {background: transparent; color: var(--gold);}
     
-    .ca-box {background: var(--dark); padding: 25px; border-radius: 12px; border: 1px solid var(--gold); margin: 40px auto; max-width: 800px; text-align: center;}
-    .ca-box code {color: var(--white); font-size: 0.95rem; word-break: break-all; background: rgba(212,175,55,0.1); padding: 10px; border-radius: 5px; display: block; margin-bottom: 15px;}
+    .ca-box {background: var(--dark); padding: 20px; border-radius: 12px; border: 1px solid var(--gold); margin: 30px auto; max-width: 700px;}
+    .ca-box code {color: var(--white); font-size: 0.9rem; word-break: break-all; background: rgba(212,175,55,0.1); padding: 10px; border-radius: 5px; display: block; margin-bottom: 15px;}
     
-    .section {padding: 80px 0;}
-    .section-dark {background: var(--dark);}
-    .section h2 {text-align: center; font-size: 2.8rem; color: var(--gold); margin-bottom: 20px;}
-    .section-subtitle {text-align: center; color: #b8c5d6; margin-bottom: 60px;}
+    /* CHIEF AI FULL SCREEN SECTION */
+    #chief-ai {padding: 0; margin: 0;}
+    #chief-ai .container {padding: 0; max-width: 100%;}
+    .ai-header {
+      background: var(--dark);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(212,175,55,0.3);
+    }
+    .ai-header h2 {color: var(--gold); font-size: 2rem; margin-bottom: 8px;}
+    .ai-header p {color: #b8c5d6; font-size: 0.95rem;}
     .live-dot {
       display: inline-block;
       width: 8px;
@@ -99,87 +79,74 @@
       animation: pulse 2s infinite;
       margin-right: 6px;
     }
-    @keyframes pulse {
-     0%, 100% { opacity: 1; }
-     50% { opacity: 0.4; }
+    @keyframes pulse {0%, 100% { opacity: 1; } 50% { opacity: 0.4; }}
+    
+    .ai-wrapper {
+      width: 100%;
+      height: 85vh;
+      background: #e5ddd5;
     }
+    .ai-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    
+    footer {padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212,175,55,0.2); color: #b8c5d6;}
   </style>
 </head>
 <body>
-  <div class="content-wrapper">
-    <div class="sailing-ship">🛳️</div>
-    <div class="waves"></div>
+  <header>
+    <nav class="nav">
+      <span class="logo-text">⚓ $SHIPS</span>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#chief-ai">Chief AI</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <button class="menu-btn" id="menu-btn">☰</button>
+    </nav>
+  </header>
 
-    <!-- SINGLE HEADER LANG - tinanggal ko yung duplicate -->
-    <header>
-      <div class="container">
-        <nav class="nav">
-          <span class="logo-text">⚓ $SHIPS</span>
-          <ul class="nav-links" id="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#chief-ai">Chief AI</a></li>
-            <li><a href="#captains-log">Log</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-          <button class="menu-btn" id="menu-btn">☰</button>
-        </nav>
-      </div>
-    </header>
+  <section class="hero" id="home">
+    <h1>From Galley to Blockchain</h1>
+    <p>Built by 20-year OFW Chief Cook for 10M OFWs worldwide. 100% Fair Launch. 0% Tax.</p>
+    
+    <div class="ca-box">
+      <code id="ca-text">2WsH3NFFjs57jyczvbVMBSuVgdci5JMbxkHJdZTbpump</code>
+      <button class="btn" onclick="copyCA()">📋 Copy Contract Address</button>
+    </div>
+    
+    <a href="https://pump.fun/coin/2WsH3NFFjs57jyczvbVMBSuVgdci5JMbxkHJdZTbpump" class="btn" target="_blank">🚀 Buy $SHIPS</a>
+  </section>
 
-    <section class="hero" id="home">
-      <div class="container">
-        <h1>From Galley to Blockchain</h1>
-        <p>Built by 20-year OFW Chief Cook for 10M OFWs worldwide. 100% Fair Launch. 0% Tax. No Team Tokens.</p>
-
-        <div class="ca-box">
-          <code id="ca-text">2WsH3NFFjs57jyczvbVMBSuVgdci5JMbxkHJdZTbpump</code>
-          <button class="btn" onclick="copyCA()">📋 Copy Contract Address</button>
-        </div>
-
-        <a href="https://pump.fun/coin/2WsH3NFFjs57jyczvbVMBSuVgdci5JMbxkHJdZTbpump" class="btn" target="_blank">🚀 Buy $SHIPS</a>
-      </div>
-    </section>
-
-    <!-- CHIEF AI SECTION - ETO YUNG BAGO -->
-    <section class="section section-dark" id="chief-ai">
-      <div class="container">
+  <!-- CHIEF AI FULL SCREEN -->
+  <section id="chief-ai">
+    <div class="container">
+      <div class="ai-header">
         <h2>⚓ Chief AI - Seaman Tutor</h2>
-        <p class="section-subtitle">Magtanong ka about STCW, Firefighting, GMDSS, Seamanship. Powered by Groq AI</p>
-        
-        <div style="max-width:900px; margin:0 auto;">
-          <iframe 
-            src="https://groq-chat--carlclifford.replit.app" 
-            width="100%" 
-            height="700px" 
-            style="border:2px solid var(--gold); border-radius:12px; background:#e5ddd5;"
-            allow="clipboard-write">
-          </iframe>
-          
-          <p style="text-align:center; font-size:0.8rem; color:#b8c5d6; margin-top:15px;">
-            <span class="live-dot"></span> Online • First click = 5-10s loading kasi natutulog si free Replit
-          </p>
-        </div>
+        <p><span class="live-dot"></span> Online • Tanong ka about STCW, Firefighting, GMDSS, Seamanship</p>
+        <p style="font-size:0.8rem; margin-top:5px;">First click = 5-10s loading kasi natutulog si free Replit</p>
       </div>
-    </section>
-
-    <section class="section" id="captains-log">
-      <div class="container">
-        <h2>⚓ CAPTAIN'S LOG</h2>
-        <p class="section-subtitle">20 years at sea, ngayon sa blockchain</p>
+      
+      <div class="ai-wrapper">
+        <iframe 
+          src="https://groq-chat--carlclifford.replit.app" 
+          allow="clipboard-write">
+        </iframe>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section section-dark" id="faq">
-      <div class="container">
-        <h2>FAQ</h2>
-        <p class="section-subtitle">Real questions from real OFWs</p>
-      </div>
-    </section>
+  <section class="hero" id="about">
+    <h2>⚓ About $SHIPS</h2>
+    <p>20 years at sea. Scammed multiple times. Kaya ginawa ko $SHIPS - para sa mga kabaro natin. Contract renounced, 0% tax, no team tokens. Verify mo lahat sa Solscan.</p>
+  </section>
 
-    <footer style="padding:40px 0; text-align:center; border-top:1px solid rgba(212,175,55,0.2); color:#b8c5d6;">
-      <p>© 2026 $SHIPS Token. Built at sea, by a seaman, for seafarers. ⚓</p>
-    </footer>
-  </div>
+  <footer>
+    <p>© 2026 $SHIPS Token. Built at sea, by a seaman, for seafarers. ⚓</p>
+  </footer>
 
   <script>
     function copyCA() {
